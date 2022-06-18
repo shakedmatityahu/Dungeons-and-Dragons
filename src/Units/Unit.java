@@ -4,6 +4,13 @@ package Units;
 import Dungeons_and_Dragons.Tile;
 
 public abstract class Unit extends Tile {
+
+    //protected char tile;
+    //protected Position position;
+    protected String name;
+    protected int healthCapacity;
+
+
     protected Unit(char tile, String name, int healthCapacity, int attack, int defense) {
         super(tile);
     }
