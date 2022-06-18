@@ -9,6 +9,8 @@ public abstract class Unit extends Tile {
     //protected Position position;
     protected String name;
     protected int healthCapacity;
+    protected int attack;
+    protected int defense;
 
 
     protected Unit(char tile, String name, int healthCapacity, int attack, int defense) {
