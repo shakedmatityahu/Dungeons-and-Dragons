@@ -5,6 +5,7 @@ import jdk.jshell.spi.ExecutionControl;
 
 public class Trap extends Enemy {
 
+
     private int visibility_time;
     private int invisibility_time;
     private int ticks_count;
@@ -16,6 +17,7 @@ public class Trap extends Enemy {
         this.visibility_time=visibility;
         this.ticks_count=ticks;
         this.visible=vis;
+
     }
     public void changeStatus()
     {

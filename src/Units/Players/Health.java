@@ -4,9 +4,9 @@ public class Health {
     private int HealthPool;
     private int HealthAmount;
 
-    public Health(int pool, int amount){
-        HealthPool = pool;
-        HealthAmount = amount;
+    public Health(){
+        HealthPool = 0;
+        HealthAmount = 0;
     }
 
     public int getHealthPool() {
@@ -22,6 +22,12 @@ public class Health {
     }
 
     public void setHealthAmount(int healthAmount) {
+        if(healthAmount > this.HealthPool){
+            healthAmount = this.getHealthPool();
+        }
+        else if(healthAmount < 0){
+            
+        }
         HealthAmount = healthAmount;
     }
 }
