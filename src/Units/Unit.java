@@ -11,8 +11,7 @@ public abstract class Unit extends Tile {
     protected int healthCapacity;
     protected int attack;
     protected int defense;
-
-
+    protected static final char PLAYERSIGN = '@';
     protected Unit(char tile, String name, int healthCapacity, int attack, int defense) {
         super(tile);
     }
