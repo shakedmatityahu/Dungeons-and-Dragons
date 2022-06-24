@@ -4,22 +4,74 @@ import Units.Unit;
 
 public class Warrior  extends Player {
 
-    final String ABILITY_NAME = "Avenger’s Shield";
-    final int ABILITY_RANGE = 3;
+    //final for special ability
+    private final String WARRIOR_ABILITY_NAME = "Avenger’s Shield";
+    private final int WARRIOR_ABILITY_RANGE = 3;
+    private final double ABILITY_COST = 0.1;
+    //finals for levelUp
+    private final int WARRIOR_HEALTH_MULTIPLAYER =5;
+    private final int WARRIOR_ATTACK_MULTIPLAYER =2;
+    private final int WARRIOR_DEFENSE_MULTIPLAYER =1;
 
-        protected Warrior(String name, int attack, int defense) {
-        super(name, attack, defense);
-            specialAbility = new Ability(ABILITY_NAME,ABILITY_RANGE);
+        private Warrior(String name, int attack, int defense,Ability specialAbility)
+        {
+            super(name, attack, defense);
+            this.specialAbility =specialAbility;
+        }
+
+        public Warrior createWarrior(String name,int collDown)
+        {
+            try{
+            if(collDown<0){
+                throw new RuntimeException("Ability cool down can not be negative integer");
+            }
+            else
+            {
+                Ability newAbility = new Ability(WARRIOR_ABILITY_NAME,WARRIOR_ABILITY_RANGE,collDown);
+                Warrior newWorrior = new Warrior(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, newAbility);
+                return newWorrior;
+            }
+            }
+            catch (Exception e){
+                System.out.println("Warrior was not formed since");
+                System.out.println(e.getMessage());
+                return null;
+            }
         }
 
 
 
-    public void cast() throws Exception {
-        if(health.getHealthAmount()*0.1)
+    public void OnAbilityCast() throws Exception {
+        if(health.getHealthAmount() <= health.getHealthPool()*ABILITY_COST)
+        {
+            throw new Exception("Casting special ability will result with Warrior death YOU MERDAERER!!!");
+        }
+        else {
+            this.specialAbility.resetCoolDown();
+            this.health.setHealthAmount(10* health.getHealthAmount());
+            //continue implementation.
+            //this.specialAbility.AvengersShield(this);
+        }
+    }
+
+    @Override
+    public void levelUp(){
+            super.levelUp();
+            specialAbility.resetCoolDown();
+            health.setHealthPool(health.getHealthPool() +(WARRIOR_HEALTH_MULTIPLAYER*level));
+            health.setHealthAmount(health.getHealthPool());
+            attack += (WARRIOR_ATTACK_MULTIPLAYER*level);
+            defense += (WARRIOR_DEFENSE_MULTIPLAYER*level);
+    }
+
+    public void onGameTick()
+    {
+        this.specialAbility.UpdateCoolDown();
     }
 
     @Override
     public void accept(Unit unit) {
 
+        //not sure what this shoud do
     }
 }

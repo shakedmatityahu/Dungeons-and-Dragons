@@ -6,7 +6,7 @@ import Units.Players.Health;
 
 public abstract class Unit extends Tile {
 
-    //protected char tile;
+    protected char tile;
     //protected Position position;
     protected String name;
     protected Health health;
