@@ -14,6 +14,7 @@ public class Enemy extends Unit {
 
     @Override
     public void accept(Unit unit) {
+        System.out.println("1");
 
     }
 }
