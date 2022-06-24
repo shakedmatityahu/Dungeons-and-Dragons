@@ -9,6 +9,12 @@ public class Health {
         HealthAmount = 0;
     }
 
+    public Health(int pool, int amount)
+    {
+        HealthPool = pool;
+        HealthAmount = amount;
+    }
+
     public int getHealthPool() {
         return HealthPool;
     }
