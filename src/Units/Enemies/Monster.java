@@ -28,8 +28,8 @@ public class Monster extends Enemy {
             else
                 move = "down";
         }
-        else
-            Math.random()
+        //else
+        //Math.random() צריך להרגיל הזזה (ימינה/שמלאה/למעלה/למטה/לא לזוז)
         }
 
 
