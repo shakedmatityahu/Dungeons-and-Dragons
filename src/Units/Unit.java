@@ -2,18 +2,20 @@ package Units;
 
 
 import Dungeons_and_Dragons.Tile;
+import Units.Players.Health;
 
 public abstract class Unit extends Tile {
 
     //protected char tile;
     //protected Position position;
     protected String name;
-    protected int healthCapacity;
+    protected Health health;
     protected int attack;
     protected int defense;
     protected static final char PLAYERSIGN = '@';
-    protected Unit(char tile, String name, int healthCapacity, int attack, int defense) {
+    protected Unit(char tile, String name, int attack, int defense) {
         super(tile);
+        health = new Health();
     }
 //
 //    protected void initialize(Position position, MessageCallback messageCallback){

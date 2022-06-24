@@ -4,11 +4,18 @@ import Units.Unit;
 
 public class Warrior  extends Player {
 
-    private Health Heath;
+    final String ABILITY_NAME = "Avenger’s Shield";
+    final int ABILITY_RANGE = 3;
+
+        protected Warrior(String name, int attack, int defense) {
+        super(name, attack, defense);
+            specialAbility = new Ability(ABILITY_NAME,ABILITY_RANGE);
+        }
 
 
-    protected Warrior(char tile, String name, int healthCapacity, int attack, int defense) {
-        super(tile, name, healthCapacity, attack, defense);
+
+    public void cast() throws Exception {
+        if(health.getHealthAmount()*0.1)
     }
 
     @Override
