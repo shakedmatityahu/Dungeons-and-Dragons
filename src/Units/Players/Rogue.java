@@ -3,8 +3,10 @@ package Units.Players;
 import Units.Unit;
 
 public class Rogue extends Player {
-    protected Rogue(char tile, String name, int healthCapacity, int attack, int defense) {
-        super(tile, name, healthCapacity, attack, defense);
+
+
+    protected Rogue(String name, int attack, int defense) {
+        super(name, attack, defense);
     }
 
     @Override
