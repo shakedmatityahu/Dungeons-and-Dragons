@@ -1,5 +1,7 @@
 package Units.Enemies;
 
+import Dungeons_and_Dragons.Position;
+import Units.Players.Health;
 import Units.Players.Player;
 import jdk.jshell.spi.ExecutionControl;
 
@@ -8,16 +10,22 @@ public class Trap extends Enemy {
 
     private int visibility_time;
     private int invisibility_time;
-    private int ticks_count;
-    private boolean visible;
+    private int ticks_count=0;
+    private boolean visible=true;
+    private char visible_char;
+    private char invisible_char='.';
 
-    public Trap(char tile, String name, int healthCapacity, int attack, int defense, int experience,int visibility, int invisibility, int ticks, boolean vis) {
-        super(tile, name, healthCapacity, attack, defense, experience);
+    public Trap(char tile, String name, Health healthCapacity, int attack, int defense, int experience, int visibility, int invisibility, int ticks, Position p) {
+        super(tile, name, attack, healthCapacity,defense, experience,p);
         this.invisibility_time=invisibility;
         this.visibility_time=visibility;
         this.ticks_count=ticks;
-        this.visible=vis;
 
+
+    }
+    public boolean isVisible()
+    {
+        return this.visible;
     }
     public void changeStatus()
     {
@@ -26,13 +34,20 @@ public class Trap extends Enemy {
             {
                 ticks_count=0;
                 visible=false;
+                setTile(invisible_char);
             }
         else
             if(ticks_count==invisibility_time)
             {
                 ticks_count=0;
                 visible=true;
+                setTile(visible_char);
             }
+    }
+
+    public void setTile(char tile)
+    {
+        super.setTile(tile);
     }
     public void attack(Player player)
     {
@@ -51,7 +66,7 @@ public class Trap extends Enemy {
                 ticks_count=0;
         else
             ticks_count++;
-        if(this.position.Range((player.getPosition()))<2)
+        if(this.position.Distance((player.getPosition()))<2)
             this.attack(player);
     }
 

@@ -22,6 +22,16 @@ public abstract class Unit extends Tile {
         health = new Health();
     }
 
+    protected  Unit (char tile ,String name, Health healthCapacity, int attack, int defense)
+    {
+        this.tile=tile;
+        this.name=name;
+        this.health=healthCapacity;
+        this.attack=attack;
+        this.attack=attack;
+        this.defense=defense;
+
+    }
     public String getName() {
         return name;
     }
@@ -54,6 +64,7 @@ public abstract class Unit extends Tile {
 
 
     }
+
 
     //
 //    protected void initialize(Position position, MessageCallback messageCallback){
