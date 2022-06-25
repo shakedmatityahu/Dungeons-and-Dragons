@@ -1,8 +1,12 @@
 package Units;
 
 
+import Dungeons_and_Dragons.Position;
 import Dungeons_and_Dragons.Tile;
+import GameTiles.Empty;
 import Units.Players.Health;
+
+import java.util.Random;
 
 public abstract class Unit extends Tile {
 
@@ -17,7 +21,41 @@ public abstract class Unit extends Tile {
         super(tile);
         health = new Health();
     }
-//
+
+    public String getName() {
+        return name;
+    }
+
+    public Health getHealth() {
+        return health;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public int AttackerRoll()
+    {
+        return new Random().nextInt((this.getAttack()) + 1);
+    }
+
+    public int DefenderRoll(){
+        return new Random().nextInt((this.getDefense()) + 1);
+    }
+
+    public void die(){
+        Position tmp = new Position(this.position);
+        //this = null
+        //implement better
+
+
+    }
+
+    //
 //    protected void initialize(Position position, MessageCallback messageCallback){
 //
 //    }
