@@ -1,5 +1,6 @@
 package Units.Players;
 
+import Units.Ability;
 import Units.Unit;
 
 public class Mage extends Player {
@@ -21,7 +22,7 @@ public class Mage extends Player {
     private final int MAGE_SPELL_MULTIPLAYER = 10;
     private final int MAGE_MANA_DIV = 4;
 
-    private Mage(String name, int attack, int defense, Ability specialAbility ,int manaCost) {
+    private Mage(String name, int attack, int defense, Ability specialAbility , int manaCost) {
         super(name, attack, defense);
        /* this.specialAbility = specialAbility;
         this.currentMana = MAX_ENERGY;

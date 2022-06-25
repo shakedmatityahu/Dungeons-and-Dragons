@@ -1,9 +1,8 @@
 package Units.Enemies;
 
 import Dungeons_and_Dragons.Position;
-import Units.Players.Health;
+import Units.Health;
 import Units.Players.Player;
-import jdk.jshell.spi.ExecutionControl;
 
 public class Trap extends Enemy {
 

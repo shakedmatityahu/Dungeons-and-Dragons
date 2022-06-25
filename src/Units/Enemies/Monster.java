@@ -1,7 +1,6 @@
 package Units.Enemies;
 
-import Dungeons_and_Dragons.Tile;
-import Units.Players.Health;
+import Units.Health;
 import Units.Players.Player;
 
 public class Monster extends Enemy {

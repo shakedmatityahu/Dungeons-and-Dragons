@@ -1,5 +1,6 @@
 package Units.Players;
 
+import Units.Ability;
 import Units.Unit;
 
 public class Warrior extends Player {

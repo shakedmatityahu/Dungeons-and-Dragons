@@ -3,9 +3,6 @@ package Units;
 
 import Dungeons_and_Dragons.Position;
 import Dungeons_and_Dragons.Tile;
-import GameTiles.Empty;
-import Units.Players.Health;
-
 import java.util.Random;
 
 public abstract class Unit extends Tile {
