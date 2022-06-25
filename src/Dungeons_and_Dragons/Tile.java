@@ -45,9 +45,15 @@ public abstract class Tile implements Comparable<Tile> {
             return 0;
         }
     }
+    public void setTile(char tile)
+    {
+        this.tile=tile;
+    }
 
     @Override
     public String toString() {
         return String.valueOf(tile);
     }
+
+
 }

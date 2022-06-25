@@ -32,4 +32,17 @@ public class Position {
     public int compareTo(Position position) throws ExecutionControl.NotImplementedException {
         throw new ExecutionControl.NotImplementedException("to-do");
     }
+
+    public int getX(){return x;}
+
+    public int getY(){return y;}
+
+    public double Distance (Position p1) {
+        return Math.sqrt(Math.pow((this.getX() - p1.getX()), 2) + Math.pow((this.getY() - p1.getY()), 2));
+    }
+
+    public boolean isInRange(Position p1,int range)
+    {
+        return range>=this.Distance(p1);
+    }
 }
