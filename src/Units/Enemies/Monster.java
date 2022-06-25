@@ -6,8 +6,8 @@ import Units.Players.Player;
 public class Monster extends Enemy {
 
     private int vision_range;
-    public Monster(char tile, String name, int healthCapacity, int attack, int defense,int exprience, int vision) {
-        super(tile, name, healthCapacity, attack, defense,exprience);
+    public Monster(char tile, String name, int attack, int defense,int exprience, int vision) {
+        super(tile, name, attack, defense,exprience);
         this.vision_range=vision;
     }
 
@@ -30,7 +30,7 @@ public class Monster extends Enemy {
         }
         //else
         //Math.random() צריך להרגיל הזזה (ימינה/שמלאה/למעלה/למטה/לא לזוז)
-        }
+
 
 
     }
