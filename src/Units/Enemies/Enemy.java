@@ -1,9 +1,8 @@
 package Units.Enemies;
 
 import Dungeons_and_Dragons.*;
-import Units.Players.Health;
 import Units.Players.Player;
-import Units.Unit;
+import Units.*;
 
 import java.util.Random;
 
@@ -14,15 +13,17 @@ public class Enemy extends Unit {
     protected static final int ATTACK_MULTIPLAYER =4;
     protected static final int DEFENSE_MULTIPLAYER =4;
 
+    protected static final char visible_char = '?';
+
 
     private int experience_value  ;
-    public Enemy(char tile, String name,Health healthCapacity, int attack, int defense, int experience) {
-        this(tile, name,attack,healthCapacity, defense,experience,new Position());
-    }
-    protected Enemy(char tile, String name, int attack, Health healthCapacity, int defense, int experience, Position postion ) {
-        super(tile, name,healthCapacity, attack, defense);
+
+    public Enemy(char tile, String name, int attack,int defence,int healthCapacity,int experience ,Position position ) {
+        super(tile, name, attack , defence);
+        this.setHealth(healthCapacity,healthCapacity);
         this.experience_value = experience;
-        this.position=postion;
+        this.initialize(position);
+
 
     }
 
@@ -41,7 +42,7 @@ public class Enemy extends Unit {
 
 
     public Position getPosition() {
-        return position;
+        return this.getPosition();
     }
 
     @Override

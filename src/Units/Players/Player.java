@@ -1,8 +1,9 @@
 package Units.Players;
 
+import Units.Ability;
 import Units.Unit;
 
-public class Player extends Unit {
+public abstract class Player extends Unit {
 
 
 
@@ -17,8 +18,6 @@ public class Player extends Unit {
 
     protected Player(String name, int attack, int defense) {
         super(PLAYERSIGN, name, attack, defense);
-        health.setHealthPool(PLAYER_HEALTH_MULTIPLAYER);
-        health.setHealthAmount(PLAYER_HEALTH_MULTIPLAYER);
     }
 
 

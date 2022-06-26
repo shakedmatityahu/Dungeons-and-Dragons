@@ -1,5 +1,6 @@
 package Units.Players;
 
+import Units.Ability;
 import Units.Unit;
 
 public class Rogue extends Player {
@@ -18,7 +19,7 @@ public class Rogue extends Player {
     private final int ROGUE_ATTACK_MULTIPLAYER = 3;
     private final int ENERGY_RAISE = 10;
 
-    private Rogue(String name, int attack, int defense, Ability specialAbility ,int cost) {
+    private Rogue(String name, int attack, int defense, Ability specialAbility , int cost) {
         super(name, attack, defense);
         this.specialAbility = specialAbility;
         this.currentEnergy = MAX_ENERGY;

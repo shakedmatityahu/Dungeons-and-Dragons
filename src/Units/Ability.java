@@ -1,4 +1,4 @@
-package Units.Players;
+package Units;
 
 public class Ability{
     private String name;

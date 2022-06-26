@@ -1,4 +1,4 @@
-package Units.Players;
+package Units;
 
 public class Health {
     private int HealthPool;
