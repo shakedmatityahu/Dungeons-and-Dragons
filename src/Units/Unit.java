@@ -17,6 +17,7 @@ public abstract class Unit extends Tile implements GameTicker {
         this.attack = attack;
         this.defense = defense;
         health = new Health();
+        GameTickListener.RegisterGameTick(this);
 
     }
 
