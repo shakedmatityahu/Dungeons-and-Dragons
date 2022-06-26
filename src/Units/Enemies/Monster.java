@@ -1,15 +1,25 @@
 package Units.Enemies;
 
+import Dungeons_and_Dragons.Position;
 import Units.Health;
 import Units.Players.Player;
 
 public class Monster extends Enemy {
 
     private int vision_range;
-    public Monster(char tile, String name, int attack, Health healthCapacity, int defense, int exprience, int vision) {
-        super(tile, name,healthCapacity,attack, defense,exprience);
-        this.vision_range=vision;
+
+    public Monster(char tile, String name, int attack, int defence, int healthCapacity, int experience, Position position, int vision) {
+        super(tile, name, attack, defence, healthCapacity, experience, position);
+        vision_range = vision;
     }
+
+
+  /*
+
+  public Monster(char tile, String name, int attack, int healthCapacity, int defense, int vision) {
+        super(tile, name,healthCapacity,attack, defense);
+        this.vision_range=vision;
+    }*/
 
     public void turn (String move, Player player)
     {

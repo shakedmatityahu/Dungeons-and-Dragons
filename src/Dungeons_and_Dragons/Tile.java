@@ -7,14 +7,20 @@ public abstract class Tile implements Comparable<Tile> {
     protected char tile;
     protected Position position;
 
-    protected Tile(char tile){
+    public Tile(char tile){
         this.tile = tile;
+        position = new Position();
     }
+
 
     /// will not be used... made problems while building
     public Tile() {
+        tile = '.';
+        position = new Position();
 
     }
+
+
 
     protected void initialize(Position position){
         this.position = position;

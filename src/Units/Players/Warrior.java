@@ -1,7 +1,7 @@
 package Units.Players;
-
-import Units.Ability;
-import Units.Unit;
+import Dungeons_and_Dragons.*;
+import Units.*;
+import org.w3c.dom.html.HTMLBRElement;
 
 public class Warrior extends Player {
 
@@ -16,16 +16,24 @@ public class Warrior extends Player {
 
     private Warrior(String name, int attack, int defense, Ability specialAbility) {
         super(name, attack, defense);
+        health.setHealthPool(PLAYER_HEALTH_MULTIPLAYER);
+        health.setHealthAmount(PLAYER_HEALTH_MULTIPLAYER);
         this.specialAbility = specialAbility;
     }
 
-    public Warrior createWarrior(String name, int collDown) {
+    public Warrior createWarrior(int x, int y,int initHealth,String name, int collDown) {
         try {
             if (collDown < 0) {
                 throw new RuntimeException("Ability cool down can not be negative integer");
             } else {
+                Position newPosition = new Position(x,y);
+                char charls = PLAYERSIGN;
+                Health newHealth = new Health(initHealth,initHealth);
+
+
                 Ability newAbility = new Ability(WARRIOR_ABILITY_NAME, WARRIOR_ABILITY_RANGE, collDown);
                 Warrior newWorrior = new Warrior(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, newAbility);
+                newWorrior.initialize(newPosition);
                 return newWorrior;
             }
         } catch (Exception e) {
@@ -34,6 +42,7 @@ public class Warrior extends Player {
             return null;
         }
     }
+
 
     public void OnAbilityCast() throws Exception {
         if (health.getHealthAmount() <= health.getHealthPool() * ABILITY_COST) {

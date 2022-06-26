@@ -11,17 +11,22 @@ public class Trap extends Enemy {
     private int invisibility_time;
     private int ticks_count=0;
     private boolean visible=true;
-    private char visible_char;
     private char invisible_char='.';
 
-    public Trap(char tile, String name, Health healthCapacity, int attack, int defense, int experience, int visibility, int invisibility, int ticks, Position p) {
-        super(tile, name, attack, healthCapacity,defense, experience,p);
+    public Trap( String name, int attack, int defence, int healthCapacity, int experience, Position position) {
+        super(visible_char, name, attack, defence, healthCapacity, experience, position);
+    }
+
+
+
+/*    public Trap(char tile, String name, Health healthCapacity, int attack, int defense, int experience, int visibility, int invisibility, int ticks, Position p) {
+        super(tile, name, attack, healthCapacity,defense, experience);
         this.invisibility_time=invisibility;
         this.visibility_time=visibility;
         this.ticks_count=ticks;
+    }*/
 
 
-    }
     public boolean isVisible()
     {
         return this.visible;

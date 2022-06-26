@@ -11,13 +11,17 @@ public class Enemy extends Unit {
     protected static final int ATTACK_MULTIPLAYER =4;
     protected static final int DEFENSE_MULTIPLAYER =4;
 
+    protected static final char visible_char = '?';
+
     private int experience_value  ;
-    public Enemy(char tile, String name,Health healthCapacity, int attack, int defense, int experience) {
+/*    public Enemy(char tile, String name,int healthCapacity, int attack, int defense, int experience) {
         this(tile, name,attack,healthCapacity, defense,experience,new Position());
-    }
-    public Enemy(char tile, String name, int attack, Health healthCapacity, int defense, int experience, Position postion ) {
-        super(tile, name,healthCapacity, attack, defense);
+    }*/
+    public Enemy(char tile, String name, int attack,int defence,int healthCapacity,int experience ,Position position ) {
+        super(tile, name, attack , defence);
+        this.setHealth(healthCapacity,healthCapacity);
         this.experience_value = experience;
+        this.initialize(position);
 
     }
 
