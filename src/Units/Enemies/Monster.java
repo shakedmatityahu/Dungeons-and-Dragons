@@ -17,8 +17,6 @@ public class Monster extends Enemy {
 
     }
 
-
-
   public Monster(char tile, String name, int attack, int healthCapacity, int defense,int experience, int vision) {
       super(tile, name, healthCapacity, attack, defense,experience,new Position());
       this.vision_range = vision;
@@ -26,7 +24,7 @@ public class Monster extends Enemy {
 
     public void turn (String move, Player player)
     {
-        if(this.getTile().Distance(player.getTile())<vision_range) {
+        if(this.Distance(player)<vision_range) {
             int dx;
             int dy;
             dx = Math.abs(player.getPosition().getX() - this.getPosition().getX());
@@ -43,8 +41,9 @@ public class Monster extends Enemy {
         }
         else
             this.initialize(new Position(this.rollMove()) );
+    }
 
-
+    public void OnGameTick(){ //????need TO-DO
 
     }
 

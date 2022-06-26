@@ -60,5 +60,5 @@ public class Enemy extends Unit {
         //אם השחקן מת להוציא הודעה שהוא מת
     }
 
-    public Tile getTile(){return this.getTile();}
+
 }

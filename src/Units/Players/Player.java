@@ -39,6 +39,6 @@ public abstract class Player extends Unit {
     public void accept(Unit unit) {
 
     }
-    public Tile getTile (){ return this.getTile();}
+
 
 }
