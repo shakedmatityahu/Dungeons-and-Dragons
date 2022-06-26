@@ -14,6 +14,11 @@ public class Health {
         HealthPool = pool;
         HealthAmount = amount;
     }
+    public Health(int pool) //בנאי לאויבים
+    {
+        HealthPool=pool;
+        HealthAmount=0;
+    }
 
     public int getHealthPool() {
         return HealthPool;
