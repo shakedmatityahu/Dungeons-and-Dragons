@@ -5,6 +5,8 @@ import Units.Players.Health;
 import Units.Players.Player;
 import Units.Unit;
 
+import java.util.Random;
+
 public class Enemy extends Unit {
 
     protected static final int EXP_MULTIPLAYER =10;
@@ -14,8 +16,8 @@ public class Enemy extends Unit {
 
 
     private int experience_value  ;
-    public Enemy(char tile, String name,int healthCapacity, int attack, int defense, int experience) {
-        this(tile, name,attack,new Health(healthCapacity), defense,experience,new Position());
+    public Enemy(char tile, String name,Health healthCapacity, int attack, int defense, int experience) {
+        this(tile, name,attack,healthCapacity, defense,experience,new Position());
     }
     protected Enemy(char tile, String name, int attack, Health healthCapacity, int defense, int experience, Position postion ) {
         super(tile, name,healthCapacity, attack, defense);
@@ -23,6 +25,20 @@ public class Enemy extends Unit {
         this.position=postion;
 
     }
+
+    public Position rollMove ()
+    {
+        String[] moves= new String[4];
+        moves[0]="left";
+        moves[1]="right";
+        moves[2]="up";
+        moves[3]="down";
+        moves[4]="Stay";
+        Random random= new Random();
+        int number= random.nextInt(moves.length);
+        return  this.position.move(moves[number]);
+    }
+
 
     public Position getPosition() {
         return position;

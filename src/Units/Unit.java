@@ -11,7 +11,6 @@ import java.util.Random;
 public abstract class Unit extends Tile {
 
     protected char tile;
-    //protected Position position;
     protected String name;
     protected Health health;
     protected int attack;
@@ -66,7 +65,7 @@ public abstract class Unit extends Tile {
     }
 
 
-    //
+
 //    protected void initialize(Position position, MessageCallback messageCallback){
 //
 //    }

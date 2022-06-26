@@ -1,5 +1,6 @@
 package Units.Enemies;
 
+import Dungeons_and_Dragons.Position;
 import Dungeons_and_Dragons.Tile;
 import Units.Players.Health;
 import Units.Players.Player;
@@ -7,9 +8,10 @@ import Units.Players.Player;
 public class Monster extends Enemy {
 
     private int vision_range;
-    public Monster(char tile, String name, int attack, Health healthCapacity, int defense, int exprience, int vision) {
+    public Monster(char tile, String name, int attack, Health healthCapacity, int defense, int exprience, int vision, Position position) {
         super(tile, name,healthCapacity,attack, defense,exprience);
         this.vision_range=vision;
+        this.initialize(position);
     }
 
     public void turn (String move, Player player)
@@ -29,10 +31,12 @@ public class Monster extends Enemy {
             else
                 move = "down";
         }
-        //else
-        //Math.random() צריך להרגיל הזזה (ימינה/שמלאה/למעלה/למטה/לא לזוז)
+        else
+            this.initialize(new Position(this.rollMove()) );
 
 
 
     }
+
+
 }
