@@ -26,9 +26,9 @@ public abstract class Tile implements Comparable<Tile> {
         this.position = position;
     }
 
-    public char getTile() {
-        return tile;
-    }
+    public Tile getTile() {return this;}
+
+    public char getTileChar(){return this.tile;}
 
     public Position getPosition() {
         return position;
@@ -44,9 +44,11 @@ public abstract class Tile implements Comparable<Tile> {
     public int compareTo(Tile tile) {
         try {
             return getPosition().compareTo(tile.getPosition());
-        } catch (ExecutionControl.NotImplementedException e) {
-            e.printStackTrace();
         }
+        /*catch (ExecutionControl.NotImplementedException e) {
+            e.printStackTrace();
+        }*/ //לא כזה הבנתי מה זה כי ראיתי בקובץ שלהם שזה לא מופיע
+
         finally {
             return 0;
         }
@@ -61,5 +63,12 @@ public abstract class Tile implements Comparable<Tile> {
         return String.valueOf(tile);
     }
 
+    public double Distance(Tile t) {
+        return Math.sqrt(Math.pow((this.getPosition().getX() - t.getPosition().getX()), 2) + Math.pow((this.getPosition().getY() - t.getPosition().getY()), 2));
+    }
+
+    public boolean isInRange(Tile t, int range) {
+        return range >= this.Distance(t);
+    }
 
 }

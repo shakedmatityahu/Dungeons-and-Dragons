@@ -23,8 +23,9 @@ public class Position {
 
     }
 
-    public static Position at(int x, int y) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("to-do");
+    public static Position at(int x, int y)
+    {
+        return new Position(x,y);
     }
 
     public int compareTo(Position position)

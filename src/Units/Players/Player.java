@@ -1,5 +1,6 @@
 package Units.Players;
 
+import Dungeons_and_Dragons.Tile;
 import Units.Ability;
 import Units.Unit;
 
@@ -38,4 +39,6 @@ public abstract class Player extends Unit {
     public void accept(Unit unit) {
 
     }
+    public Tile getTile (){ return this.getTile();}
+
 }

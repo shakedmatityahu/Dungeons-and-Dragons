@@ -59,4 +59,6 @@ public class Enemy extends Unit {
         //super.attack(player);
         //אם השחקן מת להוציא הודעה שהוא מת
     }
+
+    public Tile getTile(){return this.getTile();}
 }

@@ -26,7 +26,7 @@ public class Monster extends Enemy {
 
     public void turn (String move, Player player)
     {
-        if(position.Distance(player.getPosition())<vision_range) {
+        if(this.getTile().Distance(player.getTile())<vision_range) {
             int dx;
             int dy;
             dx = Math.abs(player.getPosition().getX() - this.getPosition().getX());
