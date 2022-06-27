@@ -7,8 +7,6 @@ public class Position {
     private int y;
 
 
-
-
     public Position(Position position) {
         this.x = position.x;
         this.y = position.y;
@@ -19,30 +17,66 @@ public class Position {
         this.y = y;
     }
 
-    public Position(){
+    public Position() {
         this.x = 0;
         this.y = 0;
 
     }
 
-    public static Position at(int x, int y) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("to-do");
+    public static Position at(int x, int y)
+    {
+        return new Position(x,y);
     }
 
-    public int compareTo(Position position) throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("to-do");
+    public int compareTo(Position position)
+    {
+        if(y<position.getY())
+            return -1;
+        if(y>= position.getY())
+            return  1;
+        if(x< position.getY())
+            return -1;
+        if(x>= position.getY())
+            return 1;
+        return 0;
     }
 
-    public int getX(){return x;}
+    public int getX() {
+        return x;
+    }
 
-    public int getY(){return y;}
+    public int getY() {
+        return y;
+    }
 
-    public double Distance (Position p1) {
+    private void setX(int newX) {
+        x = newX;
+    }
+
+    private void setY(int newY) {
+        y = newY;
+    }
+
+    public double Distance(Position p1) {
         return Math.sqrt(Math.pow((this.getX() - p1.getX()), 2) + Math.pow((this.getY() - p1.getY()), 2));
     }
 
-    public boolean isInRange(Position p1,int range)
-    {
-        return range>=this.Distance(p1);
+    public boolean isInRange(Position p1, int range) {
+        return range >= this.Distance(p1);
+    }
+
+
+    public Position moveMonster(String move) {
+        if (move == "left")
+            this.setX(this.getX() - 1);
+        if (move == "right")
+            this.setX(this.getX() + 1);
+        if (move == "up")
+            this.setY(this.getX() + 1);
+        if (move == "down")
+            this.setY(this.getY() - 1);
+        return this;
+        // אם אני עוברת למקום שיש בו מפלצת אחרץ אז אני לא זזה
+        //צריך לבדוק איפה אני ביחס ללוח כי אם אני בקיר אני מאבדת תור
     }
 }

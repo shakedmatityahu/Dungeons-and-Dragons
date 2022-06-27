@@ -14,6 +14,10 @@ public class Health {
         HealthPool = pool;
         HealthAmount = amount;
     }
+    public Health(int pool) {
+        HealthPool = pool;
+        HealthAmount = pool;
+    }
 
     public int getHealthPool() {
         return HealthPool;
@@ -35,5 +39,9 @@ public class Health {
             
         }
         HealthAmount = healthAmount;
+    }
+    public void damage (int damage)
+    {
+        this.HealthPool=getHealthPool()-damage;
     }
 }

@@ -11,12 +11,17 @@ import java.util.stream.Collectors;
 
 public class GameBoard {
     private List<Tile> tiles;
+    // length od the board
+   // private Char[][] board= new Char[][];
 
     public GameBoard(Tile[][] board){
         tiles = new ArrayList<>();
         for(Tile[] line : board){
             tiles.addAll(Arrays.asList(line));
         }
+    }
+
+    public static void reomve(Enemy enemy) {
     }
 
     public Tile get(int x, int y) throws ExecutionControl.NotImplementedException {
@@ -45,4 +50,6 @@ public class GameBoard {
         // TODO: Implement me
         return null;
     }
+
+
 }

@@ -1,12 +1,19 @@
 package Units.Players;
 
+import Dungeons_and_Dragons.GameBoard;
+import Dungeons_and_Dragons.Tile;
+import UI.MessageCallback;
 import Units.Ability;
+import Units.Enemies.Enemy;
 import Units.Unit;
+import UI.MessageCallback;
+import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Player extends Unit {
 
 
-
+    ArrayList<Enemy> enemies;
     protected int experience = 0;
     protected int level = 1;
     protected Ability specialAbility;
@@ -37,5 +44,29 @@ public abstract class Player extends Unit {
     @Override
     public void accept(Unit unit) {
 
+    }
+
+    public void damage(int damage) {
+        this.health.damage(damage);
+    }
+
+    protected void battle (Enemy enemy)
+    {
+        int defense= new Random().nextInt(enemy.getAttack());
+        int attack=new Random().nextInt(this.getAttack());
+        enemy.damage(attack-defense);
+        if(enemy.getHealth().getHealthPool()<=0)
+        {
+            MessageCallback.print( "you killed "+ enemy.getName());
+            this.addExprincePoints(this.experience);
+            this.initialize(enemy.getPosition());
+            GameBoard.reomve(enemy);
+            enemies.remove(enemy);
+        }
+    }
+
+    private void addExprincePoints(int experience) {
+        this.experience=this.experience+experience;
+        
     }
 }

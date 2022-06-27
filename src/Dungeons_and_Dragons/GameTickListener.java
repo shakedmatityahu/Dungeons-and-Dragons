@@ -1,8 +1,11 @@
 package Dungeons_and_Dragons;
 
+import Units.Players.Player;
+
 import java.net.http.WebSocket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class GameTickListener {
 
@@ -13,5 +16,17 @@ public class GameTickListener {
         ListenerList.add(newListener);
     }
 
+    public void notiifyListeners ()
+    {
+        for (GameTicker gameTicker:ListenerList)
+            gameTicker.OnGameTick();
+    }
+
+    public void getUserInput()
+    {
+        Scanner s= new Scanner(System.in);
+        while (s.hasNextLine()) //לא בטוחה
+            notiifyListeners();
+    }
 
 }

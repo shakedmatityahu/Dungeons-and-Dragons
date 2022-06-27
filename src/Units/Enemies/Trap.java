@@ -74,5 +74,9 @@ public class Trap extends Enemy {
             this.attack(player);
     }
 
+    public void OnGameTick(){
+
+        // call the method end_turn (player)
+    }
     
 }

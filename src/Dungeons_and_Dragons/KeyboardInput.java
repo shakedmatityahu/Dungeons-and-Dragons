@@ -1,27 +1,24 @@
 package Dungeons_and_Dragons;
 
-public class KeyboardInput{
+public enum KeyboardInput{
+        Left("a"),
+        Right("d"),
+        Up("w"),
+        Down("s"),
+        Cast("e"),
+        Wait("q");
 
-    enum Input {
-        Left,
-        Right,
-        Up,
-        Down,
-        Cast,
-        Wait;
-    ////לא הצלחתי אבל צריך להוסיך מה כל אחד מהם בפועל כלומר שמאלה זה בעצם a ....
-    }
-
-
-    private char key;
-    public KeyboardInput(char key)
+    private String key;
+    KeyboardInput(String key)
     {
         this.key=key;
     }
-   /* public string getKey()
+    public String getKey()
     {
         return this.key;
-    }*/
+    }
+
+
 
 
 }
