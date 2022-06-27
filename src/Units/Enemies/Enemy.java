@@ -72,9 +72,7 @@ public abstract class Enemy extends Unit {
         int defense=new Random().nextInt(player.getAttack());
         player.damage(attack-defense);
         if(player.getHealth().getHealthPool()<=0)
-            System.out.println("the player died in the battle");
-
-
+             player.death();
 
     }
 
@@ -84,8 +82,7 @@ public abstract class Enemy extends Unit {
         this.getHealth().setHealthPool(this.getHealth().getHealthPool()-damage);
     }
 
-    public void remove() {
-    }
+
 }
 
 

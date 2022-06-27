@@ -86,6 +86,7 @@ public abstract class Unit extends Tile implements GameTicker {
 
 
 
+
 //    protected void initialize(Position position, MessageCallback messageCallback){
 //
 //    }

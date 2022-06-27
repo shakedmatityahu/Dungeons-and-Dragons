@@ -16,6 +16,7 @@ public abstract class Player extends Unit {
     ArrayList<Enemy> enemies;
     protected int experience = 0;
     protected int level = 1;
+    protected boolean isAlive;
     protected Ability specialAbility;
 
     protected static final int PLAYER_EXP_MULTIPLAYER =10;
@@ -25,6 +26,7 @@ public abstract class Player extends Unit {
 
     protected Player(String name, int attack, int defense) {
         super(PLAYERSIGN, name, attack, defense);
+        isAlive=true;
     }
 
 
@@ -67,6 +69,12 @@ public abstract class Player extends Unit {
 
     private void addExprincePoints(int experience) {
         this.experience=this.experience+experience;
-        
+
+    }
+
+    public void death ()
+    {
+        this.isAlive=false;
+        MessageCallback.print("Game Over you died");
     }
 }

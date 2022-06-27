@@ -38,6 +38,8 @@ public class Monster extends Enemy {
                 move = "up";
             else
                 move = "down";
+
+            this.position.moveMonster(move);
         }
         else
             this.initialize(new Position(this.rollMove()) );
