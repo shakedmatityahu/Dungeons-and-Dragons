@@ -4,6 +4,8 @@ import Dungeons_and_Dragons.*;
 import Units.Players.Player;
 import Units.*;
 
+import java.util.Random;
+
 
 public abstract class Enemy extends Unit {
 
@@ -25,6 +27,10 @@ public abstract class Enemy extends Unit {
         this.initialize(position);
 
 
+    }
+    public int getAttack ()
+    {
+        return this.attack;
     }
 
     public Position rollMove ()
@@ -60,5 +66,27 @@ public abstract class Enemy extends Unit {
         //אם השחקן מת להוציא הודעה שהוא מת
     }
 
+    protected void battle (Player player)
+    {
+        int attack= new Random().nextInt(this.getAttack());
+        int defense=new Random().nextInt(player.getAttack());
+        player.damage(attack-defense);
+        if(player.getHealth().getHealthPool()<=0)
+            System.out.println("the player died in the battle");
 
+
+
+    }
+
+    public int getExprince () { return this.experience_value; }
+
+    public void damage(int damage) {
+        this.getHealth().setHealthPool(this.getHealth().getHealthPool()-damage);
+    }
+
+    public void remove() {
+    }
 }
+
+
+
