@@ -2,10 +2,11 @@ package Units.Players;
 
 import Dungeons_and_Dragons.GameBoard;
 import Dungeons_and_Dragons.Tile;
+import UI.MessageCallback;
 import Units.Ability;
 import Units.Enemies.Enemy;
 import Units.Unit;
-
+import UI.MessageCallback;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -56,7 +57,7 @@ public abstract class Player extends Unit {
         enemy.damage(attack-defense);
         if(enemy.getHealth().getHealthPool()<=0)
         {
-            //"you killed "+ enemy.getName()  ____ output
+            MessageCallback.print( "you killed "+ enemy.getName());
             this.addExprincePoints(this.experience);
             this.initialize(enemy.getPosition());
             GameBoard.reomve(enemy);
@@ -66,5 +67,6 @@ public abstract class Player extends Unit {
 
     private void addExprincePoints(int experience) {
         this.experience=this.experience+experience;
+        
     }
 }
