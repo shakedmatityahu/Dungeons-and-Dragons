@@ -4,9 +4,9 @@ import Dungeons_and_Dragons.*;
 import Units.Players.Player;
 import Units.*;
 
-import java.util.Random;
 
-public class Enemy extends Unit {
+public abstract class Enemy extends Unit {
+
 
     protected static final int EXP_MULTIPLAYER =10;
     protected static final int EALTH_MULTIPLAYER =10;
