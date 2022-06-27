@@ -75,8 +75,8 @@ public class Trap extends Enemy {
     }
 
     public void OnGameTick(){
-        ticks_count++;
-        //maybe call the method end_turn
+
+        // call the method end_turn (player)
     }
     
 }

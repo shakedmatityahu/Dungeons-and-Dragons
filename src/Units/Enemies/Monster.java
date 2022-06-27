@@ -43,7 +43,9 @@ public class Monster extends Enemy {
             this.initialize(new Position(this.rollMove()) );
     }
 
-    public void OnGameTick(){ //????need TO-DO
+    public void OnGameTick(){
+        //????need TO-DO
+        //this.turn(); //צריך לשלוח גם את התזוזה וגם את השחקן אני חושבת..?
 
     }
 

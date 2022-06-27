@@ -37,7 +37,7 @@ public class Enemy extends Unit {
         moves[4]="Stay";
         Random random= new Random();
         int number= random.nextInt(moves.length);
-        return  this.position.move(moves[number]);
+        return  this.position.moveMonster(moves[number]);
     }
 
 

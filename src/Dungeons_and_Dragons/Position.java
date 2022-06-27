@@ -66,7 +66,7 @@ public class Position {
     }
 
 
-    public Position move(String move) {
+    public Position moveMonster(String move) {
         if (move == "left")
             this.setX(this.getX() - 1);
         if (move == "right")
@@ -76,5 +76,7 @@ public class Position {
         if (move == "down")
             this.setY(this.getY() - 1);
         return this;
+        // אם אני עוברת למקום שיש בו מפלצת אחרץ אז אני לא זזה
+        //צריך לבדוק איפה אני ביחס ללוח כי אם אני בקיר אני מאבדת תור
     }
 }

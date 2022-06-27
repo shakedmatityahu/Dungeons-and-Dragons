@@ -1,5 +1,7 @@
 package Dungeons_and_Dragons;
 
+import Units.Players.Player;
+
 import java.net.http.WebSocket;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class GameTickListener {
     public void getUserInput()
     {
         Scanner s= new Scanner(System.in);
-        while (s.hasNext()) //לא בטוחה
+        while (s.hasNextLine()) //לא בטוחה
             notiifyListeners();
     }
 
