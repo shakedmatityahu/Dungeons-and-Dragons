@@ -2,6 +2,7 @@ package Units.Players;
 
 import Dungeons_and_Dragons.GameBoard;
 import Dungeons_and_Dragons.Tile;
+import GameTiles.Wall;
 import UI.MessageCallback;
 import Units.Ability;
 import Units.Enemies.Enemy;
@@ -77,4 +78,21 @@ public abstract class Player extends Unit {
         this.isAlive=false;
         MessageCallback.print("Game Over you died");
     }
+    public void accept (Visitor v)
+    {
+        v.visit(this);
+    }
+    public void accept(Player p)
+    {
+        //
+    }
+    public void visit (Enemy e)
+    {
+        this.battle(e);
+    }
+    public void visit(Wall w)
+    {
+        //
+    }
+
 }

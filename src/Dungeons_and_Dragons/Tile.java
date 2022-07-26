@@ -1,9 +1,13 @@
 package Dungeons_and_Dragons;
-
+import DesignPatterns.Visited;
+import DesignPatterns.Visitor;
+import GameTiles.Empty;
+import Units.Enemies.Enemy;
+import Units.Players.Player;
 import Units.Unit;
 import jdk.jshell.spi.ExecutionControl;
 
-public abstract class Tile implements Comparable<Tile> {
+public abstract class Tile implements Comparable<Tile> , Visited, Visitor {
     protected char tile;
     protected Position position;
 
@@ -19,8 +23,6 @@ public abstract class Tile implements Comparable<Tile> {
         position = new Position();
 
     }
-
-
 
     protected void initialize(Position position){
         this.position = position;
@@ -39,6 +41,11 @@ public abstract class Tile implements Comparable<Tile> {
     }
 
     public abstract void accept(Unit unit);
+    public abstract  void accept (Visitor v);
+    public abstract  void visit (Player p);
+    public abstract  void visit (Enemy e);
+    public abstract  void visit (Empty empty);
+    public abstract  void visit (Wall w);
 
     @Override
     public int compareTo(Tile tile) {
