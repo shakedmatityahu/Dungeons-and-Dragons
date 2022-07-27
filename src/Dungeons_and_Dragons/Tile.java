@@ -7,6 +7,8 @@ public abstract class Tile implements Comparable<Tile> {
     protected char tile;
     protected Position position;
 
+    public static boolean RealRandom = true;
+
     public Tile(char tile){
         this.tile = tile;
         position = new Position();

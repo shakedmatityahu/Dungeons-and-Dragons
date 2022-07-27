@@ -69,7 +69,11 @@ public abstract class Unit extends Tile implements GameTicker {
 
     public int AttackerRoll()
     {
-        return new Random().nextInt((this.getAttack()) + 1);
+        int tmp = this.getAttack();
+        int i = (RealRandom)? ( new Random().nextInt((tmp + 1))) : (tmp/2) ;
+
+        return i;
+        //return new Random().nextInt((this.getAttack()) + 1);
     }
 
     public int DefenderRoll(){
