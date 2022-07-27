@@ -1,6 +1,8 @@
 package Units;
 import Dungeons_and_Dragons.*;
 import Units.Enemies.Enemy;
+import Units.Enemies.Monster;
+import Units.Enemies.Trap;
 
 import java.util.Random;
 
@@ -83,14 +85,62 @@ public abstract class Unit extends Tile implements GameTicker {
         //this = null
         //implement better
     }
-
-    /*public Unit defineUnit (char c)
+//(char tile, String name, int attack, int defence, int healthCapacity, int experience, Position position, int vision) {
+    public Unit defineUnit (char c)
     {
-        if(c=='s')
-        {
-
+        if(c=='s') {
+            return new Monster(this.tile, "Lannister Solider", 8, 3, 80, 25, this.position, 3);
         }
-    }*/
+        if(c=='k')
+        {
+                return new Monster(this.tile,"Lannister Knight",14,8,200,50,this.position,4);
+        }
+        if(c=='q')
+        {
+            return new Monster(this.tile,"Queen’sGuard",20,15,400,100,this.position,5);
+        }
+        if(c=='z')
+        {
+            return new Monster(this.tile,"Wright",30,15,600,100,this.position,3);
+        }
+        if(c=='b')
+        {
+            return new Monster(this.tile,"Bear-Wright",75,30,1000,250,this.position,4);
+        }
+        if(c=='b')
+        {
+            return new Monster(this.tile,"Giant-Wright",100,40,1500,500,this.position,5);
+        }
+        if(c=='w')
+        {
+            return new Monster(this.tile,"White Walker",150,50,2000,1000,this.position,6);
+        }
+        if(c=='M')
+        {
+            return new Monster(this.tile,"The Mountian ",60,25,1000,500,this.position,6);
+        }
+        if(c=='C')
+        {
+            return new Monster(this.tile,"Queen Cersei",10,10,100,1000,this.position,1);
+        }
+        if(c=='K')
+        {
+            return new Monster(this.tile,"Night's King",300,150,5000,5000,this.position,8);
+        }
+        if(c=='B')
+        {
+            return new Trap("Bonus Trap",1,1,1,250,1,5);
+        }
+        if(c=='Q')
+        {
+            return new Trap("Queen's Trap",50,10,250,100,3,7);
+        }
+        if(c=='D')
+        {
+            return new Trap("Death Trap",100,20,500,250,1,10);
+        }
+        return null;
+    }
 
 
 

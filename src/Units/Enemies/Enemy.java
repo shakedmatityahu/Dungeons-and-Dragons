@@ -27,7 +27,11 @@ public abstract class Enemy extends Unit {
         this.setHealth(healthCapacity, healthCapacity);
         this.experience_value = experience;
         this.initialize(position);
-
+    }
+    public Enemy(char tile, String name, int attack, int defence, int healthCapacity, int experience) {
+        super(tile, name, attack, defence);
+        this.setHealth(healthCapacity, healthCapacity);
+        this.experience_value = experience;
 
     }
 
@@ -102,7 +106,6 @@ public abstract class Enemy extends Unit {
     {
         v.visit (this);
     }
-
 
 
 

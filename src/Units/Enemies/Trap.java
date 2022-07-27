@@ -14,8 +14,15 @@ public class Trap extends Enemy {
     private boolean visible=true;
     private char invisible_char='.';
 
-    public Trap( String name, int attack, int defence, int healthCapacity, int experience, Position position) {
+    public Trap( String name, int attack, int defence, int healthCapacity, int experience,int visibility_time,int invisibility_time, Position position) {
         super(visible_char, name, attack, defence, healthCapacity, experience, position);
+        this.visibility_time=visibility_time;
+        this.invisibility_time=invisibility_time;
+    }
+    public Trap( String name, int attack, int defence, int healthCapacity, int experience,int visibility_time,int invisibility_time) {
+        super(visible_char, name, attack, defence, healthCapacity, experience);
+        this.visibility_time=visibility_time;
+        this.invisibility_time=invisibility_time;
     }
 
 
