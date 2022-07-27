@@ -1,10 +1,6 @@
 package Dungeons_and_Dragons;
 
-import Units.Players.Player;
-
-import java.net.http.WebSocket;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class GameTickListener {
