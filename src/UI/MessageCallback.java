@@ -1,9 +1,9 @@
 package UI;
 
 
-public class MessageCallback{
+public interface MessageCallback{
 
-    public static void print(String output)
+    public static void send(String output)
     {
         System.out.println(output);
     }

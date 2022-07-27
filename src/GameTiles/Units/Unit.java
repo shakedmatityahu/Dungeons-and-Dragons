@@ -20,6 +20,13 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
     protected int attack;
     protected int defense;
     protected static final char PLAYERSIGN = '@';
+    private MessageCallback messageCallback;
+
+
+///*    protected void set(Position position, MessageCallback messageCallback){
+//        this.messageCallback = messageCallback;
+//        this.position = position;
+//    }*/
 
     protected Unit(char tile, String name, int attack, int defense) {
         super(tile);
@@ -38,6 +45,8 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
     public void setHealth(int pool,int amount) {
         this.health.setHealthPool(pool);
         this.health.setHealthAmount(amount);
+
+       MessageCallback.send("plasd");
     }
 
     public void setAttack(int attack) {
@@ -90,6 +99,10 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         }
     }
 
+    public void interact(Tile tile){
+		tile.accept(this);
+    }
+
     public void visit(Empty empty){
         this.swap(empty);
     }
@@ -109,12 +122,9 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         return new Random().nextInt((this.getDefense()) + 1);
     }
 
-    public void die(){
-        Position tmp = new Position(this.position);
-        //this = null
-        //implement better
-    }
-//(char tile, String name, int attack, int defence, int healthCapacity, int experience, Position position, int vision) {
+    public abstract void onDeath();
+
+
     public Unit defineUnit (char c)
     {
         if(c=='s') {
@@ -171,43 +181,12 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         return null;
     }
 
+    public String describe() {
+        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
+    }
+
+    
 
 
-//    protected void initialize(Position position, MessageCallback messageCallback){
-//
-//    }
-//
-//    protected int attack() throws Exception {
-//        throw new Exception("TO-DO");
-//    }
-//
-//    public int defend(){
-////        ...
-//    }
-//
-//    // Should be automatically called once the unit finishes its turn
-//    public abstract void processStep();
-//
-//    // What happens when the unit dies
-//    public abstract void onDeath();
-//
-//    // This unit attempts to interact with another tile.
-//    public void interact(Tile tile){
-////		...
-//    }
-//
-//    public void visit(Empty e){
-////		...
-//    }
-//
-//    public abstract void visit(Player p);
-//    public abstract void visit(Enemy e);
-//
-//    // Combat against another unit.
-//    protected void battle(Unit u){
-////        ...
-//    }
-//
-//
 
 }

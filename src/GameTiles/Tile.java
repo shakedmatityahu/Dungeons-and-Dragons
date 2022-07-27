@@ -31,7 +31,9 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
         this.position = position;
     }
 
-
+    public boolean InRange(Tile tile,int range ){
+        return (position.isInRange(tile.getPosition(),range));
+    }
 
     public char getTile(){return this.tile;}
 
@@ -84,5 +86,6 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
     public boolean isInRange(Tile t, int range) {
         return range >= this.Distance(t);
     }
+
 
 }

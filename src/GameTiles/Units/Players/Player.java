@@ -70,7 +70,7 @@ public abstract class Player extends Unit {
     public void death ()
     {
         this.isAlive=false;
-        MessageCallback.print("Game Over you died");
+        MessageCallback.send("Game Over you died");
     }
 
     @Override
