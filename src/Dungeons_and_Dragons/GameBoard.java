@@ -30,12 +30,7 @@ public class GameBoard {
                 return t;
             }
         }
-        return new Tile() {
-            @Override
-            public void accept(Unit unit) {
-
-            }
-        };
+        throw new RuntimeException("No tile");
     }
 
     public void remove(Enemy e) {

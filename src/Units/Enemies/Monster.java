@@ -2,6 +2,7 @@ package Units.Enemies;
 
 import Dungeons_and_Dragons.Position;
 import Dungeons_and_Dragons.Tile;
+import GameTiles.Wall;
 import Units.Health;
 
 import Units.Players.Player;
@@ -52,4 +53,8 @@ public class Monster extends Enemy {
     }
 
 
+    @Override
+    public void visit(Wall w) {
+
+    }
 }

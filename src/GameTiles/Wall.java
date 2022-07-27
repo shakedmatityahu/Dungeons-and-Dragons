@@ -1,4 +1,5 @@
 package GameTiles;
+import DesignPatterns.Visitor;
 import Dungeons_and_Dragons.*;
 import Units.Enemies.Enemy;
 import Units.Players.Player;
@@ -11,7 +12,7 @@ public class Wall extends Tile {
         super('#');
         this.position=p;
     }
-    public void accept(Vistor v)
+    public void accept(Visitor v)
     {
         v.visit(this);
 
@@ -21,6 +22,10 @@ public class Wall extends Tile {
 
     }
     public void visit (Enemy e)
+    {
+
+    }
+    public void visit (Empty empty)
     {
 
     }

@@ -1,12 +1,13 @@
 package GameTiles;
 
+import DesignPatterns.Visitor;
 import Dungeons_and_Dragons.Position;
 import Dungeons_and_Dragons.Tile;
 import Units.Enemies.Enemy;
 import Units.Players.Player;
 import Units.Unit;
 
-public class Empty extends Tile {
+public class Empty extends Tile  {
     public Empty() {
         super('.');
     }

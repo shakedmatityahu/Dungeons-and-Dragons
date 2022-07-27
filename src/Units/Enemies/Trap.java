@@ -1,6 +1,7 @@
 package Units.Enemies;
 
 import Dungeons_and_Dragons.Position;
+import GameTiles.Wall;
 import Units.Health;
 import Units.Players.Player;
 
@@ -47,6 +48,11 @@ public class Trap extends Enemy {
                 visible=true;
                 setTile(visible_char);
             }
+    }
+
+    @Override
+    public void visit(Wall w) {
+
     }
 
     public void setTile(char tile)

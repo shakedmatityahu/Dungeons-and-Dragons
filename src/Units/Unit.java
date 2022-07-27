@@ -1,5 +1,7 @@
 package Units;
 import Dungeons_and_Dragons.*;
+import Units.Enemies.Enemy;
+
 import java.util.Random;
 
 public abstract class Unit extends Tile implements GameTicker {
@@ -80,10 +82,15 @@ public abstract class Unit extends Tile implements GameTicker {
         Position tmp = new Position(this.position);
         //this = null
         //implement better
-
-
     }
 
+    /*public Unit defineUnit (char c)
+    {
+        if(c=='s')
+        {
+
+        }
+    }*/
 
 
 

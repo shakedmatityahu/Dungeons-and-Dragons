@@ -1,5 +1,6 @@
 package Units.Players;
 
+import GameTiles.Empty;
 import Units.Ability;
 import Units.Unit;
 
@@ -70,6 +71,21 @@ public class Rogue extends Player {
     public void accept(Unit unit) {
 
         //not sure what this shoud do
+    }
+
+    @Override
+    public void visit(Player p) {
+
+    }
+
+    @Override
+    public void visit(Empty empty) {
+
+    }
+
+    @Override
+    public void OnGameTick() {
+        super.OnGameTick();
     }
 }
 

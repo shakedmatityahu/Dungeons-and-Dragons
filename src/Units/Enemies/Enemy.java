@@ -1,5 +1,6 @@
 package Units.Enemies;
 
+import DesignPatterns.Visitor;
 import Dungeons_and_Dragons.*;
 import GameTiles.Empty;
 import Units.Players.Player;

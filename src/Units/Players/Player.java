@@ -1,5 +1,6 @@
 package Units.Players;
 
+import DesignPatterns.Visitor;
 import Dungeons_and_Dragons.GameBoard;
 import Dungeons_and_Dragons.Tile;
 import GameTiles.Wall;

@@ -1,5 +1,6 @@
 package Units.Players;
 import Dungeons_and_Dragons.*;
+import GameTiles.Empty;
 import Units.*;
 import org.w3c.dom.html.HTMLBRElement;
 
@@ -73,5 +74,20 @@ public class Warrior extends Player {
     public void accept(Unit unit) {
 
         //not sure what this shoud do
+    }
+
+    @Override
+    public void visit(Player p) {
+
+    }
+
+    @Override
+    public void visit(Empty empty) {
+
+    }
+
+    @Override
+    public void OnGameTick() {
+        super.OnGameTick();
     }
 }

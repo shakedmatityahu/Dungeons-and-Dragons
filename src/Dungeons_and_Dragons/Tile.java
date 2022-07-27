@@ -2,12 +2,13 @@ package Dungeons_and_Dragons;
 import DesignPatterns.Visited;
 import DesignPatterns.Visitor;
 import GameTiles.Empty;
+import GameTiles.Wall;
 import Units.Enemies.Enemy;
 import Units.Players.Player;
 import Units.Unit;
 import jdk.jshell.spi.ExecutionControl;
 
-public abstract class Tile implements Comparable<Tile> , Visited, Visitor {
+public abstract class Tile implements Comparable<Tile> ,Visited, Visitor {
     protected char tile;
     protected Position position;
 
