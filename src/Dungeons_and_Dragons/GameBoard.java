@@ -11,14 +11,9 @@ import java.util.stream.Collectors;
 
 public class GameBoard {
     private List<Tile> tiles;
-    // length od the board
-   // private Char[][] board= new Char[][];
 
-    public GameBoard(Tile[][] board){
-        tiles = new ArrayList<>();
-        for(Tile[] line : board){
-            tiles.addAll(Arrays.asList(line));
-        }
+    public GameBoard(List<Tile> tiles){
+        this.tiles =tiles;
     }
 
     public static void reomve(Enemy enemy) {

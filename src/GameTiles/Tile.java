@@ -13,7 +13,6 @@ import java.util.List;
 public abstract class Tile implements Comparable<Tile> ,Visited {
     protected char tile;
     protected Position position;
-    private static final List<Character> GAMETILES =List.of('.','#');
 
     public static boolean RealRandom = true;
 
@@ -32,17 +31,16 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
 
 
 
-    protected void initialize(Position position){
+    public void initialize(Position position){
         this.position = position;
     }
 
-    public static Tile tileFactory(char c, int x, int y){
-        Position p = new Position(x,y);
+    public static Tile tileFactory(char c,Position p){
 
-        if (GAMETILES.contains(c))
+        if (c == '.')
             return new Empty(p);
-
-        return new Wall(p);
+        else
+            return new Wall(p);
     }
 
     public boolean InRange(Tile tile,int range ){
