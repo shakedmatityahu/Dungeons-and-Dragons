@@ -86,7 +86,7 @@ public abstract class Unit extends Tile implements GameTicker {
         //implement better
     }
 //(char tile, String name, int attack, int defence, int healthCapacity, int experience, Position position, int vision) {
-    public Unit defineUnit (char c)
+    public Enemy defineUnit (char c)
     {
         if(c=='s') {
             return new Monster(this.tile, "Lannister Solider", 8, 3, 80, 25, this.position, 3);
