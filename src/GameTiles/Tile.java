@@ -31,6 +31,11 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
         this.position = position;
     }
 
+    public static Tile tileFactory(char c, int x, int y){
+        Position p = new Position(x,y);
+        return new Empty(p);
+    }
+
     public boolean InRange(Tile tile,int range ){
         return (position.isInRange(tile.getPosition(),range));
     }
