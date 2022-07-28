@@ -116,7 +116,9 @@ public class GameController {
             for (int j=0; j<=colNum; j++)
             {
                 char c = tileRow.charAt(j);
-                initBoard[i][j] = Tile.tileFactory(c,i,j);
+                Tile tmp = Tile.tileFactory(c,i,j);
+                initBoard[i][j] = tmp;
+
             }
 
         }

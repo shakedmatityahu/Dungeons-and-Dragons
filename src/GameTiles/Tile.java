@@ -6,9 +6,14 @@ import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.Unit;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Tile implements Comparable<Tile> ,Visited {
     protected char tile;
     protected Position position;
+    private static final List<Character> GAMETILES =List.of('.','#');
 
     public static boolean RealRandom = true;
 
@@ -33,7 +38,11 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
 
     public static Tile tileFactory(char c, int x, int y){
         Position p = new Position(x,y);
-        return new Empty(p);
+
+        if (GAMETILES.contains(c))
+            return new Empty(p);
+
+        return new Wall(p);
     }
 
     public boolean InRange(Tile tile,int range ){
