@@ -71,5 +71,12 @@ public class Rogue extends Player {
     public void OnGameTick() {
         super.OnGameTick();
     }
+
+    public int getCost(){return cost;}
+    public String describe (){
+        String des=((Unit)this).describe();
+        des+=String.format("%s\t\tCost: %i",getCost());
+        return des;
+    }
 }
 

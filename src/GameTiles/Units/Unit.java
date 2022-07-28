@@ -3,6 +3,7 @@ import Dungeons_and_Dragons.*;
 import GameTiles.DesignPatterns.Visitor;
 import GameTiles.Empty;
 import GameTiles.Tile;
+import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Enemies.Monster;
 import GameTiles.Units.Enemies.Trap;
 import GameTiles.Units.Players.Player;
@@ -65,17 +66,9 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         return health;
     }
 
-    //    protected int attack() throws Exception {
-//        throw new Exception("TO-DO");
-//    }
-//
-//    public int defend(){
-//        throw new Exception("TO-DO");
-//    }
-//
-//    public String describe() {
-//        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
-//    }
+    public String describe() {
+        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
+   }
 
     public void damage(int damage) {
         this.health.damage(damage);
@@ -122,10 +115,12 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         return new Random().nextInt((this.getDefense()) + 1);
     }
 
-    public abstract void onDeath();
-
-
-    public Unit defineUnit (char c)
+    public void die(){
+        Position tmp = new Position(this.position);
+        //this = null
+        //implement better
+    }
+    public Enemy defineUnit (char c)
     {
         if(c=='s') {
             return new Monster(this.tile, "Lannister Solider", 8, 3, 80, 25, this.position, 3);
@@ -186,7 +181,5 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
     }
 
     
-
-
 
 }

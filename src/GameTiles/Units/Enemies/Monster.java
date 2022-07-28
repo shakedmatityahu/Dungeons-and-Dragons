@@ -2,6 +2,7 @@ package GameTiles.Units.Enemies;
 
 import Dungeons_and_Dragons.Position;
 import GameTiles.DesignPatterns.Visitor;
+import GameTiles.Units.Unit;
 import GameTiles.Wall;
 
 import GameTiles.Units.Players.Player;
@@ -49,6 +50,12 @@ public class Monster extends Enemy {
         //????need TO-DO
         //this.turn(); //צריך לשלוח גם את התזוזה וגם את השחקן אני חושבת..?
 
+    }
+    public int getVision_range(){return vision_range;}
+    public String describe (){
+        String des=((Unit)this).describe();
+        des+=String.format("%s\t\tVisionRange: %i\t\tExperienceValue: %i",getVision_range(),getExprince());
+        return des;
     }
 
 

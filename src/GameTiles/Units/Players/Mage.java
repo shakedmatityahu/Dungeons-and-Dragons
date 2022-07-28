@@ -23,30 +23,27 @@ public class Mage extends Player {
     private final int MAGE_SPELL_MULTIPLAYER = 10;
     private final int MAGE_MANA_DIV = 4;
 
-    private Mage(String name, int attack, int defense, Ability specialAbility , int manaCost) {
+    private Mage(String name, int attack, int defense, Ability specialAbility , int manaCost, int hitsCount, int manaPool, int spellPower) {
         super(name, attack, defense);
-       /* this.specialAbility = specialAbility;
-        this.currentMana = MAX_ENERGY;
+        this.manaPool=manaPool;
+        this.currentMana = manaPool/MAGE_MANA_DIV;
         this.manaCost = manaCost;
-        change all
-        */
-    }
+        this.spellPower=spellPower;
+        this.hitsCount=hitsCount;
+        //this.range....
+        //this.specialAbility = specialAbility;
 
-    public Mage createMage(String name, int collDown, int manaCost) {
-        /*try {
-            if (collDown < 0) {
-                throw new RuntimeException("Ability cool down can not be negative integer");
-            } else {
-                //fix ability
-                Ability newAbility = new Ability(MAGE_ABILITY_NAME, MAGE_ABILITY_RANGE, collDown);
-                Mage newMage = new Mage(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, newAbility,manaCost);
-                return newMage;
-            }
-        } catch (Exception e) {
-            System.out.println("Mage was not formed since");
-            System.out.println(e.getMessage());*/
-            return null;
-        //}
+    }
+    public int getHitsCount(){return hitsCount; }
+    public int getCurrentMana(){return currentMana; }
+    public int getSpellPower(){return spellPower; }
+    public int getManaCost(){return manaCost; }
+    public int getManaPool(){return manaPool; }
+
+    public String describe (){
+        String des=((Unit)this).describe();
+        des+=String.format("%s\t\tManaPool: %i\t\tManaCost: %i\t\tCurrentMana: %i\t\tSpellPower: %i\t\tHitsCount: %i",getManaPool(),getManaCost(),getCurrentMana(),getSpellPower(),getHitsCount());
+        return des;
     }
 
     @Override

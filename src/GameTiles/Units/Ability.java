@@ -11,7 +11,7 @@ public class Ability{
         this.range = range;
         this.coolDown = coolDown;
     }
-
+    public int getCoolDown(){return coolDown;}
     public String getName() {
         return name;
     }

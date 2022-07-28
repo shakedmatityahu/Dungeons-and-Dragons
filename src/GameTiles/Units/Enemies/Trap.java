@@ -1,6 +1,7 @@
 package GameTiles.Units.Enemies;
 
 import Dungeons_and_Dragons.Position;
+import GameTiles.Units.Unit;
 import GameTiles.Wall;
 import GameTiles.Units.Players.Player;
 
@@ -85,5 +86,19 @@ public class Trap extends Enemy {
 
         // call the method end_turn (player)
     }
-    
+    public int getVisibilityTime(){return visibility_time;}
+    public int getInVisibilityTime(){return invisibility_time;}
+    public String describe (){
+        String des=((Unit)this).describe();
+        des+=String.format("%s\t\tExperienceValue: %i\t\tVisibilityTime: %i\t\tInvisibilityTime: %i",getExprince(),getVisibilityTime(),getInVisibilityTime());
+        return des;
+    }
+    @Override
+    public String toString() {
+        if (ticks_count<visibility_time)
+            return String.valueOf(tile);
+        else
+            return ".";
+        }
+
 }
