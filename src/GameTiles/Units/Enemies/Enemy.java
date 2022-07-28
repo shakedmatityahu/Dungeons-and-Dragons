@@ -103,6 +103,63 @@ public abstract class Enemy extends Unit {
     }
 
 
+    public Enemy enemyFactory(char c, Position p)
+    {
+        if(c=='s') {
+            return new Monster(this.tile, "Lannister Solider", 8, 3, 80, 25, p, 3);
+        }
+        if(c=='k')
+        {
+            return new Monster(this.tile,"Lannister Knight",14,8,200,50,p,4);
+        }
+        if(c=='q')
+        {
+            return new Monster(this.tile,"Queen’sGuard",20,15,400,100,p,5);
+        }
+        if(c=='z')
+        {
+            return new Monster(this.tile,"Wright",30,15,600,100,p,3);
+        }
+        if(c=='b')
+        {
+            return new Monster(this.tile,"Bear-Wright",75,30,1000,250,p,4);
+        }
+        if(c=='b')
+        {
+            return new Monster(this.tile,"Giant-Wright",100,40,1500,500,p,5);
+        }
+        if(c=='w')
+        {
+            return new Monster(this.tile,"White Walker",150,50,2000,1000,p,6);
+        }
+        if(c=='M')
+        {
+            return new Monster(this.tile,"The Mountian ",60,25,1000,500,p,6);
+        }
+        if(c=='C')
+        {
+            return new Monster(this.tile,"Queen Cersei",10,10,100,1000,p,1);
+        }
+        if(c=='K')
+        {
+            return new Monster(this.tile,"Night's King",300,150,5000,5000,p,8);
+        }
+        if(c=='B')
+        {
+            return new Trap("Bonus Trap",1,1,1,250,1,5);
+        }
+        if(c=='Q')
+        {
+            return new Trap("Queen's Trap",50,10,250,100,3,7);
+        }
+        if(c=='D')
+        {
+            return new Trap("Death Trap",100,20,500,250,1,10);
+        }
+        return null;
+    }
+
+
 
 }
 
