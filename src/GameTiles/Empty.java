@@ -1,11 +1,10 @@
 package GameTiles;
 
-import DesignPatterns.Visitor;
+import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.Position;
-import Dungeons_and_Dragons.Tile;
-import Units.Enemies.Enemy;
-import Units.Players.Player;
-import Units.Unit;
+import GameTiles.Units.Enemies.Enemy;
+import GameTiles.Units.Players.Player;
+import GameTiles.Units.Unit;
 
 public class Empty extends Tile  {
     public Empty() {
@@ -17,27 +16,6 @@ public class Empty extends Tile  {
         this.position=p;
     }
 
-    @Override
-    public void accept(Unit unit) {
-    // why?
-    }
-
-    public void visit (Player p)
-    {
-
-    }
-    public void  visit(Enemy e)
-    {
-
-    }
-    public void visit (Empty empty)
-    {
-
-    }
-    public void visit (Wall w)
-    {
-
-    }
     @Override
     public void accept (Visitor v)
     {

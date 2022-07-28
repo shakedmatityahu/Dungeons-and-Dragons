@@ -1,9 +1,9 @@
 package GameTiles;
-import DesignPatterns.Visitor;
+import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.*;
-import Units.Enemies.Enemy;
-import Units.Players.Player;
-import Units.Unit;
+import GameTiles.Units.Enemies.Enemy;
+import GameTiles.Units.Players.Player;
+import GameTiles.Units.Unit;
 
 public class Wall extends Tile {
 
@@ -17,26 +17,5 @@ public class Wall extends Tile {
         v.visit(this);
 
     }
-    public void visit(Player p)
-    {
 
-    }
-    public void visit (Enemy e)
-    {
-
-    }
-    public void visit (Empty empty)
-    {
-
-    }
-
-    public void visit (Wall w)
-    {
-
-    }
-
-    @Override
-    public void accept(Unit unit) {
-        //למה צריך את זה בעצם?
-    }
 }

@@ -1,7 +1,7 @@
 package Dungeons_and_Dragons;
-import Units.Enemies.Enemy;
+import GameTiles.Tile;
+import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Empty;
-import Units.Unit;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
