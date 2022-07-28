@@ -100,5 +100,5 @@ public class Trap extends Enemy {
         else
             return ".";
         }
-    
+
 }
