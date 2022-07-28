@@ -3,6 +3,7 @@ import Dungeons_and_Dragons.*;
 import GameTiles.DesignPatterns.Visitor;
 import GameTiles.Empty;
 import GameTiles.Tile;
+import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Enemies.Monster;
 import GameTiles.Units.Enemies.Trap;
 import GameTiles.Units.Players.Player;
@@ -56,17 +57,9 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         return health;
     }
 
-    //    protected int attack() throws Exception {
-//        throw new Exception("TO-DO");
-//    }
-//
-//    public int defend(){
-//        throw new Exception("TO-DO");
-//    }
-//
-//    public String describe() {
-//        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
-//    }
+    public String describe() {
+        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
+   }
 
     public void damage(int damage) {
         this.health.damage(damage);
@@ -114,7 +107,6 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         //this = null
         //implement better
     }
-//(char tile, String name, int attack, int defence, int healthCapacity, int experience, Position position, int vision) {
     public Enemy defineUnit (char c)
     {
         if(c=='s') {
@@ -171,43 +163,5 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         return null;
     }
 
-
-
-//    protected void initialize(Position position, MessageCallback messageCallback){
-//
-//    }
-//
-//    protected int attack() throws Exception {
-//        throw new Exception("TO-DO");
-//    }
-//
-//    public int defend(){
-////        ...
-//    }
-//
-//    // Should be automatically called once the unit finishes its turn
-//    public abstract void processStep();
-//
-//    // What happens when the unit dies
-//    public abstract void onDeath();
-//
-//    // This unit attempts to interact with another tile.
-//    public void interact(Tile tile){
-////		...
-//    }
-//
-//    public void visit(Empty e){
-////		...
-//    }
-//
-//    public abstract void visit(Player p);
-//    public abstract void visit(Enemy e);
-//
-//    // Combat against another unit.
-//    protected void battle(Unit u){
-////        ...
-//    }
-//
-//
 
 }

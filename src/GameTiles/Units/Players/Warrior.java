@@ -73,4 +73,11 @@ public class Warrior extends Player {
     public void OnGameTick() {
         super.OnGameTick();
     }
+
+    public int getCoolDown(){return this.specialAbility.getCoolDown();}
+    public String describe (){
+        String des=((Unit)this).describe();
+        des+=String.format("%s\t\tCoolDown: %i",getCoolDown());
+        return des;
+    }
 }
