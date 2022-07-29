@@ -4,25 +4,20 @@ import GameTiles.Tile;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 
-import javax.naming.directory.DirContext;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GameController {
 
-    ArrayList<GameBoard> levelList;
+    ArrayList<GameBoard> gameBoards;
     ArrayList<ArrayList<Enemy>> enemyList;
     Player player;
     private static final List<Character> ENEMY_LIST= List.of('s','k','q','z','b','g','w','M','C','K');
@@ -31,8 +26,9 @@ public class GameController {
 
     public GameController(String path, Player player1)
     {
+        player1 = Player.playerFactory("Demo");
         List<File> fileList = getLevelFiles(path);
-        levelList = new ArrayList<>(fileList.size());
+        gameBoards = new ArrayList<>(fileList.size());
         enemyList = new ArrayList<>(fileList.size());
         for (List<Enemy> list :enemyList)
         {
@@ -43,22 +39,64 @@ public class GameController {
         for (int i=0; i <fileList.size(); i++)
         {
             File level = fileList.get(i);
-            List<String> levelRow = fileToRowList(level);
-            GameBoard board= new GameBoard(initGameBoard(levelRow,enemyList.get(i),player1));
-            levelList.set(i,board);
+            List<String> levelCharsRow = fileToRowList(level);
+            GameBoard board= new GameBoard(
+                    initGameBoard(levelCharsRow,enemyList.get(i),player1))
+                    ;
+            gameBoards.set(i,board);
 
         }
     }
 
 
-    public void play(){
-        for (int i=0; i<levelList.size(); i++){
-            GameBoard cuurentLevel = levelList.get(i);
-            while (!(enemyList.get(i).isEmpty()))
+    public void play(Player player1){
+        for (int i = 0; i< gameBoards.size(); i++){
+            GameBoard cuurentLevel = gameBoards.get(i);
+            cuurentLevel.setPlayer(player1);
+            List<Enemy> cuurentEnemyList = enemyList.get(i);
+            while (!(cuurentEnemyList.isEmpty()))
             {
                 String command = "fill with player input";
 
+                playerMove(player1,command,cuurentLevel,cuurentEnemyList);
+                if(!(player.isAlive)){
+                    System.out.println("YOU LOST");
+                }
+                player1.onTick();
+                for (Enemy enemy: cuurentEnemyList) {
+                    enemy.onTick();
+                }
             }
+        }
+    }
+
+    private void playerMove(Player p,String command, GameBoard board,List<Enemy> enemyList){
+        Position position = new Position(player.getPosition());
+        Tile tile;
+        switch (command) {
+            case "w":
+                position.setX(position.getX() + 1);
+                tile = board.finedTile(position);
+                p.interact(tile);
+                break;
+            case "s":
+                position.setX(position.getX() - 1);
+                tile = board.finedTile(position);
+                p.interact(tile);
+                break;
+            case "a":
+                position.setY(position.getY() - 1);
+                tile = board.finedTile(position);
+                p.interact(tile);
+                break;
+            case "d":
+                position.setY(position.getY() + 1);
+                tile = board.finedTile(position);
+                p.interact(tile);
+                break;
+            case "e":
+                //player.castability(enemyList);
+                break;
         }
     }
 
@@ -124,9 +162,10 @@ public class GameController {
                 {
                     AllTiles.add(Tile.tileFactory(c, position));
                 }
-                else if(c != '@')
+                else if(c == '@')
                 {
-                    System.out.println("FAULTY_FILE");
+                    player.initialize(position);
+                    AllTiles.add(player);
                 }
 
             }

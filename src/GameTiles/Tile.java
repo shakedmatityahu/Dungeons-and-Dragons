@@ -5,6 +5,7 @@ import Dungeons_and_Dragons.Position;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.Unit;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -71,9 +72,9 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
         try {
             return getPosition().compareTo(tile.getPosition());
         }
-        /*catch (ExecutionControl.NotImplementedException e) {
+        catch (Exception e) {
             e.printStackTrace();
-        }*/ //לא כזה הבנתי מה זה כי ראיתי בקובץ שלהם שזה לא מופיע
+        }
 
         finally {
             return 0;

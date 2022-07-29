@@ -17,7 +17,7 @@ public abstract class Player extends Unit {
     ArrayList<Enemy> enemies;
     protected int experience = 0;
     protected int level = 1;
-    protected boolean isAlive;
+    public boolean isAlive;
     protected Ability specialAbility;
 
     protected static final int PLAYER_EXP_MULTIPLAYER =10;
@@ -29,6 +29,19 @@ public abstract class Player extends Unit {
         super(PLAYERSIGN, name, attack, defense);
         isAlive=true;
     }
+
+    public static Player playerFactory(String name){
+        switch (name){
+            case "Jon Snow":
+                return new Warrior(name,300,30,4);
+        }
+        return new Warrior("DEMO", 0,0,0);
+    }
+
+    @Override
+    public abstract void onTick();
+
+
 
 
     public void levelUp(){
@@ -43,9 +56,6 @@ public abstract class Player extends Unit {
     public void OnAbilityCast() throws Exception {
         throw new Exception("Not implemented");
     }
-
-
-
     @Override
     protected void battle(Unit defender){
         super.battle(defender);
@@ -59,8 +69,6 @@ public abstract class Player extends Unit {
         }
         defender.*/
     }
-
-
 
     private void addExprincePoints(int experience) {
         this.experience=this.experience+experience;

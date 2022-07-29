@@ -20,6 +20,15 @@ public class Warrior extends Player {
         health.setHealthAmount(PLAYER_HEALTH_MULTIPLAYER);
         this.specialAbility = specialAbility;
     }
+    public Warrior(String name, int Health, int attack, int defense) {
+        super(name, attack, defense);
+        health.setHealthPool(Health);
+        health.setHealthAmount(Health);
+        //fill special ability
+        this.specialAbility = null;
+    }
+
+
 
     public Warrior createWarrior(int x, int y,int initHealth,String name, int collDown) {
         try {
@@ -53,6 +62,11 @@ public class Warrior extends Player {
             //continue implementation.
             //this.specialAbility.AvengersShield(this);
         }
+    }
+
+    @Override
+    public void onTick() {
+        System.out.println("not implemented w game tick");
     }
 
     @Override

@@ -47,6 +47,12 @@ public class Mage extends Player {
     }
 
     @Override
+    public void onTick() {
+
+        System.out.println("not implemented Mage game tick");
+    }
+
+    @Override
     public void levelUp() {
         super.levelUp();
         //actual implement attack

@@ -45,6 +45,12 @@ public class Rogue extends Player {
     }
 
     @Override
+    public void onTick()
+    {
+        System.out.println("not implemented Rougue game tick");
+    }
+
+    @Override
     public void levelUp() {
         super.levelUp();
         //actual implement attack

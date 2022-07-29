@@ -2,7 +2,7 @@ package Dungeons_and_Dragons;
 
 import jdk.jshell.spi.ExecutionControl;
 
-public class Position {
+public class Position implements Comparable<Position>{
     private int x;
     private int y;
 
@@ -28,6 +28,7 @@ public class Position {
         return new Position(x,y);
     }
 
+    @Override
     public int compareTo(Position position)
     {
         if(y<position.getY())
@@ -49,11 +50,11 @@ public class Position {
         return y;
     }
 
-    private void setX(int newX) {
+    public void setX(int newX) {
         x = newX;
     }
 
-    private void setY(int newY) {
+    public void setY(int newY) {
         y = newY;
     }
 

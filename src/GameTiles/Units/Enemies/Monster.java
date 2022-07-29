@@ -52,6 +52,13 @@ public class Monster extends Enemy {
 
     }
     public int getVision_range(){return vision_range;}
+
+    @Override
+    public void onTick() {
+
+        System.out.println("not implemented M game tick");
+    }
+
     public String describe (){
         String des=((Unit)this).describe();
         des+=String.format("%s\t\tVisionRange: %i\t\tExperienceValue: %i",getVision_range(),getExprince());

@@ -89,6 +89,12 @@ public class Trap extends Enemy {
     }
     public int getVisibilityTime(){return visibility_time;}
     public int getInVisibilityTime(){return invisibility_time;}
+
+    @Override
+    public void onTick() {
+        System.out.println("not implemented w game tick");
+    }
+
     public String describe (){
         String des=((Unit)this).describe();
         des+=String.format("%s\t\tExperienceValue: %i\t\tVisibilityTime: %i\t\tInvisibilityTime: %i",getExprince(),getVisibilityTime(),getInVisibilityTime());

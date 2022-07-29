@@ -39,6 +39,8 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
 
     }
 
+    public abstract void onTick();
+
     public void setName(String name) {
         this.name = name;
     }
