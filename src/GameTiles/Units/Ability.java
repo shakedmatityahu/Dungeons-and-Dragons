@@ -1,17 +1,19 @@
 package GameTiles.Units;
 
+import GameTiles.Units.Enemies.Enemy;
+import GameTiles.Units.Players.Player;
+
 public abstract class Ability{
     private String name;
     private int range ;
-    private int coolDown;
-    private int remainingCoolDown =0;
 
-    public Ability(String name, int range, int coolDown){
+
+    public Ability(String name, int range){
         this.name = name;
         this.range = range;
-        this.coolDown = coolDown;
+
     }
-    public int getCoolDown(){return coolDown;}
+
     public String getName() {
         return name;
     }
@@ -30,14 +32,8 @@ public abstract class Ability{
         this.range = range;
     }
 
-    public void UpdateCoolDown(){
-        if (remainingCoolDown > 0)
-            remainingCoolDown--;
-    }
 
-    public void resetCoolDown(){
-        remainingCoolDown = this.coolDown;
-    }
+
 
     /*
     maby we will add visitor pattern
@@ -49,9 +45,12 @@ public abstract class Ability{
         return this.canCastAbility();
     }
 
-    public boolean canCastAbility(int mana, int cost)
-    {
-        return this.canCastAbility(mana,cost);
-    }
+
+
+    public abstract void levelUp(int level);
+    public abstract  void gameTick(int level);
+    public abstract void abilityCast(Player p, Enemy enemy);
+
+    public abstract String describe ();
 
 }

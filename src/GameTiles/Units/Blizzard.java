@@ -1,16 +1,62 @@
 package GameTiles.Units;
 
+import GameTiles.Units.Enemies.Enemy;
+import GameTiles.Units.Players.Player;
+
 public class Blizzard extends Ability
 {
+    private int manaPool;
+    private int currentMana;
+    private int spellPower;
+    private int hitsCount;
+    private  int manaCost;
+
+    private final int MAGE_MANA_MULTIPLAYER = 25;
+    private final int ENERGY_RAISE = 10;
+    private final int MAGE_SPELL_MULTIPLAYER = 10;
+    private final int MAGE_MANA_DIV = 4;
 
 
-    public Blizzard(String name, int range, int coolDown) {
-        super(name, range, coolDown);
+    public Blizzard(String name, int range, int manaPool, int spellPower,int hitsCount, int manaCost) {
+        super(name, range);
+        this.manaPool=manaPool;
+        this.currentMana=manaPool/MAGE_MANA_DIV;
+        this.spellPower=spellPower;
+        this.hitsCount=hitsCount;
+        this.manaCost=manaCost;
     }
-    public boolean canCastAbility (int mana, int cost)
+    public boolean canCastAbility ()
     {
-        if(mana< cost)
+        if(currentMana< manaCost)
             return true;
         return false;
+    }
+
+    @Override
+    public void levelUp(int level) {
+        this.manaPool += MAGE_MANA_MULTIPLAYER*level;
+        this.currentMana = (int) Math.min((double) currentMana+(currentMana/MAGE_MANA_DIV),(double)manaPool);
+        this.spellPower += (MAGE_SPELL_MULTIPLAYER*level);
+    }
+
+    @Override
+    public void gameTick(int level) {
+        this.currentMana=Math.min(manaPool,currentMana+1*level);
+    }
+
+    @Override
+    public void abilityCast(Player p, Enemy enemy)
+    {
+        while(hitsCount < this.hitsCount) {
+            p.battle(enemy, spellPower);
+            hitsCount++;
+        }
+        this.currentMana-=this.manaCost;
+        this.hitsCount=0;
+    }
+
+    public String describe (){
+        return String.format("%s\t\tManaPool: %i\t\tManaCost: %i\t\tCurrentMana: %i\t\tSpellPower: %i\t\tHitsCount: %i",manaCost,currentMana,spellPower,hitsCount);
+
     }
 }
