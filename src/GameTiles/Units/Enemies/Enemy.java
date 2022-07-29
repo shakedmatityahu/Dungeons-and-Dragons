@@ -2,7 +2,6 @@ package GameTiles.Units.Enemies;
 
 import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.*;
-import GameTiles.Empty;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.*;
 import UI.EnemyDeathCallBack;
@@ -55,39 +54,15 @@ public abstract class Enemy extends Unit {
 
     public abstract void onTick(Player player);
 
-
-    public Position getPosition() {
-        return this.getPosition();
-    }
-
     public void setEnemyDeathCallBack(EnemyDeathCallBack edc){
         enemyDeathCallBack = edc;
     }
 
-    public void setTile(char tile) {
-
-    }
-
-    public void attack(Player player) {
-        //super.attack(player);
-        //אם השחקן מת להוציא הודעה שהוא מת
-    }
-
-    protected void battle(Player player) {
-        int attack = new Random().nextInt(this.getAttack());
-        int defense = new Random().nextInt(player.getAttack());
-        player.damage(attack - defense);
-        if (player.getHealth().getHealthPool() <= 0)
-            player.death();
-
-    }
-
-
     public int getExprince() {
-        return this.experience_value;
+        return experience_value;
     }
 
-    public void damage(int damage) {
+    public void ReceiveDamage(int damage) {
         this.getHealth().setHealthPool(this.getHealth().getHealthPool() - damage);
     }
 

@@ -73,10 +73,7 @@ public class Rogue extends Player {
         }
     }
 
-    @Override
-    public void OnGameTick() {
-        super.OnGameTick();
-    }
+
 
     public int getCost(){return cost;}
     public String describe (){

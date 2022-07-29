@@ -3,10 +3,6 @@ import Dungeons_and_Dragons.*;
 import GameTiles.DesignPatterns.Visitor;
 import GameTiles.Empty;
 import GameTiles.Tile;
-import GameTiles.Units.Enemies.Enemy;
-import GameTiles.Units.Enemies.Monster;
-import GameTiles.Units.Enemies.Trap;
-import GameTiles.Units.Players.Player;
 import GameTiles.Wall;
 import UI.MessageCallback;
 
@@ -39,8 +35,6 @@ public abstract class Unit extends Tile implements Visitor {
 
     }
 
-
-
     public void setName(String name) {
         this.name = name;
     }
@@ -72,8 +66,8 @@ public abstract class Unit extends Tile implements Visitor {
         return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
    }
 
-    public void damage(int damage) {
-        this.health.damage(damage);
+    public void ReceiveDamage(int damage) {
+        health.inflictDamage(damage);
     }
 
     public int getAttack() {
@@ -86,13 +80,29 @@ public abstract class Unit extends Tile implements Visitor {
 
     protected void battle(Unit defender)
     {
-        int defense= new Random().nextInt(defender.getAttack());
-        int attack=new Random().nextInt(this.getAttack());
+        int defense= defendeRoll(defender);
+        int attack= attackRoll(this);
         if(attack -defense > 0)
         {
-            defender.damage(attack - defense);
+            defender.ReceiveDamage(attack - defense);
         }
     }
+
+    protected boolean isDead() {
+        return health.getHealthAmount() <= 0;
+    }
+
+    protected static int defendeRoll(Unit unit)
+    {
+        return new Random().nextInt(unit.getDefense());
+    }
+
+    protected static int attackRoll(Unit unit)
+    {
+        return new Random().nextInt(unit.getAttack());
+    }
+
+
 
     public void interact(Tile tile){
 		tile.accept(this);
@@ -104,30 +114,16 @@ public abstract class Unit extends Tile implements Visitor {
     public void visit(Wall w){}
     public void accept (Visitor v){}
 
-    public int AttackerRoll()
-    {
-        int tmp = this.getAttack();
-        int i = (RealRandom)? ( new Random().nextInt((tmp + 1))) : (tmp/2) ;
-
-        return i;
-        //return new Random().nextInt((this.getAttack()) + 1);
-    }
-
-    public int DefenderRoll(){
-        return new Random().nextInt((this.getDefense()) + 1);
-    }
-
     public void die(){
         Position tmp = new Position(this.position);
         //this = null
         //implement better
     }
 
-
-   /* public String describe() {
-        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
-    }*/
-
+    @Override
+    public String toString(){
+        return tile+"";
+    }
     
 
 }

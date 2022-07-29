@@ -40,8 +40,8 @@ public class Health {
         }
         HealthAmount = healthAmount;
     }
-    public void damage (int damage)
+    public void inflictDamage(int damage)
     {
-        this.HealthPool=getHealthPool()-damage;
+        HealthAmount = Math.max(0,HealthAmount-damage);
     }
 }

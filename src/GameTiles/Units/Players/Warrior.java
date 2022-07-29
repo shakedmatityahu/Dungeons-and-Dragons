@@ -83,10 +83,7 @@ public class Warrior extends Player {
         this.specialAbility.UpdateCoolDown();
     }
 
-    @Override
-    public void OnGameTick() {
-        super.OnGameTick();
-    }
+
 
     public int getCoolDown(){return this.specialAbility.getCoolDown();}
     public String describe (){
