@@ -48,8 +48,6 @@ public class GameBoard {
         return null;
     }
 
-
-
     private Tile findPlayerPosition(){
         for (Tile tile : tiles){
              if(tile.getTile() =='@')
@@ -64,9 +62,13 @@ public class GameBoard {
         tiles.add(new Empty(p));
     }
 
+    public void sortTiles(){
+        tiles = tiles.stream().sorted().collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
-        tiles = tiles.stream().sorted().collect(Collectors.toList());
+        sortTiles();
         // TODO: Implement me
         return null;
     }

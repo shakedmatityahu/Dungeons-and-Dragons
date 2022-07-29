@@ -35,8 +35,8 @@ public class Rogue extends Player {
 
 
     @Override
-    public void onTick()
-    {
+    public void onTick(Tile tile) {
+        super.onTick(tile);
         System.out.println("not implemented Rougue game tick");
     }
 

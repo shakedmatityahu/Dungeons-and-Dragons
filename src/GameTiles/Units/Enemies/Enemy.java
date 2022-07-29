@@ -2,22 +2,20 @@ package GameTiles.Units.Enemies;
 
 import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.*;
+import GameTiles.Tile;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.*;
 import UI.EnemyDeathCallBack;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public abstract class Enemy extends Unit {
 
 
-    protected static final int EXP_MULTIPLAYER = 10;
-    protected static final int EALTH_MULTIPLAYER = 10;
-    protected static final int ATTACK_MULTIPLAYER = 4;
-    protected static final int DEFENSE_MULTIPLAYER = 4;
-    private EnemyDeathCallBack enemyDeathCallBack;
 
+    private EnemyDeathCallBack enemyDeathCallBack;
     protected static final char visible_char = '.';
 
 
@@ -29,30 +27,19 @@ public abstract class Enemy extends Unit {
         this.experience_value = experience;
         this.initialize(position);
     }
+
+    /*
     public Enemy(char tile, String name, int attack, int defence, int healthCapacity, int experience) {
         super(tile, name, attack, defence);
         this.setHealth(healthCapacity, healthCapacity);
         this.experience_value = experience;
 
-    }
+    }*/
 
-    public int getAttack() {
-        return this.attack;
-    }
 
-    public Position rollMove() {
-        String[] moves = new String[4];
-        moves[0] = "left";
-        moves[1] = "right";
-        moves[2] = "up";
-        moves[3] = "down";
-        moves[4] = "Stay";
-        Random random = new Random();
-        int number = random.nextInt(moves.length);
-        return this.position.moveMonster(moves[number]);
+    public void onTick(Tile tile){
+        interact(tile);
     }
-
-    public abstract void onTick(Player player);
 
     public void setEnemyDeathCallBack(EnemyDeathCallBack edc){
         enemyDeathCallBack = edc;
@@ -62,10 +49,11 @@ public abstract class Enemy extends Unit {
         return experience_value;
     }
 
-    public void ReceiveDamage(int damage) {
-        this.getHealth().setHealthPool(this.getHealth().getHealthPool() - damage);
+    @Override
+    public void accept (Visitor v)
+    {
+        v.visit (this);
     }
-
 
     public void visit(Enemy e) {    }
 
@@ -73,12 +61,9 @@ public abstract class Enemy extends Unit {
         this.battle(p);
     }
 
-    @Override
-    public void accept (Visitor v)
-    {
-        v.visit (this);
+    public int getRange(){
+        return 0;
     }
-
 
     public static Enemy enemyFactory(char c, Position p)
     {
@@ -123,7 +108,8 @@ public abstract class Enemy extends Unit {
         }
         if(c=='B')
         {
-            return new Trap(c,"Bonus Trap",1,1,1,250,1,5,p);
+            //return new Trap(c,"Bonus Trap",1,1,1,250,1,5,p);
+            return new Trap(c,"Queen's Trap",50,10,250,100,3,7,p);
         }
         if(c=='Q')
         {
@@ -135,8 +121,6 @@ public abstract class Enemy extends Unit {
         }
         return null;
     }
-
-
 
 }
 

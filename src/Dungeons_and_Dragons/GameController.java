@@ -3,6 +3,7 @@ package Dungeons_and_Dragons;
 import GameTiles.Tile;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
+import GameTiles.Units.Unit;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class GameController {
@@ -20,106 +22,132 @@ public class GameController {
     ArrayList<GameBoard> gameBoards;
     ArrayList<ArrayList<Enemy>> enemyList;
     Player player;
-    private static final List<Character> ENEMY_LIST= List.of('s','k','q','z','b','g','w','M','C','K');
-    private static final List<Character> PLANE_TILES= List.of('.','#');
+    private static final List<Character> ENEMY_LIST = List.of('s', 'k', 'q', 'z', 'b', 'g', 'w', 'M', 'C', 'K');
+    private static final List<Character> PLANE_TILES = List.of('.', '#');
+    private final int UP =0;
+    private final int DOWN =1;
+    private final int LEFT = 2;
+    private final int RIGHT=3;
+    private final int STAY =4;
 
 
-    public GameController(String path, Player player1)
-    {
+    public GameController(String path, Player player1) {
         player1 = Player.playerFactory("Demo");
         List<File> fileList = getLevelFiles(path);
         gameBoards = new ArrayList<>(fileList.size());
         enemyList = new ArrayList<>(fileList.size());
-        for (List<Enemy> list :enemyList)
-        {
-         list = new ArrayList<Enemy>();
+        for (List<Enemy> list : enemyList) {
+            list = new ArrayList<Enemy>();
         }
 
         //check that we don't miss last level
-        for (int i=0; i <fileList.size(); i++)
-        {
+        for (int i = 0; i < fileList.size(); i++) {
             File level = fileList.get(i);
             List<String> levelCharsRow = fileToRowList(level);
-            GameBoard board= new GameBoard(
-                    initGameBoard(levelCharsRow,enemyList.get(i),player1))
-                    ;
-            gameBoards.set(i,board);
+            GameBoard board = new GameBoard(
+                    initGameBoard(levelCharsRow, enemyList.get(i), player1));
+            gameBoards.set(i, board);
 
         }
     }
 
 
-    public void play(Player player1){
-        for (int i = 0; i< gameBoards.size(); i++){
+    public void play(Player player1) {
+        for (int i = 0; i < gameBoards.size(); i++) {
             GameBoard cuurentLevel = gameBoards.get(i);
             cuurentLevel.setPlayer(player1);
             List<Enemy> cuurentEnemyList = enemyList.get(i);
-            while (!(cuurentEnemyList.isEmpty()))
-            {
+            while (!(cuurentEnemyList.isEmpty())) {
                 String command = "fill with player input";
 
-                playerMove(player1,command,cuurentLevel,cuurentEnemyList);
-                if(!(player.isAlive)){
+                playerMove(player1, command, cuurentLevel, cuurentEnemyList);
+                if (!(player.isDead())) {
                     System.out.println("YOU LOST");
                 }
-                player1.onTick();
-                for (Enemy enemy: cuurentEnemyList) {
+                for (Enemy enemy : cuurentEnemyList) {
                     enemy.onTick(player1);
                 }
             }
         }
     }
 
-    private void playerMove(Player p,String command, GameBoard board,List<Enemy> enemyList){
+    private void playerMove(Player p, String command, GameBoard board, List<Enemy> enemyList) {
         Position position = new Position(player.getPosition());
         Tile tile;
         switch (command) {
-            case "w":
-                position.setX(position.getX() + 1);
-                tile = board.finedTile(position);
-                p.interact(tile);
+            case "w": // up
+                Move(board,player,UP);
                 break;
-            case "s":
-                position.setX(position.getX() - 1);
-                tile = board.finedTile(position);
-                p.interact(tile);
+            case "s": // down
+                Move(board,player,DOWN);
                 break;
-            case "a":
-                position.setY(position.getY() - 1);
-                tile = board.finedTile(position);
-                p.interact(tile);
+            case "a": //left
+                Move(board,player,LEFT);
                 break;
-            case "d":
-                position.setY(position.getY() + 1);
-                tile = board.finedTile(position);
-                p.interact(tile);
+            case "d": // right
+                Move(board,player,RIGHT);
                 break;
-            case "e":
-                //player.castability(enemyList);
+            case "e": // cast
+                try {
+                    player.OnAbilityCast(enemyList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
 
-    ///Return a list of all txt files in desired directory
-    private static List<File> getLevelFiles(String path) {
-        String dir = System.getProperty("user.dir");
-        dir += path;
-        String directory = dir;
-        List<File> levelList = new ArrayList<>();
-        try {
-            List<File> files = Files.list(Paths.get(directory)).sorted()
-                    .map(Path::toFile)
-                    .filter(File::isFile)
-                    .filter(File -> File.getName().toString().endsWith(".txt"))
-                    .collect(Collectors.toList());
-
-            levelList = files;
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void EnemyMove(Player player, GameBoard board, Enemy enemy) {
+        Position position = new Position(player.getPosition());
+        Tile tile;
+        if (enemy.Distance(player) < enemy.getRange()) {
+            int dx;
+            int dy;
+            dx = Math.abs(player.getPosition().getX() - enemy.getPosition().getX());
+            dy = Math.abs(player.getPosition().getY() - enemy.getPosition().getY());
+            if (dx > dy)
+                if (dx > 0) {
+                    Move(board,enemy,LEFT);
+                } else {
+                    Move(board,enemy,RIGHT);
+                }
+            else if (dy > 0) {
+                Move(board,enemy,UP);
+            } else {
+                Move(board,enemy,DOWN);
+            }
         }
-        return levelList;
+        else
+        {
+            Move(board,enemy,new Random().nextInt(STAY));
+        }
     }
+    //else
+    //this.initialize(new Position(this.rollMove()) );
+
+
+        ///Return a list of all txt files in desired directory
+        private static List<File> getLevelFiles (String path){
+            String dir = System.getProperty("user.dir");
+            dir += path;
+            String directory = dir;
+            List<File> levelList = new ArrayList<>();
+            try {
+                List<File> files = Files.list(Paths.get(directory)).sorted()
+                        .map(Path::toFile)
+                        .filter(File::isFile)
+                        .filter(File -> File.getName().toString().endsWith(".txt"))
+                        .collect(Collectors.toList());
+
+                levelList = files;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return levelList;
+        }
+
+
 
     ///Returns list of strings when every string is a row in a file.
     private static List<String> fileToRowList(File file) {
@@ -173,6 +201,38 @@ public class GameController {
         }
 
         return AllTiles;
+    }
+
+    public void Move(GameBoard board, Unit unit, int move){
+        Position position = unit.getPosition();
+        Tile tile = unit;
+        switch (move){
+            case 0:// up
+                position.setX(position.getX() + 1);
+                tile = board.finedTile(position);
+                unit.Up(tile);
+                break;
+            case 1:// down
+                position.setX(position.getX() - 1);
+                tile = board.finedTile(position);
+                unit.Down(tile);
+                break;
+            case 2://left
+                position.setY(position.getY() - 1);
+                tile = board.finedTile(position);
+                unit.Left(tile);
+                break;
+            case 3:// right
+                position.setY(position.getY() + 1);
+                tile = board.finedTile(position);
+                unit.Right(tile);
+                break;
+            case 4:
+                unit.Stay(tile);
+                break;
+
+
+        }
     }
 
 }

@@ -38,19 +38,15 @@ public class Mage extends Player {
     }
 
     @Override
-    public void onTick() {
-
-        System.out.println("not implemented Mage game tick");
+    public void onTick(Tile tile) {
+        super.onTick(tile);
+        specialAbility.gameTick(level);
     }
 
     @Override
     public void levelUp() {
         super.levelUp();
        this.specialAbility.levelUp(level);
-    }
-
-    public void onGameTick() {
-        this.specialAbility.gameTick(level);
     }
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {

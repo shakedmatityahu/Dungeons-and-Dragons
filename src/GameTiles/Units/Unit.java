@@ -6,6 +6,7 @@ import GameTiles.Tile;
 import GameTiles.Wall;
 import UI.MessageCallback;
 
+import javax.swing.text.Style;
 import java.util.Random;
 
 public abstract class Unit extends Tile implements Visitor {
@@ -88,7 +89,7 @@ public abstract class Unit extends Tile implements Visitor {
         }
     }
 
-    protected boolean isDead() {
+    public boolean isDead() {
         return health.getHealthAmount() <= 0;
     }
 
@@ -100,6 +101,11 @@ public abstract class Unit extends Tile implements Visitor {
     protected static int attackRoll(Unit unit)
     {
         return new Random().nextInt(unit.getAttack());
+    }
+
+    
+    public void onTick(Tile tile) {
+        interact(tile);
     }
 
 
@@ -118,6 +124,28 @@ public abstract class Unit extends Tile implements Visitor {
         Position tmp = new Position(this.position);
         //this = null
         //implement better
+    }
+
+    public void Up(Tile tile){
+        onTick(tile);
+    }
+
+
+    public void Down(Tile tile){
+        onTick(tile);
+    }
+
+    public void Left(Tile tile){
+        onTick(tile);
+    }
+
+    public void Right(Tile tile){
+        onTick(tile);
+    }
+
+    public void Stay(Tile tile){
+        onTick(tile);
+
     }
 
     @Override

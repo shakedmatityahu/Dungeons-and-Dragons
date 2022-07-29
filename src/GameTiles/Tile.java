@@ -1,4 +1,5 @@
 package GameTiles;
+import Dungeons_and_Dragons.GameBoard;
 import GameTiles.DesignPatterns.Visited;
 import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.Position;
@@ -99,6 +100,5 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
     public boolean isInRange(Tile t, int range) {
         return range >= this.Distance(t);
     }
-
 
 }

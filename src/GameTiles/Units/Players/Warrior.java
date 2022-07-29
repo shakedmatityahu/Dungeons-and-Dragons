@@ -21,14 +21,13 @@ public class Warrior extends Player {
 
     public Warrior(String name, int Health, int attack, int defense,int coolDown) {
         super(name, attack, defense);
-        //He       
-        this.specialAbility = new AvengersShield(WARRIOR_ABILITY_NAME,WARRIOR_ABILITY_RANGE,coolDown);
-        this.specialAbility = null;
+        health = new Health(Health);
+        specialAbility = new AvengersShield(WARRIOR_ABILITY_NAME,WARRIOR_ABILITY_RANGE,coolDown);
     }
 
 
 
-    public Warrior createWarrior(int x, int y,int initHealth,String name, int collDown) {
+    /*public Warrior createWarrior(int x, int y,int initHealth,String name, int collDown) {
         try {
             if (collDown < 0) {
                 throw new RuntimeException("Ability cool down can not be negative integer");
@@ -45,7 +44,7 @@ public class Warrior extends Player {
             System.out.println(e.getMessage());
             return null;
         }
-    }
+    }*/
 
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
@@ -67,8 +66,8 @@ public class Warrior extends Player {
     }
 
     @Override
-    public void onTick() {
-        System.out.println("not implemented w game tick");
+    public void onTick(Tile tile) {
+        super.onTick(tile);
     }
 
     @Override
@@ -81,12 +80,6 @@ public class Warrior extends Player {
         defense += (WARRIOR_DEFENSE_MULTIPLAYER * level);
     }
 
-
-    public void onGameTick() {
-   
-        super.OnGameTick();
-        this.specialAbility.gameTick(level);
-    }
 
 
 

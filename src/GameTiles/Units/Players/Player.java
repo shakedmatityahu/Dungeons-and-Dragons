@@ -9,6 +9,7 @@ import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Unit;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public abstract class Player extends Unit {
@@ -17,7 +18,7 @@ public abstract class Player extends Unit {
     ArrayList<Enemy> enemies;
     protected int experience = 0;
     protected int level = 1;
-    public boolean isAlive;
+    protected boolean isAlive;
     protected Ability specialAbility;
 
     protected static final int PLAYER_EXP_MULTIPLAYER =10;
@@ -33,16 +34,10 @@ public abstract class Player extends Unit {
     public static Player playerFactory(String name){
         switch (name){
             case "Jon Snow":
-                return new Warrior(name,300,30,4);
+                return new Warrior(name,300,30,4,3);
         }
-        return new Warrior("DEMO", 0,0,0);
+        return new Warrior("DEMO", 0,0,0,3);
     }
-
-
-    public abstract void onTick();
-
-
-
 
     public void levelUp(){
         experience = experience-(PLAYER_EXP_MULTIPLAYER*level);
@@ -53,9 +48,7 @@ public abstract class Player extends Unit {
          defense = (PLAYER_DEFENSE_MULTIPLAYER*level);
     }
 
-    public void OnAbilityCast() throws Exception {
-        throw new Exception("Not implemented");
-    }
+    public abstract void OnAbilityCast(List<Enemy> list)throws Exception;
     @Override
     protected void battle(Unit defender){
         super.battle(defender);
@@ -72,10 +65,10 @@ public abstract class Player extends Unit {
 
     public void battle (Enemy enemy, int attack)
     {
-            int defense= new Random().nextInt(enemy.getAttack());
+            int defense= defendeRoll(enemy);
             if(attack -defense > 0)
             {
-                enemy.damage(attack - defense);
+                enemy.ReceiveDamage(attack - defense);
             }
 
     }
@@ -106,7 +99,6 @@ public abstract class Player extends Unit {
     {
         this.battle(e);
     }
-
 
 
 }
