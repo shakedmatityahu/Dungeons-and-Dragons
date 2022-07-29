@@ -1,7 +1,11 @@
 package GameTiles.Units.Players;
 import Dungeons_and_Dragons.*;
 import GameTiles.Empty;
+import GameTiles.Tile;
 import GameTiles.Units.*;
+import GameTiles.Units.Enemies.Enemy;
+
+import java.util.List;
 
 public class Warrior extends Player {
 
@@ -14,11 +18,11 @@ public class Warrior extends Player {
     private final int WARRIOR_ATTACK_MULTIPLAYER = 2;
     private final int WARRIOR_DEFENSE_MULTIPLAYER = 1;
 
-    private Warrior(String name, int attack, int defense, Ability specialAbility) {
+    private Warrior(String name, int attack, int defense, int coolDown) {
         super(name, attack, defense);
         health.setHealthPool(PLAYER_HEALTH_MULTIPLAYER);
         health.setHealthAmount(PLAYER_HEALTH_MULTIPLAYER);
-        this.specialAbility = specialAbility;
+        this.specialAbility = new AvengersShield(WARRIOR_ABILITY_NAME,WARRIOR_ABILITY_RANGE,coolDown);
     }
     public Warrior(String name, int Health, int attack, int defense) {
         super(name, attack, defense);
@@ -38,12 +42,9 @@ public class Warrior extends Player {
                 Position newPosition = new Position(x,y);
                 char charls = PLAYERSIGN;
                 Health newHealth = new Health(initHealth,initHealth);
-
-
-                Ability newAbility = new Ability(WARRIOR_ABILITY_NAME, WARRIOR_ABILITY_RANGE, collDown);
-                Warrior newWorrior = new Warrior(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, newAbility);
-                newWorrior.initialize(newPosition);
-                return newWorrior;
+                Warrior newWarrior = new Warrior(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, collDown);
+                newWarrior.initialize(newPosition);
+                return newWarrior;
             }
         } catch (Exception e) {
             System.out.println("Warrior was not formed since");
@@ -53,15 +54,24 @@ public class Warrior extends Player {
     }
 
 
-    public void OnAbilityCast() throws Exception {
-        if (health.getHealthAmount() <= health.getHealthPool() * ABILITY_COST) {
+    public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
+        boolean abilityCast=this.specialAbility.canCastAbility();
+        if(!abilityCast)
             throw new Exception("Casting special ability will result with Warrior death YOU MERDAERER!!!");
-        } else {
-            this.specialAbility.resetCoolDown();
-            this.health.setHealthAmount(10 * health.getHealthAmount());
-            //continue implementation.
-            //this.specialAbility.AvengersShield(this);
+        boolean cast=false;
+        for(Enemy enemy :enemyList) {
+            if (this.isInRange((Tile) enemy, WARRIOR_ABILITY_RANGE)) {
+                this.battle(enemy, (int) ABILITY_COST * health.getHealthPool());
+                if (health.getHealthAmount() + 10 * this.defense <= health.getHealthPool())
+                    this.health.setHealthAmount(health.getHealthPool() + 10 * this.defense);
+                else
+                    this.specialAbility.resetCoolDown();
+                cast = true;
+            }
+            if (cast)
+                break;
         }
+
     }
 
     @Override

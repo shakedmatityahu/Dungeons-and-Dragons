@@ -1,8 +1,15 @@
 package GameTiles.Units.Players;
 
 import GameTiles.Empty;
+import GameTiles.Tile;
 import GameTiles.Units.Ability;
+import GameTiles.Units.Blizzard;
+import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Unit;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Mage extends Player {
 
@@ -23,16 +30,14 @@ public class Mage extends Player {
     private final int MAGE_SPELL_MULTIPLAYER = 10;
     private final int MAGE_MANA_DIV = 4;
 
-    private Mage(String name, int attack, int defense, Ability specialAbility , int manaCost, int hitsCount, int manaPool, int spellPower) {
+    private Mage(String name, int attack, int defense, int coolDown , int manaCost, int hitsCount, int manaPool, int spellPower) {
         super(name, attack, defense);
         this.manaPool=manaPool;
         this.currentMana = manaPool/MAGE_MANA_DIV;
         this.manaCost = manaCost;
         this.spellPower=spellPower;
         this.hitsCount=hitsCount;
-        //this.range....
-        //this.specialAbility = specialAbility;
-
+        this.specialAbility= new Blizzard(MAGE_ABILITY_NAME,MAGE_ABILITY_RANGE,coolDown);
     }
     public int getHitsCount(){return hitsCount; }
     public int getCurrentMana(){return currentMana; }
@@ -65,14 +70,25 @@ public class Mage extends Player {
         currentMana = Math.min(manaPool, currentMana+level);
     }
 
-    public void OnAbilityCast() throws Exception {
-        if (currentMana < manaCost) {
+    public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
+        boolean canCast=this.specialAbility.canCastAbility(manaCost,manaCost);
+        if(!canCast)
             throw new Exception("Casting special ability will result with Mage death YOU MERDAERER!!!");
-        } else {
+         else {
+            int hits = 0;
+            List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
+            int randomNumber = 0;
+            for (Enemy enemy : enemyList) {
+                if (this.isInRange((Tile) enemy, MAGE_ABILITY_RANGE))
+                    listEnemyInRange.add(enemy);
+            }
+            while (hits < this.hitsCount && !listEnemyInRange.isEmpty()) {
+                randomNumber = new Random().nextInt(listEnemyInRange.size());
+                this.battle(listEnemyInRange.get(randomNumber), spellPower);
+                hits++;
+            }
             currentMana -= manaCost;
             hitsCount = 0;
-            //continue implementation.
-            //this.specialAbility.AvengersShield(this);
         }
     }
 

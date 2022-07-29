@@ -1,8 +1,14 @@
 package GameTiles.Units.Players;
 
 import GameTiles.Empty;
+import GameTiles.Tile;
 import GameTiles.Units.Ability;
+import GameTiles.Units.Enemies.Enemy;
+import GameTiles.Units.FanofKnives;
 import GameTiles.Units.Unit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Rogue extends Player {
 
@@ -20,9 +26,9 @@ public class Rogue extends Player {
     private final int ROGUE_ATTACK_MULTIPLAYER = 3;
     private final int ENERGY_RAISE = 10;
 
-    private Rogue(String name, int attack, int defense, Ability specialAbility , int cost) {
+    private Rogue(String name, int attack, int defense, int coolDown , int cost) {
         super(name, attack, defense);
-        this.specialAbility = specialAbility;
+        this.specialAbility = new FanofKnives(ROGUE_ABILITY_NAME,ROGUE_ABILITY_RANGE,coolDown);
         this.currentEnergy = MAX_ENERGY;
         this.cost = cost;
     }
@@ -32,9 +38,7 @@ public class Rogue extends Player {
             if (collDown < 0) {
                 throw new RuntimeException("Ability cool down can not be negative integer");
             } else {
-                //fix ability
-                Ability newAbility = new Ability(ROGUE_ABILITY_NAME, ROGUE_ABILITY_RANGE, collDown);
-                Rogue newRogue = new Rogue(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, newAbility,cost);
+                Rogue newRogue = new Rogue(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, collDown,cost);
                 return newRogue;
             }
         } catch (Exception e) {
@@ -62,14 +66,15 @@ public class Rogue extends Player {
         currentEnergy = Math.min(MAX_ENERGY,currentEnergy+ENERGY_RAISE);
     }
 
-    public void OnAbilityCast() throws Exception {
-        if (currentEnergy < cost) {
+    public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
+        if (!this.specialAbility.canCastAbility(currentEnergy, cost)){
             throw new Exception("Casting special ability will result with Rogue death YOU MERDAERER!!!");
         } else {
-            currentEnergy -= cost;
-            this.health.setHealthAmount(10 * health.getHealthAmount());
-            //continue implementation.
-            //this.specialAbility.AvengersShield(this);
+            for (Enemy enemy : enemyList) {
+                if (this.isInRange((Tile) enemy, ROGUE_ABILITY_RANGE))
+                    this.battle(enemy, getAttack());
+            }
+
         }
     }
 

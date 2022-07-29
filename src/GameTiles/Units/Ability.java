@@ -1,6 +1,6 @@
 package GameTiles.Units;
 
-public class Ability{
+public abstract class Ability{
     private String name;
     private int range ;
     private int coolDown;
@@ -44,4 +44,14 @@ public class Ability{
     public void AvengersShield(Warrior warrior) {
 
     }*/
+    public boolean canCastAbility()
+    {
+        return this.canCastAbility();
+    }
+
+    public boolean canCastAbility(int mana, int cost)
+    {
+        return this.canCastAbility(mana,cost);
+    }
+
 }

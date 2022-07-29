@@ -70,6 +70,15 @@ public abstract class Player extends Unit {
         defender.*/
     }
 
+    public void battle (Enemy enemy, int attack)
+    {
+            int defense= new Random().nextInt(enemy.getAttack());
+            if(attack -defense > 0)
+            {
+                enemy.damage(attack - defense);
+            }
+
+    }
     private void addExprincePoints(int experience) {
         this.experience=this.experience+experience;
 
