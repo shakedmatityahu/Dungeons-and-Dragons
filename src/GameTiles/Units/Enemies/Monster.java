@@ -54,8 +54,7 @@ public class Monster extends Enemy {
     public int getVision_range(){return vision_range;}
 
     @Override
-    public void onTick() {
-
+    public void onTick(Player player) {
         System.out.println("not implemented M game tick");
     }
 

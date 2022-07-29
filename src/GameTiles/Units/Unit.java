@@ -12,7 +12,7 @@ import UI.MessageCallback;
 
 import java.util.Random;
 
-public abstract class Unit extends Tile implements GameTicker, Visitor {
+public abstract class Unit extends Tile implements Visitor {
 
 
 
@@ -35,11 +35,11 @@ public abstract class Unit extends Tile implements GameTicker, Visitor {
         this.attack = attack;
         this.defense = defense;
         health = new Health();
-        GameTickListener.RegisterGameTick(this);
+
 
     }
 
-    public abstract void onTick();
+
 
     public void setName(String name) {
         this.name = name;

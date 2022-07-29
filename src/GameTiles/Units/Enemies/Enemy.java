@@ -19,7 +19,7 @@ public abstract class Enemy extends Unit {
     protected static final int DEFENSE_MULTIPLAYER = 4;
     private EnemyDeathCallBack enemyDeathCallBack;
 
-    protected static final char visible_char = '?';
+    protected static final char visible_char = '.';
 
 
     private int experience_value;
@@ -52,6 +52,8 @@ public abstract class Enemy extends Unit {
         int number = random.nextInt(moves.length);
         return this.position.moveMonster(moves[number]);
     }
+
+    public abstract void onTick(Player player);
 
 
     public Position getPosition() {

@@ -64,7 +64,7 @@ public class GameController {
                 }
                 player1.onTick();
                 for (Enemy enemy: cuurentEnemyList) {
-                    enemy.onTick();
+                    enemy.onTick(player1);
                 }
             }
         }

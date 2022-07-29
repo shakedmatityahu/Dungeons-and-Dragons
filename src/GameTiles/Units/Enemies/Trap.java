@@ -91,7 +91,7 @@ public class Trap extends Enemy {
     public int getInVisibilityTime(){return invisibility_time;}
 
     @Override
-    public void onTick() {
+    public void onTick(Player player) {
         System.out.println("not implemented w game tick");
     }
 

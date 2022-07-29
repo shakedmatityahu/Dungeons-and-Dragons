@@ -38,7 +38,7 @@ public abstract class Player extends Unit {
         return new Warrior("DEMO", 0,0,0);
     }
 
-    @Override
+
     public abstract void onTick();
 
 
