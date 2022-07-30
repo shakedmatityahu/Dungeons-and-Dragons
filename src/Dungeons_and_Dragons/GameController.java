@@ -45,6 +45,7 @@ public class GameController {
         userInterface.print("!!!!!!!!!Players Options ");
         int playerInt=userInterface.readInt();
         player1 = Player.playerFactory(playerInt);
+
         List<File> fileList = getLevelFiles(path);
         gameBoards = new ArrayList<>(fileList.size());
         enemyList = new ArrayList<>(fileList.size());
