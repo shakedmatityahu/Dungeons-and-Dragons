@@ -35,7 +35,7 @@ public abstract class Player extends Unit {
                 return new Warrior("Jon Snow",300,30,4,3);
             case 2:
                 return new Warrior("The Hound",400,20,6,5);
-                
+
 
         }
         return new Warrior("DEMO", 0,0,0,3);
