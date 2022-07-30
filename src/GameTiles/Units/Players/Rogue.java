@@ -12,12 +12,6 @@ import java.util.List;
 
 public class Rogue extends Player {
 
-    private int cost;
-    int currentEnergy;
-
-
-    private final int MAX_ENERGY = 100;
-
     //finals for special ability
     private final int ROGUE_ABILITY_RANGE = 2;
     private final String ROGUE_ABILITY_NAME = "Fan of Knives";
@@ -28,29 +22,24 @@ public class Rogue extends Player {
 
     private Rogue(String name, int attack, int defense, int cost ) {
         super(name, attack, defense);
-        this.specialAbility = new FanofKnives(ROGUE_ABILITY_NAME,ROGUE_ABILITY_RANGE,cost,MAX_ENERGY);
-        this.currentEnergy = MAX_ENERGY;
-        this.cost = cost;
+        this.specialAbility = new FanofKnives(ROGUE_ABILITY_NAME,ROGUE_ABILITY_RANGE,cost);
     }
 
 
     @Override
     public void onTick(Tile tile) {
         super.onTick(tile);
-        System.out.println("not implemented Rougue game tick");
+        specialAbility.gameTick(level);
     }
 
     @Override
     public void levelUp() {
         super.levelUp();
-        //actual implement attack
-        currentEnergy = MAX_ENERGY;
         attack += (ROGUE_ATTACK_MULTIPLAYER * level);
+        specialAbility.levelUp(level);
     }
 
-    public void onGameTick() {
-        currentEnergy = Math.min(MAX_ENERGY,currentEnergy+ENERGY_RAISE);
-    }
+
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
         if (!this.specialAbility.canCastAbility()){
@@ -65,12 +54,9 @@ public class Rogue extends Player {
         }
     }
 
-
-
-    public int getCost(){return cost;}
     public String describe (){
-        String des=((Unit)this).describe();
-        des+=String.format("%s\t\tCost: %i",getCost());
+        String des= super.describe();
+        des+=String.format("%s\t\tCost: %i");
         return des;
     }
 }

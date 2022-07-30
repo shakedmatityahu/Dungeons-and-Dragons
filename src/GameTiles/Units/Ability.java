@@ -49,5 +49,4 @@ public abstract class Ability{
     public abstract void abilityCast(Player p, Enemy enemy);
 
     public abstract String describe ();
-
 }

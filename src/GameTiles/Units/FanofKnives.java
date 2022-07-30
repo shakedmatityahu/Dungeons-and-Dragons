@@ -8,17 +8,19 @@ public class FanofKnives extends Ability{
     private final int MAX_ENERGY = 100;
     private int cost;
     private int currentEnergy;
-    public FanofKnives(String name, int range, int cost,int currentEnergy) {
+    public FanofKnives(String name, int range, int cost) {
         super(name, range );
         this.cost=cost;
-        this.currentEnergy=currentEnergy;
+        this.currentEnergy=MAX_ENERGY;
     }
+
+
 
     public boolean canCastAbility(int energy,int cost){return energy<cost;}
 
     @Override
     public boolean canCastAbility() {
-        return false;
+        return currentEnergy < cost;
     }
 
     @Override
@@ -42,5 +44,8 @@ public class FanofKnives extends Ability{
     public String describe() {
         return String.format("%s\t\tcost: %i\t\tcurrentEnergy: %i",cost,currentEnergy);
 
+    }
+    public int getCost() {
+        return cost;
     }
 }
