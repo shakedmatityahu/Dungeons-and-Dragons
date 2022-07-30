@@ -8,7 +8,9 @@ import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Unit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Player extends Unit {
 
@@ -23,23 +25,25 @@ public abstract class Player extends Unit {
     protected static final int PLAYER_HEALTH_MULTIPLAYER =10;
     protected static final int PLAYER_ATTACK_MULTIPLAYER =4;
     protected static final int PLAYER_DEFENSE_MULTIPLAYER =4;
+    private static final int PRE_DEF_PLAYERS =7;
 
-    protected Player(String name, int attack, int defense) {
-        super(PLAYERSIGN, name, attack, defense);
+    protected Player(String name,int health, int attack, int defense) {
+        super(PLAYERSIGN, name,health, attack, defense);
         isAlive=true;
     }
 
-    public static Player playerFactory(int number){
-        switch (number){
-            case 1:
-                return new Warrior("Jon Snow",300,30,4,3);
-            case 2:
-                return new Warrior("The Hound",400,20,6,5);
+    public static Map<Integer, Player> playerFactory(){
+        Map<Integer, Player> PlayerMap = new HashMap<Integer, Player>();
+        PlayerMap.put(1, new Warrior("Jon Snow",300,30,4,3));
+        PlayerMap.put(2, new Warrior("The Hound",400,20,6,5));
+        PlayerMap.put(3, new Mage("Melisandre",100,5,1,300,30,15,5,6));
+        PlayerMap.put(4, new Mage("Thoros of Myr",250,25,4,150,20,20,3,4));
+        PlayerMap.put(5, new Rogue("Arya Stark",150,40,2,20));
+        PlayerMap.put(6, new Rogue("",250,35,3,50));
 
-
-        }
-        return new Warrior("DEMO", 0,0,0,3);
+        return PlayerMap;
     }
+
 
     public void levelUp(){
         experience = experience-(PLAYER_EXP_MULTIPLAYER*level);

@@ -21,9 +21,8 @@ public abstract class Enemy extends Unit {
 
     private int experience_value;
 
-    public Enemy(char tile, String name, int attack, int defence, int healthCapacity, int experience, Position position) {
-        super(tile, name, attack, defence);
-        this.setHealth(healthCapacity, healthCapacity);
+    public Enemy(char tile, String name,int health, int attack, int defence, int experience, Position position) {
+        super(tile, name,health,attack, defence);
         this.experience_value = experience;
         this.initialize(position);
     }

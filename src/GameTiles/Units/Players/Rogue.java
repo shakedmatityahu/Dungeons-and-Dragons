@@ -16,8 +16,8 @@ public class Rogue extends Player {
     private final int ROGUE_ATTACK_MULTIPLAYER = 3;
     private final int ENERGY_RAISE = 10;
 
-    private Rogue(String name, int attack, int defense, int cost ) {
-        super(name, attack, defense);
+    public Rogue(String name,int health, int attack, int defense, int cost ) {
+        super(name,health, attack, defense);
         this.specialAbility = new FanofKnives(ROGUE_ABILITY_NAME,ROGUE_ABILITY_RANGE,cost);
     }
 

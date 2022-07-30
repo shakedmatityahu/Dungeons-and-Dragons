@@ -20,7 +20,7 @@ public class Warrior extends Player {
     private final int WARRIOR_DEFENSE_MULTIPLAYER = 1;
 
     public Warrior(String name, int Health, int attack, int defense,int coolDown) {
-        super(name, attack, defense);
+        super(name, Health,attack, defense);
         health = new Health(Health);
         specialAbility = new AvengersShield(WARRIOR_ABILITY_NAME,WARRIOR_ABILITY_RANGE,coolDown);
     }
