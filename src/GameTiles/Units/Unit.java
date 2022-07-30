@@ -26,12 +26,12 @@ public abstract class Unit extends Tile implements Visitor {
 //        this.position = position;
 //    }*/
 
-    protected Unit(char tile, String name, int attack, int defense) {
+    protected Unit(char tile, String name,int health, int attack, int defense) {
         super(tile);
         this.name = name;
         this.attack = attack;
         this.defense = defense;
-        health = new Health();
+        this.health = new Health(health);
 
 
     }

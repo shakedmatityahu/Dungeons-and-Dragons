@@ -13,10 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -39,12 +36,11 @@ public class GameController {
 
 
 
-    public GameController(String path, Player player1)
+    public GameController(String path)
     {
-        userInterface.print("Select a player by number");
-        userInterface.print("!!!!!!!!!Players Options ");
-        int playerInt=userInterface.readInt();
-        player1 = Player.playerFactory(playerInt);
+
+
+        player= getPlayer();
 
         List<File> fileList = getLevelFiles(path);
         gameBoards = new ArrayList<>(fileList.size());
@@ -58,7 +54,7 @@ public class GameController {
             File level = fileList.get(i);
             List<String> levelCharsRow = fileToRowList(level);
             GameBoard board = new GameBoard(
-                    initGameBoard(levelCharsRow, enemyList.get(i), player1));
+                    initGameBoard(levelCharsRow, enemyList.get(i), player));
             gameBoards.set(i, board);
 
         }
@@ -66,7 +62,7 @@ public class GameController {
 
 
     public void play() {
-        Player player1 = getPlayer();
+        Player player1 = player;
         for (int i = 0; i < gameBoards.size(); i++) {
             GameBoard cuurentLevel = gameBoards.get(i);
             cuurentLevel.setPlayer(player1);
@@ -98,14 +94,27 @@ public class GameController {
     }
 
     private Player getPlayer() {
-        System.out.println();
-        String input = "";
-        Player player = Player.playerFactory(1);
-        if(player != null){
-            return player;
+        Map<Integer,Player > player = Player.playerFactory();
+        choosePlayer(player);
+        int playerInt=userInterface.readInt();
+        if(player.get(playerInt) != null){
+            userInterface.print("You hav selected");
+            userInterface.print(player.get(playerInt).describe());
+            return player.get(playerInt);
         }
-        System.out.println("Ygritte is unavailable at the moment would you like ti choose another player?");
+        System.out.println("Ygritte is unavailable at the moment would you like to choose another player?");
         return getPlayer();
+    }
+
+    private void choosePlayer(Map<Integer, Player> player) {
+        System.out.println("Please select your player");
+        for (int i = 1; i <= player.size(); i++)
+        {
+            Player tmp = player.get(i);
+            if (tmp != null)
+            System.out.println(i+"."+" "+ tmp.describe());
+        }
+
     }
 
     private void playerMove(Player p, String command, GameBoard board, List<Enemy> enemyList) {
@@ -131,7 +140,7 @@ public class GameController {
                     e.printStackTrace();
                 }
                 break;
-            case "BTA": // Burn them all   ;-)
+            case "K": // Burn them all   ;-)
                 BurnThemAll(enemyList, board);
                 break;
         }

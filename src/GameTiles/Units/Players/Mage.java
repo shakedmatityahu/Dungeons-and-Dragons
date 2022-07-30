@@ -23,9 +23,9 @@ public class Mage extends Player {
     private final int MAGE_SPELL_MULTIPLAYER = 10;
     private final int MAGE_MANA_DIV = 4;
 
-    private Mage(String name, int attack, int defense , int manaCost,int currentMana, int hitsCount, int manaPool, int spellPower) {
-        super(name, attack, defense);
-        this.specialAbility= new Blizzard(MAGE_ABILITY_NAME,MAGE_ABILITY_RANGE,manaPool,spellPower,hitsCount,manaCost);
+    public Mage(String name,int helth, int attack, int defense , int manaPool, int manaCost, int spellPower, int hitsCount ,int Range) {
+        super(name,helth ,attack, defense);
+        this.specialAbility= new Blizzard(MAGE_ABILITY_NAME,Range,manaPool,spellPower,hitsCount,manaCost);
     }
 
 
