@@ -2,6 +2,7 @@ package GameTiles.Units.Players;
 
 import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.GameBoard;
+import GameTiles.Tile;
 import GameTiles.Wall;
 import UI.MessageCallback;
 import GameTiles.Units.Ability;
@@ -70,6 +71,10 @@ public abstract class Player extends Unit {
             {
                 enemy.ReceiveDamage(attack - defense);
             }
+            //חסר קצת מלא
+            if (experience >= PLAYER_EXP_MULTIPLAYER*level){
+                levelUp();
+            }
 
     }
     private void addExprincePoints(int experience) {
@@ -81,6 +86,16 @@ public abstract class Player extends Unit {
     {
         this.isAlive=false;
         MessageCallback.send("Game Over you died");
+    }
+
+    @Override
+    public void onTick(Tile tile) {
+        super.onTick(tile);
+        if(isDead())
+        {
+            death();
+        }
+        specialAbility.gameTick(level);
     }
 
     @Override

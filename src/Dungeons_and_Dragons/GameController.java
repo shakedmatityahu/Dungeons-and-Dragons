@@ -65,7 +65,7 @@ public class GameController {
                     System.out.println("YOU LOST");
                 }
                 for (Enemy enemy : cuurentEnemyList) {
-                    enemy.onTick(player1);
+                    EnemyMove(player1,cuurentLevel,enemy);
                 }
             }
         }
@@ -94,6 +94,16 @@ public class GameController {
                     e.printStackTrace();
                 }
                 break;
+            case "BTA": // Burn them all   ;-)
+                BurnThemAll(enemyList, board);
+                break;
+        }
+    }
+
+    private void BurnThemAll(List<Enemy> enemyList, GameBoard board) {
+        for (Enemy enemy : enemyList) {
+            board.Replace(enemy,Tile.tileFactory('.',enemy.getPosition()));
+            enemyList.remove(enemy);
         }
     }
 
@@ -122,9 +132,6 @@ public class GameController {
             Move(board,enemy,new Random().nextInt(STAY));
         }
     }
-    //else
-    //this.initialize(new Position(this.rollMove()) );
-
 
         ///Return a list of all txt files in desired directory
         private static List<File> getLevelFiles (String path){

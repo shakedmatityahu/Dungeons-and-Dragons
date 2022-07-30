@@ -69,7 +69,32 @@ public class GameBoard {
     @Override
     public String toString() {
         sortTiles();
-        // TODO: Implement me
-        return null;
+        String output = "";
+        int line = 0;
+        for(Tile tile : tiles) {
+            if(line < tile.getPosition().getY()) {
+                output += tile.toString();
+            } else
+            {
+                line++;
+                output += "\n" + tile.toString();
+            }
+        }
+        return output;
+    }
+
+    public void addTile(Tile tileFactory) {
+        tiles.add(tileFactory);
+        sortTiles();
+    }
+
+    public void remove(Tile tile) {
+        tiles.remove(tile);
+        sortTiles();
+    }
+
+    public void Replace(Tile oldTile ,Tile newTile){
+        addTile(newTile);
+        remove(oldTile);
     }
 }

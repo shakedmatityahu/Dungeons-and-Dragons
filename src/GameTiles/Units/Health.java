@@ -32,13 +32,7 @@ public class Health {
     }
 
     public void setHealthAmount(int healthAmount) {
-        if(healthAmount > this.HealthPool){
-            healthAmount = this.getHealthPool();
-        }
-        else if(healthAmount < 0){
-            
-        }
-        HealthAmount = healthAmount;
+        HealthAmount = Math.min(HealthPool,healthAmount);
     }
     public void inflictDamage(int damage)
     {

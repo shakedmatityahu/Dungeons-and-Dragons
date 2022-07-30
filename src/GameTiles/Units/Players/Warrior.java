@@ -25,30 +25,8 @@ public class Warrior extends Player {
         specialAbility = new AvengersShield(WARRIOR_ABILITY_NAME,WARRIOR_ABILITY_RANGE,coolDown);
     }
 
-
-
-    /*public Warrior createWarrior(int x, int y,int initHealth,String name, int collDown) {
-        try {
-            if (collDown < 0) {
-                throw new RuntimeException("Ability cool down can not be negative integer");
-            } else {
-                Position newPosition = new Position(x,y);
-                char charls = PLAYERSIGN;
-                Health newHealth = new Health(initHealth,initHealth);
-                Warrior newWarrior = new Warrior(name, PLAYER_ATTACK_MULTIPLAYER, PLAYER_DEFENSE_MULTIPLAYER, collDown);
-                newWarrior.initialize(newPosition);
-                return newWarrior;
-            }
-        } catch (Exception e) {
-            System.out.println("Warrior was not formed since");
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }*/
-
-
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
-        boolean abilityCast=this.specialAbility.canCastAbility();
+        boolean abilityCast= specialAbility.canCastAbility();
         if(!abilityCast)
             throw new Exception("Casting special ability will result with Warrior death YOU MERDAERER!!!");
         List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
@@ -61,13 +39,12 @@ public class Warrior extends Player {
             Enemy enemy=listEnemyInRange.get(randomNumber);
             this.specialAbility.abilityCast(this,enemy);
             this.health.setHealthAmount(Math.min(this.health.getHealthPool() + 10 * this.defense,this.health.getHealthPool()));
-
-
     }
 
     @Override
     public void onTick(Tile tile) {
         super.onTick(tile);
+        specialAbility.gameTick(level);
     }
 
     @Override
@@ -79,8 +56,6 @@ public class Warrior extends Player {
         attack += (WARRIOR_ATTACK_MULTIPLAYER * level);
         defense += (WARRIOR_DEFENSE_MULTIPLAYER * level);
     }
-
-
 
 
     public String describe (){

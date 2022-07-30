@@ -17,7 +17,8 @@ public class AvengersShield extends Ability
     }
 
 
-    public boolean canCastAbilty ()
+    @Override
+    public boolean canCastAbility ()
     {
         if(coolDown>0)
             return true;
@@ -38,6 +39,7 @@ public class AvengersShield extends Ability
     @Override
     public void abilityCast(Player p, Enemy enemy)
     {
+
         p.battle(enemy, (int) ABILITY_COST * p.health.getHealthPool());
         remainingCoolDown=coolDown;
     }

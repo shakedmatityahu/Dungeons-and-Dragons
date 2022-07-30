@@ -40,10 +40,7 @@ public abstract class Ability{
     public void AvengersShield(Warrior warrior) {
 
     }*/
-    public boolean canCastAbility()
-    {
-        return this.canCastAbility();
-    }
+    public abstract boolean canCastAbility();
 
 
 

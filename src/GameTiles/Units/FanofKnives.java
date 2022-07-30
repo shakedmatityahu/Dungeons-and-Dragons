@@ -17,6 +17,11 @@ public class FanofKnives extends Ability{
     public boolean canCastAbility(int energy,int cost){return energy<cost;}
 
     @Override
+    public boolean canCastAbility() {
+        return false;
+    }
+
+    @Override
     public void levelUp(int level) {
         currentEnergy=MAX_ENERGY;
     }
