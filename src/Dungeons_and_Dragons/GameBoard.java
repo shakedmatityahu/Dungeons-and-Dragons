@@ -41,6 +41,7 @@ public class GameBoard {
             player.initialize(old.getPosition());
             tiles.remove(old);
             tiles.add(player);
+            sortTiles();
         }
 
     }

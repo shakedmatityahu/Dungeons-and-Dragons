@@ -29,10 +29,14 @@ public abstract class Player extends Unit {
         isAlive=true;
     }
 
-    public static Player playerFactory(String name){
-        switch (name){
-            case "Jon Snow":
-                return new Warrior(name,300,30,4,3);
+    public static Player playerFactory(int number){
+        switch (number){
+            case 1:
+                return new Warrior("Jon Snow",300,30,4,3);
+            case 2:
+                return new Warrior("The Hound",400,20,6,5);
+                
+
         }
         return new Warrior("DEMO", 0,0,0,3);
     }
