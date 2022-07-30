@@ -118,12 +118,6 @@ public abstract class Unit extends Tile implements Visitor {
     public void visit(Wall w){}
     public void accept (Visitor v){}
 
-    public void die(){
-        Position tmp = new Position(this.position);
-        //this = null
-        //implement better
-    }
-
     public void Up(Tile tile){
         onTick(tile);
     }
@@ -147,9 +141,16 @@ public abstract class Unit extends Tile implements Visitor {
     public String toString(){
         return tile+"";
     }
-    
+
+    public void send (String output)
+    {
+        messageCallback.send(output);
+    }
     public void print()
     {
-        //MessageCallback.send(describe());
+        send(describe());
     }
+
+    public void setMessageCallBack(MessageCallback messageCallback) { this.messageCallback=messageCallback;}
+
 }
