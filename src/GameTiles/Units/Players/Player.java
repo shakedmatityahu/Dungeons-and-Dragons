@@ -6,6 +6,7 @@ import UI.MessageCallback;
 import GameTiles.Units.Resource.Ability;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Unit;
+import UI.PlayerDeathCallBack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public abstract class Player extends Unit {
     protected static final int PLAYER_DEFENSE_MULTIPLAYER =4;
     private static final int PRE_DEF_PLAYERS =7;
 
+    private PlayerDeathCallBack playerDeathCallBack;
     protected Player(String name,int health, int attack, int defense) {
         super(PLAYERSIGN, name,health, attack, defense);
         isAlive=true;
@@ -44,6 +46,11 @@ public abstract class Player extends Unit {
         return PlayerMap;
     }
 
+    public void setMessageCallBack (MessageCallback messageCallback,PlayerDeathCallBack  playerDeathCallBack)
+    {
+        super.setMessageCallBack(messageCallback);
+        this.playerDeathCallBack=playerDeathCallBack;
+    }
 
     public void levelUp(){
         experience = experience-(PLAYER_EXP_MULTIPLAYER*level);
@@ -52,6 +59,7 @@ public abstract class Player extends Unit {
          health.setHealthAmount(PLAYER_HEALTH_MULTIPLAYER*level);
          attack =  (PLAYER_ATTACK_MULTIPLAYER*level);
          defense = (PLAYER_DEFENSE_MULTIPLAYER*level);
+        send("You just leveled Up");
     }
 
     public abstract void OnAbilityCast(List<Enemy> list)throws Exception;
@@ -59,27 +67,27 @@ public abstract class Player extends Unit {
     protected void battle(Enemy defender){
         super.battle(defender);
         if (defender.isDead())
-            addExprincePoints(defender.getExprince());
-            swap(defender);
-        /*if(defender.getHealth().getHealthPool()<=0)
         {
-            MessageCallback.print( "you killed "+ defender.getName());
-            this.addExprincePoints(this.experience);
-            this.initialize(defender.getPosition());
-            GameBoard.reomve(defender);
-            enemies.remove(defender);
+           playerWonBattle(defender);
         }
-        defender.*/
+        if (experience >= PLAYER_EXP_MULTIPLAYER*level){
+            send("You just leveled Up");
+            levelUp();
+        }
+
     }
 
-    public void battle(Enemy enemy, int attack)
+    public void battle(Enemy defender, int attack)
     {
-            int defense= defendeRoll(enemy);
+            int defense= defendeRoll(defender);
             if(attack -defense > 0)
             {
-                enemy.ReceiveDamage(attack - defense);
+                defender.ReceiveDamage(attack - defense);
             }
-            //חסר קצת מלא
+            if (defender.isDead())
+            {
+               playerWonBattle(defender);
+            }
             if (experience >= PLAYER_EXP_MULTIPLAYER*level){
                 levelUp();
             }
@@ -87,13 +95,14 @@ public abstract class Player extends Unit {
     }
     private void addExprincePoints(int experience) {
         this.experience=this.experience+experience;
+        send("You gained "+ experience+ " new experience points");
 
     }
 
     public void death ()
     {
         this.isAlive=false;
-        //MessageCallback.send("Game Over you died");
+        send("GAME-OVER you died");
     }
 
     @Override
@@ -127,5 +136,11 @@ public abstract class Player extends Unit {
         this.battle(e);
     }
 
+    private void playerWonBattle(Enemy defender)
+    {
+        addExprincePoints(defender.getExprince());
+        swap(defender);
+        send(defender.getName() +" died."+ getName()+" gained "+defender.getName()+ " experience points");
+    }
 
 }
