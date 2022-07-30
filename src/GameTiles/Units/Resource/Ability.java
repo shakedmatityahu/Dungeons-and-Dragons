@@ -1,4 +1,4 @@
-package GameTiles.Units;
+package GameTiles.Units.Resource;
 
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;

@@ -72,9 +72,11 @@ public class GameBoard {
         String output = "";
         int line = 0;
         for(Tile tile : tiles) {
-            if(line < tile.getPosition().getY()) {
+            if(line == tile.getPosition().getX()) {
                 output += tile.toString();
-            } else
+            }
+
+            else
             {
                 line++;
                 output += "\n" + tile.toString();

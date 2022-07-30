@@ -1,4 +1,4 @@
-package GameTiles.Units;
+package GameTiles.Units.Resource;
 
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
@@ -39,8 +39,7 @@ public class AvengersShield extends Ability
     @Override
     public void abilityCast(Player p, Enemy enemy)
     {
-
-        p.battle(enemy, (int) ABILITY_COST * p.health.getHealthPool());
+        p.battle(enemy, (int) ABILITY_COST * p.getHealth().getHealthPool());
         remainingCoolDown=coolDown;
     }
     public String describe (){

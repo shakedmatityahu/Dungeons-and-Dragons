@@ -1,9 +1,9 @@
 package GameTiles.Units.Players;
-import Dungeons_and_Dragons.*;
-import GameTiles.Empty;
 import GameTiles.Tile;
 import GameTiles.Units.*;
 import GameTiles.Units.Enemies.Enemy;
+import GameTiles.Units.Resource.AvengersShield;
+import GameTiles.Units.Resource.Health;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,7 @@ public class Warrior extends Player {
     }
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
-        boolean abilityCast= specialAbility.canCastAbility();
-        if(!abilityCast)
+        if(!canCast())
             throw new Exception("Casting special ability will result with Warrior death YOU MERDAERER!!!");
         List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
         int randomNumber = 0;

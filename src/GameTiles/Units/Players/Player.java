@@ -1,17 +1,14 @@
 package GameTiles.Units.Players;
 
 import GameTiles.DesignPatterns.Visitor;
-import Dungeons_and_Dragons.GameBoard;
 import GameTiles.Tile;
-import GameTiles.Wall;
 import UI.MessageCallback;
-import GameTiles.Units.Ability;
+import GameTiles.Units.Resource.Ability;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Unit;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public abstract class Player extends Unit {
 
@@ -50,9 +47,12 @@ public abstract class Player extends Unit {
     }
 
     public abstract void OnAbilityCast(List<Enemy> list)throws Exception;
-    @Override
-    protected void battle(Unit defender){
+
+    protected void battle(Enemy defender){
         super.battle(defender);
+        if (defender.isDead())
+            addExprincePoints(defender.getExprince());
+            swap(defender);
         /*if(defender.getHealth().getHealthPool()<=0)
         {
             MessageCallback.print( "you killed "+ defender.getName());
@@ -64,7 +64,7 @@ public abstract class Player extends Unit {
         defender.*/
     }
 
-    public void battle (Enemy enemy, int attack)
+    public void battle(Enemy enemy, int attack)
     {
             int defense= defendeRoll(enemy);
             if(attack -defense > 0)
@@ -96,6 +96,10 @@ public abstract class Player extends Unit {
             death();
         }
         specialAbility.gameTick(level);
+    }
+
+    protected boolean canCast(){
+        return specialAbility.canCastAbility();
     }
 
     @Override

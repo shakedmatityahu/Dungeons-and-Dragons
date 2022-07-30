@@ -1,9 +1,7 @@
 package GameTiles.Units.Players;
 
-import GameTiles.Empty;
 import GameTiles.Tile;
-import GameTiles.Units.Ability;
-import GameTiles.Units.Blizzard;
+import GameTiles.Units.Resource.Blizzard;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Unit;
 
@@ -50,8 +48,7 @@ public class Mage extends Player {
     }
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
-        boolean canCast=this.specialAbility.canCastAbility();
-        if(!canCast)
+         if(!canCast())
             throw new Exception("Casting special ability will result with Mage death YOU MERDAERER!!!");
          else {
             int hits = 0;
@@ -61,7 +58,7 @@ public class Mage extends Player {
                 if (this.isInRange((Tile) enemy, MAGE_ABILITY_RANGE))
                     listEnemyInRange.add(enemy);
             }
-            while (!listEnemyInRange.isEmpty())
+            while ((!listEnemyInRange.isEmpty())&&(canCast()))
             {
                 randomNumber = new Random().nextInt(listEnemyInRange.size());
                 Enemy enemy=listEnemyInRange.get(randomNumber);

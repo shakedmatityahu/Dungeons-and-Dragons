@@ -3,10 +3,10 @@ import Dungeons_and_Dragons.*;
 import GameTiles.DesignPatterns.Visitor;
 import GameTiles.Empty;
 import GameTiles.Tile;
+import GameTiles.Units.Resource.Health;
 import GameTiles.Wall;
 import UI.MessageCallback;
 
-import javax.swing.text.Style;
 import java.util.Random;
 
 public abstract class Unit extends Tile implements Visitor {
@@ -143,10 +143,7 @@ public abstract class Unit extends Tile implements Visitor {
         onTick(tile);
     }
 
-    public void Stay(Tile tile){
-        onTick(tile);
-
-    }
+    public void Stay(Tile tile){}
 
     @Override
     public String toString(){

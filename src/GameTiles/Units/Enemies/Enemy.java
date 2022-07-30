@@ -28,19 +28,6 @@ public abstract class Enemy extends Unit {
         this.initialize(position);
     }
 
-    /*
-    public Enemy(char tile, String name, int attack, int defence, int healthCapacity, int experience) {
-        super(tile, name, attack, defence);
-        this.setHealth(healthCapacity, healthCapacity);
-        this.experience_value = experience;
-
-    }*/
-
-
-    public void onTick(Tile tile){
-        interact(tile);
-    }
-
     public void setEnemyDeathCallBack(EnemyDeathCallBack edc){
         enemyDeathCallBack = edc;
     }

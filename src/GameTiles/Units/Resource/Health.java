@@ -1,4 +1,4 @@
-package GameTiles.Units;
+package GameTiles.Units.Resource;
 
 public class Health {
     private int HealthPool;

@@ -1,5 +1,5 @@
 package UI;
 
 public interface EnemyDeathCallBack {
-    void call();
+    void call(String msg);
 }

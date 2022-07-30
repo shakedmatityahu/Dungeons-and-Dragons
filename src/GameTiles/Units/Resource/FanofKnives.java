@@ -1,4 +1,4 @@
-package GameTiles.Units;
+package GameTiles.Units.Resource;
 
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
@@ -36,7 +36,7 @@ public class FanofKnives extends Ability{
     @Override
     public void abilityCast(Player p, Enemy enemy)
     {
-        p.battle(enemy, p.attack);
+        p.battle(enemy, p.getAttack());
         currentEnergy-=cost;
     }
 

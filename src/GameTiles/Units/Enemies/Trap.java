@@ -34,16 +34,11 @@ public class Trap extends Enemy {
     public void onTick(Tile tile)
     {
         visible = ticks_count < visibility_time;
-        if(ticks_count< visibility_time)
-            visible=true;
-        else
-            visible=false;
-
         if (ticks_count == (visibility_time + invisibility_time) )
             ticks_count=0;
         else
             ticks_count++;
-        if(this.position.isInRange(tile.getPosition(),2))
+        if(isInRange(tile,2))
         {
             interact(tile);
         }

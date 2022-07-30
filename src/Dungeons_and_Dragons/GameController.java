@@ -52,7 +52,8 @@ public class GameController {
     }
 
 
-    public void play(Player player1) {
+    public void play() {
+        Player player1 = getPlayer();
         for (int i = 0; i < gameBoards.size(); i++) {
             GameBoard cuurentLevel = gameBoards.get(i);
             cuurentLevel.setPlayer(player1);
@@ -61,14 +62,37 @@ public class GameController {
                 String command = "fill with player input";
 
                 playerMove(player1, command, cuurentLevel, cuurentEnemyList);
-                if (!(player.isDead())) {
+                for (Enemy enemy: cuurentEnemyList)
+                {
+                 if (enemy.isDead()){
+                     cuurentLevel.Replace(enemy,Tile.tileFactory('c',enemy.getPosition()));
+                     cuurentEnemyList.remove(enemy);
+                     //enemy.setEnemyDeathCallBack();
+                 }
+                }
+                if (!(player1.isDead())) {
+                    player1.setTile('X');
+                    System.out.println(cuurentLevel);
                     System.out.println("YOU LOST");
+                    return;
                 }
                 for (Enemy enemy : cuurentEnemyList) {
                     EnemyMove(player1,cuurentLevel,enemy);
                 }
             }
         }
+        System.out.println(you_won);
+    }
+
+    private Player getPlayer() {
+        System.out.println();
+        String input = "";
+        Player player = Player.playerFactory(input);
+        if(player != null){
+            return player;
+        }
+        System.out.println("Ygritte is unavailable at the moment would you like ti choose another player?");
+        return getPlayer();
     }
 
     private void playerMove(Player p, String command, GameBoard board, List<Enemy> enemyList) {
@@ -241,5 +265,16 @@ public class GameController {
 
         }
     }
+
+
+    private String you_won = " __    __                              __      __                      __     \n" +
+            "/\\ \\  /\\ \\                            /\\ \\  __/\\ \\                    /\\ \\    \n" +
+            "\\ `\\`\\\\/'/  ___    __  __             \\ \\ \\/\\ \\ \\ \\    ___     ___    \\ \\ \\   \n" +
+            " `\\ `\\ /'  / __`\\ /\\ \\/\\ \\             \\ \\ \\ \\ \\ \\ \\  / __`\\ /' _ `\\   \\ \\ \\  \n" +
+            "   `\\ \\ \\ /\\ \\L\\ \\\\ \\ \\_\\ \\             \\ \\ \\_/ \\_\\ \\/\\ \\L\\ \\/\\ \\/\\ \\   \\ \\_\\ \n" +
+            "     \\ \\_\\\\ \\____/ \\ \\____/              \\ `\\___x___/\\ \\____/\\ \\_\\ \\_\\   \\/\\_\\\n" +
+            "      \\/_/ \\/___/   \\/___/                '\\/__//__/  \\/___/  \\/_/\\/_/    \\/_/\n" +
+            "                                                                              \n" +
+            "                                                                              ";
 
 }

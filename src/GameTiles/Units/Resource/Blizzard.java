@@ -1,4 +1,4 @@
-package GameTiles.Units;
+package GameTiles.Units.Resource;
 
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
@@ -27,9 +27,7 @@ public class Blizzard extends Ability
     }
     public boolean canCastAbility ()
     {
-        if(currentMana< manaCost)
-            return true;
-        return false;
+        return(currentMana< manaCost);
     }
 
     @Override
@@ -49,9 +47,11 @@ public class Blizzard extends Ability
     {
         while(hitsCount < this.hitsCount) {
             p.battle(enemy, spellPower);
+            if(enemy.isDead())
+                break;
             hitsCount++;
         }
-        this.currentMana-=this.manaCost;
+        this.currentMana -= this.manaCost;
         this.hitsCount=0;
     }
 
