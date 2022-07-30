@@ -44,12 +44,10 @@ public abstract class Unit extends Tile implements Visitor {
         this.health.setHealthPool(pool);
         this.health.setHealthAmount(amount);
 
-       MessageCallback.send("plasd");
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
+    public void setAttack(int attack) {this.attack = attack;}
+
 
     public void setDefense(int defense) {
         this.defense = defense;
@@ -150,5 +148,8 @@ public abstract class Unit extends Tile implements Visitor {
         return tile+"";
     }
     
-
+    public void print()
+    {
+        //MessageCallback.send(describe());
+    }
 }
