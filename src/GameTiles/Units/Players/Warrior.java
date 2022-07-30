@@ -53,10 +53,9 @@ public class Warrior extends Player {
         defense += (WARRIOR_DEFENSE_MULTIPLAYER * level);
     }
 
-
-    public String describe (){
-        String des=((Unit)this).describe();
-        des+=this.specialAbility.describe();
+    public String describe(){
+        String des= describe();
+        des+=specialAbility.describe();
         return des;
     }
 }

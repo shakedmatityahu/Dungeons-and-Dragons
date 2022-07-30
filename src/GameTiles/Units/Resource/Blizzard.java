@@ -64,7 +64,7 @@ public class Blizzard extends Ability
 
     }
 
-    public String describe (){
+    public String describe(){
         return String.format("%s\t\tManaPool: %i\t\tManaCost: %i\t\tCurrentMana: %i\t\tSpellPower: %i\t\tHitsCount: %i",manaCost,currentMana,spellPower,hitsCount);
 
     }

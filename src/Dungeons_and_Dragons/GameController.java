@@ -109,7 +109,7 @@ public class GameController {
         {
             Player tmp = player.get(i);
             if (tmp != null)
-            System.out.println(i+"."+" "+ tmp.describe());
+                System.out.println(i+"."+" "+ tmp.describe());
         }
 
     }

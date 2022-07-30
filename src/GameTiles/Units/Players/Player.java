@@ -143,4 +143,11 @@ public abstract class Player extends Unit {
         send(defender.getName() +" died."+ getName()+" gained "+defender.getName()+ " experience points");
     }
 
+
+    public String describe(){
+        String des= describe();
+        des+=specialAbility.describe();
+        return des;
+    }
+
 }

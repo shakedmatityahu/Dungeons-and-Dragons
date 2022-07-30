@@ -50,5 +50,5 @@ public abstract class Ability{
     public abstract  void gameTick(int level);
     public abstract void abilityCast(Player p, List<Enemy> enemy);
 
-    public abstract String describe ();
+    public abstract String describe();
 }

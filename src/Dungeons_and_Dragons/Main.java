@@ -4,10 +4,12 @@ import UI.UserInterface;
 
 public class Main {
 
-    public static void main (String [] args)
+    public static void main(String[] args)
     {
+        System.out.println("Hello World");
 
-        GameController gc=new GameController(args[3]);
+
+        GameController gc=new GameController("levels_dir");
         gc.play();
     }
 }
