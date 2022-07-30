@@ -4,6 +4,7 @@ import GameTiles.Tile;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.Unit;
+import UI.UserInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,9 +16,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
+
 public class GameController {
+
 
     ArrayList<GameBoard> gameBoards;
     ArrayList<ArrayList<Enemy>> enemyList;
@@ -29,6 +33,7 @@ public class GameController {
     private final int LEFT = 2;
     private final int RIGHT=3;
     private final int STAY =4;
+
 
 
     public GameController(String path, Player player1) {
