@@ -11,6 +11,7 @@ import jdk.jshell.spi.ExecutionControl;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public abstract class Tile implements Comparable<Tile> ,Visited {
     protected char tile;
@@ -101,4 +102,9 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
         return range >= this.Distance(t);
     }
 
+    public int randomNumber (int lastNumberPossible)
+    {
+        int randomNumber=0;
+        return randomNumber = new Random().nextInt(lastNumberPossible);
+    }
 }

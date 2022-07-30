@@ -4,6 +4,7 @@ import GameTiles.Tile;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Resource.FanofKnives;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rogue extends Player {
@@ -40,11 +41,14 @@ public class Rogue extends Player {
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
         if (!canCast()){
             throw new Exception("Casting special ability will result with Rogue death YOU MERDAERER!!!");
-        } else {
-            for (Enemy enemy : enemyList) {
-                if ((isInRange((Tile) enemy, ROGUE_ABILITY_RANGE)) && canCast())
-                    this.specialAbility.abilityCast(this,enemy);
-            }
+        } else
+        {
+            List<Enemy> listEnemiesInRange=new ArrayList<>();
+            for (Enemy enemy : enemyList)
+                if ((isInRange((Tile) enemy, ROGUE_ABILITY_RANGE)))
+                    listEnemiesInRange.add(enemy);
+            this.specialAbility.abilityCast(this,listEnemiesInRange);
+
         }
     }
 

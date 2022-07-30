@@ -29,15 +29,12 @@ public class Warrior extends Player {
         if(!canCast())
             throw new Exception("Casting special ability will result with Warrior death YOU MERDAERER!!!");
         List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
-        int randomNumber = 0;
         for (Enemy enemy : enemyList) {
             if (this.isInRange((Tile) enemy, WARRIOR_ABILITY_RANGE))
                 listEnemyInRange.add(enemy);
         }
-            randomNumber = new Random().nextInt(listEnemyInRange.size());
-            Enemy enemy=listEnemyInRange.get(randomNumber);
-            this.specialAbility.abilityCast(this,enemy);
-            this.health.setHealthAmount(Math.min(this.health.getHealthPool() + 10 * this.defense,this.health.getHealthPool()));
+        specialAbility.abilityCast(this,listEnemyInRange);
+        health.setHealthAmount(Math.min(this.health.getHealthPool() + 10 * this.defense,this.health.getHealthPool()));
     }
 
     @Override

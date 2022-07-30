@@ -3,6 +3,8 @@ package GameTiles.Units.Resource;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 
+import java.util.List;
+
 public class Blizzard extends Ability
 {
     private int manaPool;
@@ -43,16 +45,23 @@ public class Blizzard extends Ability
     }
 
     @Override
-    public void abilityCast(Player p, Enemy enemy)
+    public void abilityCast(Player p, List<Enemy> enemyList)
     {
-        while(hitsCount < this.hitsCount) {
-            p.battle(enemy, spellPower);
-            if(enemy.isDead())
-                break;
-            hitsCount++;
+        int random=0;
+        while(!enemyList.isEmpty()&& canCastAbility())
+        {
+            hitsCount=0;
+            random=p.randomNumber(enemyList.size());
+            Enemy enemy=enemyList.get(random);
+            while(hitsCount < this.hitsCount) {
+                p.battle(enemy, spellPower);
+                if(enemy.isDead())
+                    break;
+                hitsCount++;
+            }
+            this.currentMana -= this.manaCost;
         }
-        this.currentMana -= this.manaCost;
-        this.hitsCount=0;
+
     }
 
     public String describe (){

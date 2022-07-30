@@ -3,6 +3,8 @@ package GameTiles.Units.Resource;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 
+import java.util.List;
+
 public class FanofKnives extends Ability{
 
     private final int MAX_ENERGY = 100;
@@ -34,10 +36,12 @@ public class FanofKnives extends Ability{
     }
 
     @Override
-    public void abilityCast(Player p, Enemy enemy)
+    public void abilityCast(Player p, List<Enemy> enemyList)
     {
-        p.battle(enemy, p.getAttack());
-        currentEnergy-=cost;
+        if(!enemyList.isEmpty())
+            currentEnergy-=cost;
+        for(Enemy enemy:enemyList)
+              p.battle(enemy, p.getAttack());
     }
 
     @Override

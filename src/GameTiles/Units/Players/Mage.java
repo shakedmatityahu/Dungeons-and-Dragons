@@ -51,19 +51,14 @@ public class Mage extends Player {
          if(!canCast())
             throw new Exception("Casting special ability will result with Mage death YOU MERDAERER!!!");
          else {
-            int hits = 0;
             List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
-            int randomNumber = 0;
             for (Enemy enemy : enemyList) {
                 if (this.isInRange((Tile) enemy, MAGE_ABILITY_RANGE))
                     listEnemyInRange.add(enemy);
             }
-            while ((!listEnemyInRange.isEmpty())&&(canCast()))
-            {
-                randomNumber = new Random().nextInt(listEnemyInRange.size());
-                Enemy enemy=listEnemyInRange.get(randomNumber);
-                this.specialAbility.abilityCast(this,enemy);
-            }
+            specialAbility.abilityCast(this,listEnemyInRange);
+
+
 
         }
     }

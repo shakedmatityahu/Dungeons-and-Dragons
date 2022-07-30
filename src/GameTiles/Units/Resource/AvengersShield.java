@@ -1,7 +1,11 @@
 package GameTiles.Units.Resource;
 
+import GameTiles.Tile;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AvengersShield extends Ability
 {
@@ -37,10 +41,13 @@ public class AvengersShield extends Ability
     }
 
     @Override
-    public void abilityCast(Player p, Enemy enemy)
+    public void abilityCast(Player p, List<Enemy> enemyList)
     {
-        p.battle(enemy, (int) ABILITY_COST * p.getHealth().getHealthPool());
+        int randomNumber= p.randomNumber(enemyList.size());
+        Enemy enemy=enemyList.get(randomNumber);
         remainingCoolDown=coolDown;
+        p.battle(enemy, (int) ABILITY_COST * p.getHealth().getHealthPool());
+
     }
     public String describe (){
         return String.format("%s\t\tCoolDown: %i",coolDown);

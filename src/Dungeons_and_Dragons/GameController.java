@@ -100,7 +100,7 @@ public class GameController {
     private Player getPlayer() {
         System.out.println();
         String input = "";
-        Player player = Player.playerFactory(input);
+        Player player = Player.playerFactory(1);
         if(player != null){
             return player;
         }

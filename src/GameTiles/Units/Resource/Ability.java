@@ -3,6 +3,8 @@ package GameTiles.Units.Resource;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 
+import java.util.List;
+
 public abstract class Ability{
     private String name;
     private int range ;
@@ -46,7 +48,7 @@ public abstract class Ability{
 
     public abstract void levelUp(int level);
     public abstract  void gameTick(int level);
-    public abstract void abilityCast(Player p, Enemy enemy);
+    public abstract void abilityCast(Player p, List<Enemy> enemy);
 
     public abstract String describe ();
 }
