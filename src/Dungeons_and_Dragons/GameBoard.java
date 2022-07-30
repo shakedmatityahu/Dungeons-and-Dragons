@@ -3,6 +3,7 @@ import GameTiles.Tile;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Empty;
 import GameTiles.Units.Players.Player;
+import UI.PrintBoardCallBack;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
@@ -12,7 +13,11 @@ import java.util.stream.Collectors;
 
 public class GameBoard {
     private List<Tile> tiles;
+    private PrintBoardCallBack printBoardCallBack;
 
+    public void setPrintBoardCallBack(PrintBoardCallBack boardCallBack) {
+        this.printBoardCallBack = boardCallBack;
+    }
     public GameBoard(List<Tile> tiles){
         this.tiles =tiles;
     }
@@ -83,6 +88,11 @@ public class GameBoard {
             }
         }
         return output;
+    }
+
+    public void printBoard()
+    {
+        printBoardCallBack.print();
     }
 
     public void addTile(Tile tileFactory) {
