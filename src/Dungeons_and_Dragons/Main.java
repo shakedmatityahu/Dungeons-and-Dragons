@@ -4,7 +4,7 @@ import UI.UserInterface;
 
 public class Main {
 
-    private UserInterface userInterface;
+
     public static void main (String [] args)
     {
 

@@ -33,10 +33,17 @@ public class GameController {
     private final int LEFT = 2;
     private final int RIGHT=3;
     private final int STAY =4;
+    private UserInterface userInterface;
 
 
 
-    public GameController(String path, Player player1) {
+
+
+    public GameController(String path, Player player1)
+    {
+        userInterface.print("Select a player by number");
+        userInterface.print("!!!!!!!!!Players Options ");
+        int playerInt=userInterface.readInt();
         player1 = Player.playerFactory("Demo");
         List<File> fileList = getLevelFiles(path);
         gameBoards = new ArrayList<>(fileList.size());
