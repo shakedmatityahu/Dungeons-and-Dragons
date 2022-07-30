@@ -38,10 +38,7 @@ public class GameController {
 
     public GameController(String path)
     {
-
-
         player= getPlayer();
-
         List<File> fileList = getLevelFiles(path);
         gameBoards = new ArrayList<>(fileList.size());
         enemyList = new ArrayList<>(fileList.size());
