@@ -40,19 +40,28 @@ public class GameController {
     {
         player= getPlayer();
         List<File> fileList = getLevelFiles(path);
-        gameBoards = new ArrayList<>(fileList.size());
+        int size = fileList.size();
+        gameBoards = new ArrayList<GameBoard>(size);
+        enemyList = new ArrayList<ArrayList<Enemy>>(size);
 
-        enemyList = new ArrayList<>(fileList.size());
+        for (int i=0; i<size; i++){
+            gameBoards.add(null);
+            enemyList.add(new ArrayList<Enemy>());
+        }
+        /*gameBoards = new ArrayList<GameBoard>(size);
+
+        enemyList = new ArrayList<ArrayList<Enemy>>(size);
         for (List<Enemy> list : enemyList) {
             list = new ArrayList<Enemy>();
-        }
+        }*/
 
         //check that we don't miss last level
-        for (int i = 0; i < fileList.size(); i++) {
+        for (int i = 0; i < size; i++) {
             File level = fileList.get(i);
             List<String> levelCharsRow = fileToRowList(level);
+            List<Enemy> levelEnemies = enemyList.get(i);
             GameBoard board = new GameBoard(
-                    initGameBoard(levelCharsRow, enemyList.get(i), player));
+                    initGameBoard(levelCharsRow,levelEnemies, player));
             gameBoards.set(i, board);
 
         }
@@ -225,7 +234,7 @@ public class GameController {
         for(int i=0; i <= rowNum; i++)
         {
             String tileRow = rows.get(i);
-            for (int j=0; j<=colNum; j++)
+            for (int j=0; j< colNum; j++)
             {
                 Position position = new Position(i,j);
                 char c = tileRow.charAt(j);
