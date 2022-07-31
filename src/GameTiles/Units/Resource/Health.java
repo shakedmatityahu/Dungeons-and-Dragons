@@ -38,4 +38,9 @@ public class Health {
     {
         HealthAmount = Math.max(0,HealthAmount-damage);
     }
+
+    @Override
+    public String toString(){
+        return HealthAmount+"/"+HealthPool;
+    }
 }

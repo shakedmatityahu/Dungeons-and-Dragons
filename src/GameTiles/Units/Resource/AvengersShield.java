@@ -49,8 +49,12 @@ public class AvengersShield extends Ability
         p.battle(enemy, (int) ABILITY_COST * p.getHealth().getHealthPool());
 
     }
+
+    private int getCoolDown(){
+        return coolDown;
+    }
     public String describe(){
-        return String.format("%s\t\tCoolDown: %i",coolDown);
+        return String.format("%s\t\tCoolDown: %d", coolDown);
 
     }
 }

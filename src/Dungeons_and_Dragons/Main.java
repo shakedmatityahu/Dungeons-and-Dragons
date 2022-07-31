@@ -6,10 +6,12 @@ public class Main {
 
     public static void main(String[] args)
     {
-        System.out.println("Hello World");
-
-
+        //For testing
         GameController gc=new GameController("levels_dir");
         gc.play();
+
+        //real
+        /*GameController gc=new GameController(args[0]);
+        gc.play();*/
     }
 }

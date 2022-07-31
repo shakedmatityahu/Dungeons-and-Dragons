@@ -21,6 +21,8 @@ public abstract class Unit extends Tile implements Visitor {
     private MessageCallback messageCallback;
 
 
+
+
 ///*    protected void set(Position position, MessageCallback messageCallback){
 //        this.messageCallback = messageCallback;
 //        this.position = position;
@@ -32,8 +34,6 @@ public abstract class Unit extends Tile implements Visitor {
         this.attack = attack;
         this.defense = defense;
         this.health = new Health(health);
-
-
     }
 
     public void setName(String name) {

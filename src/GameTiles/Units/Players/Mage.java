@@ -28,13 +28,6 @@ public class Mage extends Player {
         this.specialAbility= new Blizzard(MAGE_ABILITY_NAME,Range,manaPool,spellPower,hitsCount,manaCost);
     }
 
-
-    public String describe (){
-        String des=((Unit)this).describe();
-        des+=this.specialAbility.describe();
-        return des;
-    }
-
     @Override
     public void onTick(Tile tile) {
         super.onTick(tile);

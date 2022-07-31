@@ -30,7 +30,7 @@ public class GameController {
     private final int LEFT = 2;
     private final int RIGHT=3;
     private final int STAY =4;
-    private UserInterface userInterface;
+    private UserInterface userInterface = new UserInterface();
 
 
 

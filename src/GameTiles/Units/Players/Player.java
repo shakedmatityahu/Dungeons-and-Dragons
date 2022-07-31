@@ -41,7 +41,7 @@ public abstract class Player extends Unit {
         PlayerMap.put(3, new Mage("Melisandre",100,5,1,300,30,15,5,6));
         PlayerMap.put(4, new Mage("Thoros of Myr",250,25,4,150,20,20,3,4));
         PlayerMap.put(5, new Rogue("Arya Stark",150,40,2,20));
-        PlayerMap.put(6, new Rogue("",250,35,3,50));
+        PlayerMap.put(6, new Rogue("Bronn",250,35,3,50));
 
         return PlayerMap;
     }
@@ -144,10 +144,10 @@ public abstract class Player extends Unit {
     }
 
 
-    public String describe(){
-        String des= describe();
+    /*public String describe(){
+        String des= super.describe();
         des+=specialAbility.describe();
         return des;
-    }
+    }*/
 
 }
