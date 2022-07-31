@@ -268,7 +268,7 @@ public class GameController {
     }
 
     public void Move(GameBoard board, Unit unit, int move){
-        Position position = unit.getPosition();
+        Position position = new Position(unit.getPosition());
         Tile tile = unit;
         switch (move){
             case 0:// up

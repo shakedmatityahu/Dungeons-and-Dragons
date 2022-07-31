@@ -47,10 +47,11 @@ public class GameBoard {
     }
 
     public Tile finedTile(Position pose) {
-        for (Tile tmp : tiles) {
-            if (pose.compareTo(tmp.getPosition()) == 0)
+            for (Tile tmp : tiles)
+            {
+                if (pose.compareTo(tmp.getPosition()) == 0)
                 return tmp;
-        }
+            }
         return null;
     }
 
