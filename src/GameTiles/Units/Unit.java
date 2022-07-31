@@ -118,20 +118,7 @@ public abstract class Unit extends Tile implements Visitor {
     public void visit(Wall w){}
     public void accept (Visitor v){}
 
-    public void Up(Tile tile){
-        onTick(tile);
-    }
-
-
-    public void Down(Tile tile){
-        onTick(tile);
-    }
-
-    public void Left(Tile tile){
-        onTick(tile);
-    }
-
-    public void Right(Tile tile){
+    public void Move(Tile tile){
         onTick(tile);
     }
 

@@ -22,6 +22,9 @@ public class GameBoard {
     }
     public GameBoard(List<Tile> tiles, int col, int rowNum){
         this.tiles =tiles;
+        column = col;
+        row =rowNum;
+
     }
 
     public static void reomve(Enemy enemy) {
@@ -37,9 +40,10 @@ public class GameBoard {
     }
 
 
-    public void setPlayer(Tile player){
+    public void setPlayer(Player player){
         Tile old =findPlayerPosition();
         if(old != null){
+            player.initialize(old.getPosition());
             old =player;
             //sortTiles();
         }
@@ -74,21 +78,21 @@ public class GameBoard {
 
     @Override
     public String toString() {
-        //sortTiles();
+        sortTiles();
         String output = "";
-        int line = 0;
-        for(Tile tile : tiles) {
-            if(line == tile.getPosition().getX()) {
-                output += tile;
-            }
-            else
-            {
-                line++;
-                output += "\n" + tile;
+        int counter = 0;
+        for(Tile t : tiles) {
+            if(counter < row) {
+                output += t;
+                counter++;
+            } else {
+                output += "\n" + t;
+                counter = 1;
             }
         }
         return output;
     }
+
 
     public void printBoard()
     {
@@ -97,12 +101,11 @@ public class GameBoard {
 
     public void addTile(Tile tileFactory) {
         tiles.add(tileFactory);
-        sortTiles();
+
     }
 
     public void remove(Tile tile) {
         tiles.remove(tile);
-        sortTiles();
     }
 
     public void Replace(Tile oldTile ,Tile newTile){
