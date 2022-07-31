@@ -39,9 +39,9 @@ public class GameBoard {
         Tile old =findPlayerPosition();
         if(old != null){
             player.initialize(old.getPosition());
-            tiles.remove(old);
-            tiles.add(player);
-            sortTiles();
+            remove(old);
+            addTile(player);
+           // sortTiles();
         }
 
     }

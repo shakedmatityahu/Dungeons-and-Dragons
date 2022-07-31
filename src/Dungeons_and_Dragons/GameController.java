@@ -255,11 +255,12 @@ public class GameController {
                 }
                 else if(c == '@')
                 {
-                    player.initialize(position);
-                    AllTiles.add(player);
+                    Player dummy = Player.playerFactory().get(1);
+                    dummy.initialize(position);
+                    AllTiles.add(dummy);
                 }
-
             }
+
 
         }
 
