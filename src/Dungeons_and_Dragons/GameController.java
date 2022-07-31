@@ -129,7 +129,6 @@ public class GameController {
     private void playerMove(Player p, GameBoard board, List<Enemy> enemyList) {
         char command=userInterface.readChar();
         Position position = new Position(player.getPosition());
-        Tile tile;
         switch (command) {
             case 'w': // up
                 Move(board,player,UP);
