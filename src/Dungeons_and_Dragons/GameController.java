@@ -23,7 +23,7 @@ public class GameController {
     ArrayList<GameBoard> gameBoards;
     ArrayList<ArrayList<Enemy>> enemyList;
     Player player;
-    private static final List<Character> ENEMY_LIST = List.of('s', 'k', 'q', 'z', 'b', 'g', 'w', 'M', 'C', 'K');
+    private static final List<Character> ENEMY_LIST = List.of('s', 'k', 'q', 'z', 'b', 'g', 'w', 'M', 'C', 'K','B','Q','D');
     private static final List<Character> PLANE_TILES = List.of('.', '#');
     private final int UP =0;
     private final int DOWN =1;
@@ -75,9 +75,11 @@ public class GameController {
             cuurentLevel.setPlayer(player1);
             List<Enemy> cuurentEnemyList = enemyList.get(i);
             while (!(cuurentEnemyList.isEmpty())) {
-                String command = "fill with player input";
 
-                playerMove(player1, command, cuurentLevel, cuurentEnemyList);
+                //print board
+                System.out.println(cuurentLevel);
+
+                playerMove(player1, cuurentLevel, cuurentEnemyList);
                 for (Enemy enemy: cuurentEnemyList)
                 {
                  if (enemy.isDead()){
@@ -86,7 +88,7 @@ public class GameController {
                      //enemy.setEnemyDeathCallBack();
                  }
                 }
-                if (!(player1.isDead())) {
+                if ((player1.isDead())) {
                     player1.setTile('X');
                     System.out.println(cuurentLevel);
                     System.out.println("YOU LOST");
@@ -124,30 +126,31 @@ public class GameController {
 
     }
 
-    private void playerMove(Player p, String command, GameBoard board, List<Enemy> enemyList) {
+    private void playerMove(Player p, GameBoard board, List<Enemy> enemyList) {
+        char command=userInterface.readChar();
         Position position = new Position(player.getPosition());
         Tile tile;
         switch (command) {
-            case "w": // up
+            case 'w': // up
                 Move(board,player,UP);
                 break;
-            case "s": // down
+            case 's': // down
                 Move(board,player,DOWN);
                 break;
-            case "a": //left
+            case 'a': //left
                 Move(board,player,LEFT);
                 break;
-            case "d": // right
+            case 'd': // right
                 Move(board,player,RIGHT);
                 break;
-            case "e": // cast
+            case 'e': // cast
                 try {
                     player.OnAbilityCast(enemyList);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
-            case "K": // Burn them all   ;-)
+            case 'K': // Burn them all   ;-)
                 BurnThemAll(enemyList, board);
                 break;
         }
@@ -231,10 +234,10 @@ public class GameController {
         int rowNum = rows.size();
         int colNum = rows.get(0).length();
         List<Tile> AllTiles = new ArrayList<>();
-        for(int i=0; i <= rowNum; i++)
+        for(int i=0; i < rowNum; i++)
         {
             String tileRow = rows.get(i);
-            for (int j=0; j< colNum; j++)
+            for (int j=0; j < colNum; j++)
             {
                 Position position = new Position(i,j);
                 char c = tileRow.charAt(j);
