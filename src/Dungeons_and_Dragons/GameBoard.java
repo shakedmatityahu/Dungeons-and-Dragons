@@ -36,10 +36,21 @@ public class GameBoard {
         throw new RuntimeException("No tile");
     }
 
+    public void playerBoard(Player p)
+    {
+        Position position=new Position(findPlayerPosition().getPosition());
+        //Tile t=new Empty(position);
+        for(Tile tile:tiles)
+            if(tile.getPosition().equals(position))
+                tiles.remove(tile);
+        tiles.add(p);
+
+    }
 
     public void setPlayer(Tile player){
         Tile old =findPlayerPosition();
         if(old != null){
+            player.initialize(old.getPosition());
             old =player;
             //sortTiles();
         }

@@ -89,11 +89,11 @@ public class Position implements Comparable<Position>{
         return false;
     }
 
-    public int equals(Position position)
+    /*public int equals(Position position)
     {
         if((y== position.getY())&& (x== (position.getX())))
             return 0;
         else
             return -1;
-    }
+    }*/
 }

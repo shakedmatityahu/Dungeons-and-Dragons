@@ -68,17 +68,18 @@ public class GameController {
 
 
     public void play() {
-        Player player1 = player;
+
         for (int i = 0; i < gameBoards.size(); i++) {
             GameBoard cuurentLevel = gameBoards.get(i);
-            cuurentLevel.setPlayer(player1);
+            cuurentLevel.setPlayer(player);
             List<Enemy> cuurentEnemyList = enemyList.get(i);
             while (!(cuurentEnemyList.isEmpty())) {
 
                 //print board
+                //gameBoards.get(i).playerBoard(player);
                 System.out.println(cuurentLevel);
 
-                playerMove(player1, cuurentLevel, cuurentEnemyList);
+                playerMove(player, cuurentLevel, cuurentEnemyList);
                 for (Enemy enemy: cuurentEnemyList)
                 {
                  if (enemy.isDead()){
@@ -87,16 +88,19 @@ public class GameController {
                      //enemy.setEnemyDeathCallBack();
                  }
                 }
-                if ((player1.isDead())) {
-                    player1.setTile('X');
+                if ((player.isDead())) {
+                    player.setTile('X');
                     System.out.println(cuurentLevel);
                     System.out.println("YOU LOST");
                     return;
                 }
                 for (Enemy enemy : cuurentEnemyList) {
-                    EnemyMove(player1,cuurentLevel,enemy);
+                    EnemyMove(player,cuurentLevel,enemy);
                 }
+                gameBoards.get(i).playerBoard(player);
+
             }
+
         }
         System.out.println(you_won);
     }
@@ -161,7 +165,7 @@ public class GameController {
     }
 
     private void EnemyMove(Player player, GameBoard board, Enemy enemy) {
-        Position position = new Position(player.getPosition());
+       /* Position position = new Position(player.getPosition());
         Tile tile;
         if (enemy.Distance(player) < enemy.getRange()) {
             int dx;
@@ -183,7 +187,7 @@ public class GameController {
         else
         {
             Move(board,enemy,new Random().nextInt(STAY));
-        }
+        }*/
     }
 
         ///Return a list of all txt files in desired directory
