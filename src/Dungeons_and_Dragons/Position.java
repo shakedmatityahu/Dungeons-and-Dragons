@@ -31,8 +31,6 @@ public class Position implements Comparable<Position>{
     @Override
     public int compareTo(Position position)
     {
-        if((y== position.getY())&& (x==position.getX()))
-            return 0;
         if(y<position.getY())
             return -1;
         if(y>= position.getY())
@@ -69,7 +67,7 @@ public class Position implements Comparable<Position>{
     }
 
 
-    public Position moveMonster(String move) {
+    /*public Position moveMonster(String move) {
         if (move == "left")
             this.setX(this.getX() - 1);
         if (move == "right")
@@ -81,5 +79,13 @@ public class Position implements Comparable<Position>{
         return this;
         // אם אני עוברת למקום שיש בו מפלצת אחרץ אז אני לא זזה
         //צריך לבדוק איפה אני ביחס ללוח כי אם אני בקיר אני מאבדת תור
+    }*/
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj instanceof Position)
+            return ((y== ((Position) obj).getY())&& (x== ((Position) obj).getX()));
+
+        return false;
     }
 }

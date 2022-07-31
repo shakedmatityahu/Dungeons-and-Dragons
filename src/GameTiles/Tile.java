@@ -33,7 +33,6 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
     }
 
 
-
     public void initialize(Position position){
         this.position = position;
     }
@@ -65,7 +64,7 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
 
     public void swap(Tile t){
         Position tmp = new Position(position);
-        this.setPosition(t.getPosition());
+        this.setPosition(t.position);
         t.setPosition(tmp);
     }
 

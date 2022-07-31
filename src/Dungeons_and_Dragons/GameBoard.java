@@ -14,11 +14,13 @@ import java.util.stream.Collectors;
 public class GameBoard {
     private List<Tile> tiles;
     private PrintBoardCallBack printBoardCallBack;
+    private int column;
+    private int row;
 
     public void setPrintBoardCallBack(PrintBoardCallBack boardCallBack) {
         this.printBoardCallBack = boardCallBack;
     }
-    public GameBoard(List<Tile> tiles){
+    public GameBoard(List<Tile> tiles, int col, int rowNum){
         this.tiles =tiles;
     }
 
@@ -46,7 +48,7 @@ public class GameBoard {
 
     public Tile finedTile(Position pose) {
         for (Tile tmp : tiles) {
-            if (pose.compareTo(tmp.getPosition()) == 0)
+            if (pose.equals(tmp.getPosition()))
                 return tmp;
         }
         return null;
@@ -77,12 +79,12 @@ public class GameBoard {
         int line = 0;
         for(Tile tile : tiles) {
             if(line == tile.getPosition().getX()) {
-                output += tile.toString();
+                output += tile;
             }
             else
             {
                 line++;
-                output += "\n" + tile.toString();
+                output += "\n" + tile;
             }
         }
         return output;

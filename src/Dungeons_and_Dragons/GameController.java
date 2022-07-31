@@ -60,8 +60,7 @@ public class GameController {
             File level = fileList.get(i);
             List<String> levelCharsRow = fileToRowList(level);
             List<Enemy> levelEnemies = enemyList.get(i);
-            GameBoard board = new GameBoard(
-                    initGameBoard(levelCharsRow,levelEnemies, player));
+            GameBoard board = initGameBoard(levelCharsRow,levelEnemies, player);
             gameBoards.set(i, board);
 
         }
@@ -83,7 +82,7 @@ public class GameController {
                 for (Enemy enemy: cuurentEnemyList)
                 {
                  if (enemy.isDead()){
-                     cuurentLevel.Replace(enemy,Tile.tileFactory('c',enemy.getPosition()));
+                     cuurentLevel.Replace(enemy,Tile.tileFactory('.',enemy.getPosition()));
                      cuurentEnemyList.remove(enemy);
                      //enemy.setEnemyDeathCallBack();
                  }
@@ -128,7 +127,6 @@ public class GameController {
 
     private void playerMove(Player p, GameBoard board, List<Enemy> enemyList) {
         char command=userInterface.readChar();
-        Position position = new Position(player.getPosition());
         switch (command) {
             case 'w': // up
                 Move(board,player,UP);
@@ -229,7 +227,7 @@ public class GameController {
     }
 
     //
-    private static List<Tile> initGameBoard(List<String> rows, List<Enemy> enemyList, Player player){
+    private static GameBoard initGameBoard(List<String> rows, List<Enemy> enemyList, Player player){
         int rowNum = rows.size();
         int colNum = rows.get(0).length();
         List<Tile> AllTiles = new ArrayList<>();
@@ -263,12 +261,12 @@ public class GameController {
 
         }
 
-        return AllTiles;
+        return new GameBoard(AllTiles,rowNum,colNum);
     }
 
     public void Move(GameBoard board, Unit unit, int move){
-        Position position = unit.getPosition();
-        Tile tile = unit;
+        Position position = new Position(unit.getPosition());
+        Tile tile;
         switch (move){
             case 0:// up
                 position.setX(position.getX() + 1);
@@ -291,7 +289,6 @@ public class GameController {
                 unit.Right(tile);
                 break;
             case 4:
-                unit.Stay(tile);
                 break;
 
 
