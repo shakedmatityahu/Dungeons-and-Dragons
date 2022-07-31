@@ -142,12 +142,15 @@ public abstract class Player extends Unit {
         swap(defender);
         send(defender.getName() +" died."+ getName()+" gained "+defender.getName()+ " experience points");
     }
+    private String getExperince()
+    {
+        String s=experience+"/"+level*50;
+        return s;
+    }
 
+    public String describe(){
+        return  super.describe()+String.format("\t\tLevel: %d \t\tExperience: %s \t\t%s", level,getExperince(),specialAbility.describe());
+    }
 
-    /*public String describe(){
-        String des= super.describe();
-        des+=specialAbility.describe();
-        return des;
-    }*/
 
 }

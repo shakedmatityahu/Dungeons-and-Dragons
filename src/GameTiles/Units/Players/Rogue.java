@@ -52,10 +52,9 @@ public class Rogue extends Player {
         }
     }
 
-    /*public String describe (){
-        String des= super.describe();
-        des+=String.format("%s\t\tCost: %i");
-        return des;
-    }*/
+    public String describe (){
+            return super.describe();
+        }
+
 }
 

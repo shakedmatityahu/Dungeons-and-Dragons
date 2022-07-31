@@ -5,20 +5,22 @@ import GameTiles.Units.Players.Player;
 
 import java.util.List;
 
-public class FanofKnives extends Ability{
+public class FanofKnives extends Ability {
 
     private final int MAX_ENERGY = 100;
     private int cost;
     private int currentEnergy;
+
     public FanofKnives(String name, int range, int cost) {
-        super(name, range );
-        this.cost=cost;
-        this.currentEnergy=MAX_ENERGY;
+        super(name, range);
+        this.cost = cost;
+        this.currentEnergy = MAX_ENERGY;
     }
 
 
-
-    public boolean canCastAbility(int energy,int cost){return energy<cost;}
+    public boolean canCastAbility(int energy, int cost) {
+        return energy < cost;
+    }
 
     @Override
     public boolean canCastAbility() {
@@ -27,29 +29,25 @@ public class FanofKnives extends Ability{
 
     @Override
     public void levelUp(int level) {
-        currentEnergy=MAX_ENERGY;
+        currentEnergy = MAX_ENERGY;
     }
 
     @Override
     public void gameTick(int level) {
-        currentEnergy=Math.min(currentEnergy+10,MAX_ENERGY);
+        currentEnergy = Math.min(currentEnergy + 10, MAX_ENERGY);
     }
 
     @Override
-    public void abilityCast(Player p, List<Enemy> enemyList)
-    {
-        if(!enemyList.isEmpty())
-            currentEnergy-=cost;
-        for(Enemy enemy:enemyList)
-              p.battle(enemy, p.getAttack());
+    public void abilityCast(Player p, List<Enemy> enemyList) {
+        if (!enemyList.isEmpty())
+            currentEnergy -= cost;
+        for (Enemy enemy : enemyList)
+            p.battle(enemy, p.getAttack());
     }
 
     @Override
     public String describe() {
-        return String.format("%s\t\tcost: %i\t\tcurrentEnergy: %i",cost,currentEnergy);
+        return "Energy: "+currentEnergy + "/" + MAX_ENERGY;
+    }
 
-    }
-    public int getCost() {
-        return cost;
-    }
 }

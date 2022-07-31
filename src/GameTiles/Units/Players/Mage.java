@@ -55,6 +55,9 @@ public class Mage extends Player {
 
         }
     }
+    public String describe (){
+        return super.describe();
+    }
 
 
 }

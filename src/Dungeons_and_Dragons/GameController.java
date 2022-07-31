@@ -41,6 +41,7 @@ public class GameController {
         player= getPlayer();
         List<File> fileList = getLevelFiles(path);
         gameBoards = new ArrayList<>(fileList.size());
+
         enemyList = new ArrayList<>(fileList.size());
         for (List<Enemy> list : enemyList) {
             list = new ArrayList<Enemy>();
@@ -179,7 +180,7 @@ public class GameController {
         ///Return a list of all txt files in desired directory
         private static List<File> getLevelFiles (String path){
             String dir = System.getProperty("user.dir");
-            dir += path;
+            dir += "\\"+path;
             String directory = dir;
             List<File> levelList = new ArrayList<>();
             try {
