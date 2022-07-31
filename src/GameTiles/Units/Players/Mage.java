@@ -40,9 +40,9 @@ public class Mage extends Player {
        this.specialAbility.levelUp(level);
     }
 
-    public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
+    public void OnAbilityCast(List<Enemy> enemyList)  {
          if(!canCast())
-            throw new Exception("Casting special ability will result with Mage death YOU MERDAERER!!!");
+             messageCallback.send(String.format("Casting special ability will result with Mage death YOU MERDAERER!!!"));
          else {
             List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
             for (Enemy enemy : enemyList) {

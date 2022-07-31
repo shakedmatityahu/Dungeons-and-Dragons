@@ -18,7 +18,7 @@ public abstract class Unit extends Tile implements Visitor {
     protected int attack;
     protected int defense;
     protected static final char PLAYERSIGN = '@';
-    private MessageCallback messageCallback;
+    protected MessageCallback messageCallback;
 
 
 

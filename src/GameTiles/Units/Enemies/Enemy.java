@@ -78,7 +78,7 @@ public abstract class Enemy extends Unit {
         {
             return new Monster(c,"Bear-Wright",75,30,1000,250,p,4);
         }
-        if(c=='b')
+        if(c=='g')
         {
             return new Monster(c,"Giant-Wright",100,40,1500,500,p,5);
         }

@@ -25,9 +25,11 @@ public class Warrior extends Player {
         specialAbility = new AvengersShield(WARRIOR_ABILITY_NAME,WARRIOR_ABILITY_RANGE,coolDown);
     }
 
-    public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
+    public void OnAbilityCast(List<Enemy> enemyList) {
         if(!canCast())
-            throw new Exception("Casting special ability will result with Warrior death YOU MERDAERER!!!");
+            messageCallback.send(String.format("Casting special ability will result with Warrior death YOU MERDAERER!!!"));
+
+
         List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
         for (Enemy enemy : enemyList) {
             if (this.isInRange((Tile) enemy, WARRIOR_ABILITY_RANGE))

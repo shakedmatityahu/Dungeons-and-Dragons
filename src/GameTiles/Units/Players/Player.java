@@ -62,7 +62,7 @@ public abstract class Player extends Unit {
         send("You just leveled Up");
     }
 
-    public abstract void OnAbilityCast(List<Enemy> list)throws Exception;
+    public abstract void OnAbilityCast(List<Enemy> list);
 
     protected void battle(Enemy defender){
         super.battle(defender);
