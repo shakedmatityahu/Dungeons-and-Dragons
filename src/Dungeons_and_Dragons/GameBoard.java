@@ -74,20 +74,20 @@ public class GameBoard {
 
     @Override
     public String toString() {
-        sortTiles();
-        String output = "";
-        int line = 0;
-        for(Tile tile : tiles) {
-            if(line == tile.getPosition().getX()) {
-                output += tile;
-            }
-            else
-            {
-                line++;
-                output += "\n" + tile;
+        //sortTiles();
+        String result = "";
+        int counter = 0;
+        for(Tile t : tiles) {
+
+            if(counter < column) {
+                result += t;
+                counter++;
+            } else {
+                result += "\n" + t;
+                counter = 1;
             }
         }
-        return output;
+        return result;
     }
 
     public void printBoard()

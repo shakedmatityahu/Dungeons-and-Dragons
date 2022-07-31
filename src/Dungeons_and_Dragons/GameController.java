@@ -162,7 +162,6 @@ public class GameController {
 
     private void EnemyMove(Player player, GameBoard board, Enemy enemy) {
         Position position = new Position(player.getPosition());
-        Tile tile;
         if (enemy.Distance(player) < enemy.getRange()) {
             int dx;
             int dy;
@@ -260,7 +259,6 @@ public class GameController {
 
 
         }
-
         return new GameBoard(AllTiles,rowNum,colNum);
     }
 

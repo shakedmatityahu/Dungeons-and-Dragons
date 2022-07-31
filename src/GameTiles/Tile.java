@@ -70,16 +70,7 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
 
     @Override
     public int compareTo(Tile tile) {
-        try {
-            return getPosition().compareTo(tile.getPosition());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        finally {
-            return 0;
-        }
+        return getPosition().compareTo(tile.getPosition());
     }
 
 
