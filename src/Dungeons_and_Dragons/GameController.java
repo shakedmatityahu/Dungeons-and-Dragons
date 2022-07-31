@@ -3,6 +3,7 @@ package Dungeons_and_Dragons;
 import GameTiles.Tile;
 import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
+import GameTiles.Units.Players.Warrior;
 import GameTiles.Units.Unit;
 import UI.UserInterface;
 
@@ -76,7 +77,6 @@ public class GameController {
             while (!(cuurentEnemyList.isEmpty())) {
 
                 //print board
-                //gameBoards.get(i).playerBoard(player);
                 System.out.println(cuurentLevel);
 
                 playerMove(player, cuurentLevel, cuurentEnemyList);
@@ -97,10 +97,7 @@ public class GameController {
                 for (Enemy enemy : cuurentEnemyList) {
                     EnemyMove(player,cuurentLevel,enemy);
                 }
-                gameBoards.get(i).playerBoard(player);
-
             }
-
         }
         System.out.println(you_won);
     }
@@ -130,30 +127,37 @@ public class GameController {
     }
 
     private void playerMove(Player p, GameBoard board, List<Enemy> enemyList) {
-        char command=userInterface.readChar();
-        switch (command) {
-            case 'w': // up
-                Move(board,player,UP);
-                break;
-            case 's': // down
-                Move(board,player,DOWN);
-                break;
-            case 'a': //left
-                Move(board,player,LEFT);
-                break;
-            case 'd': // right
-                Move(board,player,RIGHT);
-                break;
-            case 'e': // cast
-                try {
-                    player.OnAbilityCast(enemyList);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case 'K': // Burn them all   ;-)
-                BurnThemAll(enemyList, board);
-                break;
+        try {
+            char command = userInterface.readChar();
+            switch (command) {
+                case 'w': // up
+                    Move(board, p, UP);
+                    break;
+                case 's': // down
+                    Move(board, p, DOWN);
+                    break;
+                case 'a': //left
+                    Move(board, p, LEFT);
+                    break;
+                case 'd': // right
+                    Move(board, p, RIGHT);
+                    break;
+                case 'e': // cast
+                    try {
+                        player.OnAbilityCast(enemyList);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 'K': // Burn them all   ;-)
+                    BurnThemAll(enemyList, board);
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println();
+            playerMove(p,  board, enemyList);
         }
     }
 
@@ -165,7 +169,7 @@ public class GameController {
     }
 
     private void EnemyMove(Player player, GameBoard board, Enemy enemy) {
-       /* Position position = new Position(player.getPosition());
+    /*    Position position = new Position(player.getPosition());
         Tile tile;
         if (enemy.Distance(player) < enemy.getRange()) {
             int dx;
@@ -234,7 +238,7 @@ public class GameController {
     private static GameBoard initGameBoard(List<String> rows, List<Enemy> enemyList, Player player){
         int rowNum = rows.size();
         int colNum = rows.get(0).length();
-        List<Tile> AllTiles = new ArrayList<>();
+        List<Tile> AllTiles = new ArrayList<Tile>();
         for(int i=0; i < rowNum; i++)
         {
             String tileRow = rows.get(i);
@@ -256,7 +260,7 @@ public class GameController {
                 }
                 else if(c == '@')
                 {
-                    Player dummy = Player.playerFactory().get(1);
+                    Player dummy = new Warrior("Jon Snow",300,30,4,3);
                     dummy.initialize(position);
                     AllTiles.add(dummy);
                 }
@@ -275,22 +279,22 @@ public class GameController {
             case 0:// up
                 position.setX(position.getX() + 1);
                 tile = board.finedTile(position);
-                unit.Up(tile);
+                unit.Move(tile);
                 break;
             case 1:// down
                 position.setX(position.getX() - 1);
                 tile = board.finedTile(position);
-                unit.Down(tile);
+                unit.Move(tile);
                 break;
             case 2://left
                 position.setY(position.getY() - 1);
                 tile = board.finedTile(position);
-                unit.Left(tile);
+                unit.Move(tile);
                 break;
             case 3:// right
                 position.setY(position.getY() + 1);
                 tile = board.finedTile(position);
-                unit.Right(tile);
+                unit.Move(tile);
                 break;
             case 4:
                 break;
