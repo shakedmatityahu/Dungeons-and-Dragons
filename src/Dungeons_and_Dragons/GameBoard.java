@@ -73,7 +73,7 @@ public class GameBoard {
 
     @Override
     public String toString() {
-        //sortTiles();
+        sortTiles();
         String output = "";
         int line = 0;
         for(Tile tile : tiles) {
