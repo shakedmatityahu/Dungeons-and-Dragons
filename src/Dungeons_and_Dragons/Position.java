@@ -31,6 +31,8 @@ public class Position implements Comparable<Position>{
     @Override
     public int compareTo(Position position)
     {
+        if((y== position.getY())&& (x==position.getX()))
+            return 0;
         if(y<position.getY())
             return -1;
         if(y>= position.getY())

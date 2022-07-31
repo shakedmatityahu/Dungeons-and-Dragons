@@ -35,13 +35,11 @@ public class GameBoard {
     }
 
 
-    public void setPlayer(Player player){
+    public void setPlayer(Tile player){
         Tile old =findPlayerPosition();
         if(old != null){
-            player.initialize(old.getPosition());
-            remove(old);
-            addTile(player);
-           // sortTiles();
+            old =player;
+            //sortTiles();
         }
 
     }
@@ -74,14 +72,13 @@ public class GameBoard {
 
     @Override
     public String toString() {
-        sortTiles();
+        //sortTiles();
         String output = "";
         int line = 0;
         for(Tile tile : tiles) {
             if(line == tile.getPosition().getX()) {
                 output += tile.toString();
             }
-
             else
             {
                 line++;
