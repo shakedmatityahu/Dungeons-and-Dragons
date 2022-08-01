@@ -69,6 +69,7 @@ public abstract class Player extends Unit {
         if (defender.isDead())
         {
            playerWonBattle(defender);
+
         }
         if (experience >= PLAYER_EXP_MULTIPLAYER*level){
             send("You just leveled Up");
@@ -141,6 +142,7 @@ public abstract class Player extends Unit {
         addExprincePoints(defender.getExprince());
         swap(defender);
         send(defender.getName() +" died."+ getName()+" gained "+defender.getName()+ " experience points");
+
     }
     private String getExperince()
     {

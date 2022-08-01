@@ -7,11 +7,12 @@ import GameTiles.Units.Enemies.Enemy;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.Unit;
 import jdk.jshell.spi.ExecutionControl;
-
+import Dungeons_and_Dragons.GameBoard;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 public abstract class Tile implements Comparable<Tile> ,Visited {
     protected char tile;
@@ -66,21 +67,32 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
         Position tmp = new Position(position);
         this.setPosition(t.position);
         t.setPosition(tmp);
+        
     }
 
     @Override
     public int compareTo(Tile tile) {
-        try {
-            return getPosition().compareTo(tile.getPosition());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        finally {
-            return 0;
+        //return getPosition().compareTo(tile.getPosition());
+        int o1Y = this.getPosition().getY();
+        int o2Y = tile.getPosition().getY();
+        if(o1Y < o2Y)
+            return -1;
+        else if (o1Y > o2Y)
+            return 1;
+        else{
+            int o1X = this.getPosition().getX();
+            int o2X = tile.getPosition().getX();
+            if(o1X < o2X)
+                return -1;
+            else if(o1X > o2X)
+                return 1;
+            else
+                return 0;
         }
     }
+
+
+
 
 
     public void setTile(char tile)

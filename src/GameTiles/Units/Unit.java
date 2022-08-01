@@ -79,6 +79,7 @@ public abstract class Unit extends Tile implements Visitor {
 
     protected void battle(Unit defender)
     {
+        messageCallback.send("battle");
         int defense= defendeRoll(defender);
         int attack= attackRoll(this);
         if(attack -defense > 0)

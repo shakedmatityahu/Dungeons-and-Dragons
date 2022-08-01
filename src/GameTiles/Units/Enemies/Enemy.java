@@ -100,8 +100,8 @@ public abstract class Enemy extends Unit {
         }
         if(c=='B')
         {
-            //return new Trap(c,"Bonus Trap",1,1,1,250,1,5,p);
-            return new Trap(c,"Queen's Trap",50,10,250,100,3,7,p);
+
+            return new Trap(c,"Bouns Trap",1,1,1,250,1,5,p);
         }
         if(c=='Q')
         {
