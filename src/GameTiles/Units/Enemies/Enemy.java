@@ -78,7 +78,7 @@ public abstract class Enemy extends Unit {
         {
             return new Monster(c,"Bear-Wright",75,30,1000,250,p,4);
         }
-        if(c=='b')
+        if(c=='g')
         {
             return new Monster(c,"Giant-Wright",100,40,1500,500,p,5);
         }
@@ -100,8 +100,8 @@ public abstract class Enemy extends Unit {
         }
         if(c=='B')
         {
-            //return new Trap(c,"Bonus Trap",1,1,1,250,1,5,p);
-            return new Trap(c,"Queen's Trap",50,10,250,100,3,7,p);
+            return new Trap(c,"Bonus Trap",1,1,1,250,1,5,p);
+            /*return new Trap(c,"Queen's Trap",50,10,250,100,3,7,p);*/
         }
         if(c=='Q')
         {

@@ -39,7 +39,9 @@ public class GameController {
 
     public GameController(String path)
     {
+        //init real player
         player= getPlayer();
+
         List<File> fileList = getLevelFiles(path);
         int size = fileList.size();
         gameBoards = new ArrayList<GameBoard>(size);
@@ -61,12 +63,74 @@ public class GameController {
             File level = fileList.get(i);
             List<String> levelCharsRow = fileToRowList(level);
             List<Enemy> levelEnemies = enemyList.get(i);
-            GameBoard board = initGameBoard(levelCharsRow,levelEnemies, player);
+            GameBoard board = initGameBoard(levelCharsRow,levelEnemies);
             gameBoards.set(i, board);
 
         }
     }
 
+    private static GameBoard initGameBoard(List<String> rows, List<Enemy> enemyList){
+        int rowNum = rows.size();
+        int colNum = rows.get(0).length();
+        Player dummy = new Warrior("dummy",300,30,4,3);
+        List<Tile> AllTiles = new ArrayList<Tile>();
+        for(int i=0; i < rowNum; i++)
+        {
+            String tileRow = rows.get(i);
+            for (int j=0; j < colNum; j++)
+            {
+                Position position = new Position(i,j);
+                char c = tileRow.charAt(j);
+
+                if(ENEMY_LIST.contains(c))
+                {
+                    //Might cause runTime error
+                    Enemy tmp = Enemy.enemyFactory(c,position);
+                    if (tmp != null)
+                    {
+                        AllTiles.add(tmp);
+                        enemyList.add(tmp);
+                    }
+                    else {
+                        System.out.println(c);
+                    }
+                }
+                else if (PLANE_TILES.contains(c))
+                {
+                    AllTiles.add(Tile.tileFactory(c, position));
+                }
+                else if(c == '@')
+                {
+                    dummy.initialize(position);
+                }
+            }
+        }
+        return new GameBoard(AllTiles,colNum,rowNum,dummy);
+    }
+
+    private Player getPlayer() {
+        Map<Integer,Player > player = Player.playerFactory();
+        choosePlayer(player);
+        int playerInt=userInterface.readInt();
+        if(player.get(playerInt) != null){
+            userInterface.print("\n You hav selected:");
+            userInterface.print(player.get(playerInt).describe());
+            return player.get(playerInt);
+        }
+        System.out.println("Ygritte is unavailable at the moment would you like to choose another player?");
+        return getPlayer();
+    }
+
+    private void choosePlayer(Map<Integer, Player> player) {
+        System.out.println("Please select your player");
+        for (int i = 1; i <= player.size(); i++)
+        {
+            Player tmp = player.get(i);
+            if (tmp != null)
+                System.out.println(i+"."+" "+ tmp.describe());
+        }
+
+    }
 
     public void play() {
 
@@ -102,30 +166,6 @@ public class GameController {
         System.out.println(you_won);
     }
 
-    private Player getPlayer() {
-        Map<Integer,Player > player = Player.playerFactory();
-        choosePlayer(player);
-        int playerInt=userInterface.readInt();
-        if(player.get(playerInt) != null){
-            userInterface.print("You hav selected");
-            userInterface.print(player.get(playerInt).describe());
-            return player.get(playerInt);
-        }
-        System.out.println("Ygritte is unavailable at the moment would you like to choose another player?");
-        return getPlayer();
-    }
-
-    private void choosePlayer(Map<Integer, Player> player) {
-        System.out.println("Please select your player");
-        for (int i = 1; i <= player.size(); i++)
-        {
-            Player tmp = player.get(i);
-            if (tmp != null)
-                System.out.println(i+"."+" "+ tmp.describe());
-        }
-
-    }
-
     private void playerMove(Player p, GameBoard board, List<Enemy> enemyList) {
         try {
             char command = userInterface.readChar();
@@ -152,19 +192,16 @@ public class GameController {
                 case 'K': // Burn them all   ;-)
                     BurnThemAll(enemyList, board);
                     break;
+                default :
+                    System.out.println("");
+                    playerMove(p,  board, enemyList);
+
             }
         }
         catch (Exception e)
         {
-            System.out.println();
+            System.out.println("");
             playerMove(p,  board, enemyList);
-        }
-    }
-
-    private void BurnThemAll(List<Enemy> enemyList, GameBoard board) {
-        for (Enemy enemy : enemyList) {
-            board.Replace(enemy,Tile.tileFactory('.',enemy.getPosition()));
-            enemyList.remove(enemy);
         }
     }
 
@@ -193,84 +230,7 @@ public class GameController {
             Move(board,enemy,new Random().nextInt(STAY));
         }*/
     }
-
-        ///Return a list of all txt files in desired directory
-        private static List<File> getLevelFiles (String path){
-            String dir = System.getProperty("user.dir");
-            dir += "\\"+path;
-            String directory = dir;
-            List<File> levelList = new ArrayList<>();
-            try {
-                List<File> files = Files.list(Paths.get(directory)).sorted()
-                        .map(Path::toFile)
-                        .filter(File::isFile)
-                        .filter(File -> File.getName().toString().endsWith(".txt"))
-                        .collect(Collectors.toList());
-
-                levelList = files;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return levelList;
-        }
-
-
-
-    ///Returns list of strings when every string is a row in a file.
-    private static List<String> fileToRowList(File file) {
-        List<String> rowList = new ArrayList<String>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file.getPath()));
-            String line = reader.readLine();
-            while (line != null) {
-                rowList.add(line);
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return rowList;
-    }
-
     //
-    private static GameBoard initGameBoard(List<String> rows, List<Enemy> enemyList, Player player){
-        int rowNum = rows.size();
-        int colNum = rows.get(0).length();
-        List<Tile> AllTiles = new ArrayList<Tile>();
-        for(int i=0; i < rowNum; i++)
-        {
-            String tileRow = rows.get(i);
-            for (int j=0; j < colNum; j++)
-            {
-                Position position = new Position(i,j);
-                char c = tileRow.charAt(j);
-
-                if(ENEMY_LIST.contains(c))
-                {
-                    //Might cause runTime error
-                    Enemy tmp = Enemy.enemyFactory(c,position);
-                    AllTiles.add(tmp);
-                    enemyList.add(tmp);
-                }
-                else if (PLANE_TILES.contains(c))
-                {
-                    AllTiles.add(Tile.tileFactory(c, position));
-                }
-                else if(c == '@')
-                {
-                    Player dummy = new Warrior("Jon Snow",300,30,4,3);
-                    dummy.initialize(position);
-                    AllTiles.add(dummy);
-                }
-            }
-
-
-        }
-
-        return new GameBoard(AllTiles,rowNum,colNum);
-    }
 
     public void Move(GameBoard board, Unit unit, int move){
         Position position = new Position(unit.getPosition());
@@ -303,6 +263,50 @@ public class GameController {
         }
     }
 
+    ///Return a list of all txt files in desired directory
+    private static List<File> getLevelFiles (String path){
+        String dir = System.getProperty("user.dir");
+        dir += "\\"+path;
+        String directory = dir;
+        List<File> levelList = new ArrayList<>();
+        try {
+            List<File> files = Files.list(Paths.get(directory)).sorted()
+                    .map(Path::toFile)
+                    .filter(File::isFile)
+                    .filter(File -> File.getName().toString().endsWith(".txt"))
+                    .collect(Collectors.toList());
+
+            levelList = files;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return levelList;
+    }
+
+    ///Returns list of strings when every string is a row in a file.
+    private static List<String> fileToRowList(File file) {
+        List<String> rowList = new ArrayList<String>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file.getPath()));
+            String line = reader.readLine();
+            while (line != null) {
+                rowList.add(line);
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return rowList;
+    }
+
+    private void BurnThemAll(List<Enemy> enemyList, GameBoard board) {
+        for (Enemy enemy : enemyList) {
+            board.Replace(enemy,Tile.tileFactory('.',enemy.getPosition()));
+            enemyList.remove(enemy);
+        }
+    }
 
     private String you_won = " __    __                              __      __                      __     \n" +
             "/\\ \\  /\\ \\                            /\\ \\  __/\\ \\                    /\\ \\    \n" +

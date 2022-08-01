@@ -75,11 +75,11 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
         }
         catch (Exception e) {
             e.printStackTrace();
+            System.out.println(this.position + "    " +tile.position);
+            System.out.println( e.getMessage());
+            return -7;
         }
 
-        finally {
-            return 0;
-        }
     }
 
 

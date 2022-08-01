@@ -16,12 +16,15 @@ public class GameBoard {
     private PrintBoardCallBack printBoardCallBack;
     private int column;
     private int row;
+    private Player player;
 
     public void setPrintBoardCallBack(PrintBoardCallBack boardCallBack) {
         this.printBoardCallBack = boardCallBack;
     }
-    public GameBoard(List<Tile> tiles, int col, int rowNum){
+    public GameBoard(List<Tile> tiles, int col, int rowNum,Player player){
         this.tiles =tiles;
+        this.player = player;
+        this.tiles.add(player);
         column = col;
         row =rowNum;
 
@@ -40,14 +43,10 @@ public class GameBoard {
     }
 
 
-    public void setPlayer(Player player){
-        Tile old =findPlayerPosition();
-        if(old != null){
-            player.initialize(old.getPosition());
-            old =player;
-            //sortTiles();
-        }
-
+    public void setPlayer(Player newPlayer){
+        newPlayer.initialize(this.player.getPosition());
+        this.player =newPlayer;
+        sortTiles();
     }
 
     public Tile finedTile(Position pose) {
@@ -82,7 +81,7 @@ public class GameBoard {
         String output = "";
         int counter = 0;
         for(Tile t : tiles) {
-            if(counter < row) {
+            if(counter < column) {
                 output += t;
                 counter++;
             } else {
@@ -99,8 +98,8 @@ public class GameBoard {
         printBoardCallBack.print();
     }
 
-    public void addTile(Tile tileFactory) {
-        tiles.add(tileFactory);
+    public void addTile(Tile tile) {
+        tiles.add(tile);
 
     }
 

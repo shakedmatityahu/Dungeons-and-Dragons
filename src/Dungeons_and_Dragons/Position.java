@@ -28,19 +28,11 @@ public class Position implements Comparable<Position>{
         return new Position(x,y);
     }
 
-    @Override
-    public int compareTo(Position position)
-    {
-        if(y<position.getY())
-            return -1;
-        if(y>= position.getY())
-            return  1;
-        if(x< position.getY())
-            return -1;
-        if(x>= position.getY())
-            return 1;
-        return 0;
-    }
+
+
+
+
+
 
     public int getX() {
         return x;
@@ -87,5 +79,27 @@ public class Position implements Comparable<Position>{
             return ((y== ((Position) obj).getY())&& (x== ((Position) obj).getX()));
 
         return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "X: "+x+"    "+"Y: "+y+"\n";
+    }
+
+    @Override
+    public int compareTo(Position o) {
+        if(x < o.x){
+            return -1;
+        }
+        if (x > o.x)
+            return 1;
+        else
+            if (y < o.y)
+                return -1;
+            if (y > o.y)
+                return 1;
+
+        return 0;
     }
 }
