@@ -111,7 +111,7 @@ public abstract class Enemy extends Unit {
         {
             return new Trap(c,"Death Trap",100,20,500,250,1,10,p);
         }
-        return null;
+        return new Trap(c,"Unknown",100,20,500,250,1,10,p);
     }
 
 }

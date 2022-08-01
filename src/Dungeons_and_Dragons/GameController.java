@@ -69,6 +69,46 @@ public class GameController {
         }
     }
 
+    /*private static GameBoard initGameBoard(List<String> rows, List<Enemy> enemyList){
+        int rowNum = rows.size();
+        int colNum = rows.get(0).length();
+        Player dummy = new Warrior("dummy",300,30,4,3);
+        List<Tile> AllTiles = new ArrayList<Tile>();
+        for(int i=0; i < rowNum; i++)
+        {
+            String tileRow = rows.get(i);
+            for (int j=0; j < colNum; j++)
+            {
+                Position position = new Position(i,j);
+                char c = tileRow.charAt(j);
+
+                if(ENEMY_LIST.contains(c))
+                {
+                    //Might cause runTime error
+                    Enemy tmp = Enemy.enemyFactory(c,position);
+                    if (tmp != null)
+                    {
+                        AllTiles.add(tmp);
+                        enemyList.add(tmp);
+                    }
+                    else {
+                        System.out.println(c);
+                    }
+                }
+                else if (PLANE_TILES.contains(c))
+                {
+                    AllTiles.add(Tile.tileFactory(c, position));
+                }
+                else if(c == '@')
+                {
+                    dummy.initialize(position);
+                }
+            }
+        }
+        return new GameBoard(AllTiles,colNum,rowNum,dummy);
+    }*/
+
+
     private static GameBoard initGameBoard(List<String> rows, List<Enemy> enemyList){
         int rowNum = rows.size();
         int colNum = rows.get(0).length();
@@ -76,6 +116,7 @@ public class GameController {
         List<Tile> AllTiles = new ArrayList<Tile>();
         for(int i=0; i < rowNum; i++)
         {
+
             String tileRow = rows.get(i);
             for (int j=0; j < colNum; j++)
             {

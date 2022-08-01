@@ -70,16 +70,7 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
 
     @Override
     public int compareTo(Tile tile) {
-        try {
-            return getPosition().compareTo(tile.getPosition());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(this.position + "    " +tile.position);
-            System.out.println( e.getMessage());
-            return -7;
-        }
-
+        return getPosition().compareTo(tile.getPosition());
     }
 
 
@@ -106,4 +97,15 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
         int randomNumber=0;
         return randomNumber = new Random().nextInt(lastNumberPossible);
     }
+
+
+    private String you_won = " __    __                              __      __                      __     \n" +
+            "/\\ \\  /\\ \\                            /\\ \\  __/\\ \\                    /\\ \\    \n" +
+            "\\ `\\`\\\\/'/  ___    __  __             \\ \\ \\/\\ \\ \\ \\    ___     ___    \\ \\ \\   \n" +
+            " `\\ `\\ /'  / __`\\ /\\ \\/\\ \\             \\ \\ \\ \\ \\ \\ \\  / __`\\ /' _ `\\   \\ \\ \\  \n" +
+            "   `\\ \\ \\ /\\ \\L\\ \\\\ \\ \\_\\ \\             \\ \\ \\_/ \\_\\ \\/\\ \\L\\ \\/\\ \\/\\ \\   \\ \\_\\ \n" +
+            "     \\ \\_\\\\ \\____/ \\ \\____/              \\ `\\___x___/\\ \\____/\\ \\_\\ \\_\\   \\/\\_\\\n" +
+            "      \\/_/ \\/___/   \\/___/                '\\/__//__/  \\/___/  \\/_/\\/_/    \\/_/\n" +
+            "                                                                              \n" +
+            "                                                                              ";
 }

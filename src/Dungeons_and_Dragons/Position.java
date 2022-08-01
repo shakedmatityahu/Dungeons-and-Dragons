@@ -89,17 +89,10 @@ public class Position implements Comparable<Position>{
 
     @Override
     public int compareTo(Position o) {
-        if(x < o.x){
+        if (x < o.x)
             return -1;
-        }
         if (x > o.x)
             return 1;
-        else
-            if (y < o.y)
-                return -1;
-            if (y > o.y)
-                return 1;
-
-        return 0;
+        return Integer.compare(y, o.y);
     }
 }
