@@ -62,7 +62,7 @@ public abstract class Unit extends Tile implements Visitor {
     }
 
     public String describe() {
-        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth(), getAttack(), getDefense());
+        return String.format("%s\t\tHealth: %s\t\tAttack: %d\t\tDefense: %d", getName(), getHealth().toString(), getAttack(), getDefense());
    }
 
     public void ReceiveDamage(int damage) {
@@ -79,28 +79,19 @@ public abstract class Unit extends Tile implements Visitor {
 
     protected void battle(Unit defender)
     {
-        int defense= defendeRoll(defender);
-        int attack= attackRoll(this);
-        if(attack -defense > 0)
-        {
-            defender.ReceiveDamage(attack - defense);
-        }
+        messageCallback.send(String.format("%s Engaged in combat with %s.\n%s\n%s", getName(), defender.getName(), describe(), defender.describe()));
+        int defense= randomNumber(defender.getDefense());
+        int attack= randomNumber(this.getAttack());
+        messageCallback.send(String.format("%s rooled %d attack points.", getName(), attack));
+        defender.messageCallback.send(String.format("%s rooled %d defense points.", defender.getName(), defense));
+        int damage = Math.max(0,attack -defense);
+        defender.ReceiveDamage(damage);
+        messageCallback.send(String.format("%s Dealt %d damage to %s.", getName(), damage, defender.getName()));
     }
 
     public boolean isDead() {
         return health.getHealthAmount() <= 0;
     }
-
-    protected static int defendeRoll(Unit unit)
-    {
-        return new Random().nextInt(unit.getDefense());
-    }
-
-    protected static int attackRoll(Unit unit)
-    {
-        return new Random().nextInt(unit.getAttack());
-    }
-
     
     public void onTick(Tile tile) {
         interact(tile);

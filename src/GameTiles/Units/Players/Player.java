@@ -86,7 +86,7 @@ public abstract class Player extends Unit {
 
     public void battle(Enemy defender, int attack)
     {
-            int defense= defendeRoll(defender);
+            int defense= randomNumber(defender.getDefense());
             if(attack -defense > 0)
             {
                 defender.ReceiveDamage(attack - defense);

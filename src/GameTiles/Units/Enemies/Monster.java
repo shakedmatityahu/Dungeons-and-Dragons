@@ -11,9 +11,8 @@ import GameTiles.Units.Players.Player;
 public class Monster extends Enemy {
     protected int vision_range;
 
-
     public Monster(char tile, String name, int attack, int defense, int healthCapacity, int experience, Position position, int vision) {
-        super(tile, name, attack, defense, healthCapacity, experience, position);
+        super(tile, name,healthCapacity, attack, defense, experience, position);
         vision_range = vision;
 
     }
@@ -26,8 +25,7 @@ public class Monster extends Enemy {
     }
 
     public String describe (){
-        String des=((Unit)this).describe();
-        des+=String.format("%s\t\tVisionRange: %i\t\tExperienceValue: %i",getVision_range(),getExprince());
+        String des= super.describe()+String.format("\t\tVisionRange: %d\t\tExperienceValue: %d",vision_range,getExprince());
         return des;
     }
 

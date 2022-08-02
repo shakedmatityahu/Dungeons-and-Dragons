@@ -6,6 +6,7 @@ import GameTiles.Units.Players.Player;
 import GameTiles.Units.Unit;
 import UI.UserInterface;
 
+import javax.sound.midi.Soundbank;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -39,6 +40,7 @@ public class GameController {
     public GameController(String path)
     {
         player= getPlayer();
+        player.setMessageCallBack((msg)-> System.out.println(msg));
         List<File> fileList = getLevelFiles(path);
         int size = fileList.size();
         gameBoards = new ArrayList<GameBoard>(size);
@@ -93,9 +95,9 @@ public class GameController {
                     System.out.println("YOU LOST");
                     return;
                 }
-                for (Enemy enemy : cuurentEnemyList) {
+                /*for (Enemy enemy : cuurentEnemyList) {
                     EnemyMove(player1,cuurentLevel,enemy);
-                }
+                }*/
             }
         }
         System.out.println(you_won);
@@ -147,6 +149,8 @@ public class GameController {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    break;
+                case 'q':
                     break;
                 case 'K': // Burn them all   ;-)
                     BurnThemAll(enemyList, board);
@@ -257,6 +261,8 @@ public class GameController {
                     Enemy tmp = Enemy.enemyFactory(c,position);
                     if (tmp != null)
                     {
+                        tmp.setMessageCallBack((msg)-> System.out.println(msg) );
+                        tmp.send(tmp.describe());
                         AllTiles.add(tmp);
                         enemyList.add(tmp);
                     }

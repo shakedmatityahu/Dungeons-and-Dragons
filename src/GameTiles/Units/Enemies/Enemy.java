@@ -91,8 +91,7 @@ public abstract class Enemy extends Unit {
                 return new Monster(c, "Night's King", 300, 150, 5000, 5000, p, 8);
             }
             case ('B') :{
-                //return new Trap(c,"Bonus Trap",1,1,1,250,1,5,p);
-                return new Trap(c, "Queen's Trap", 50, 10, 250, 100, 3, 7, p);
+                return new Trap(c,"Bonus Trap",1,1,1,250,1,5,p);
             }
             case ('Q'): {
                 return new Trap(c, "Queen's Trap", 50, 10, 250, 100, 3, 7, p);
@@ -100,8 +99,6 @@ public abstract class Enemy extends Unit {
             case ('D') :{
                 return new Trap(c, "Death Trap", 100, 20, 500, 250, 1, 10, p);
             }
-
-
             default:
                 return new Trap(c, "Death Trap", 100, 20, 500, 250, 1, 10, p);
 
