@@ -90,7 +90,7 @@ public abstract class Player extends Unit {
         defender.ReceiveDamage(damage);
         send(getName() + " cast " + specialAbility.getName() + ".");
         send(String.format("%s rolled %d:  defence points.", defender.getName(), defense));
-        send(String.format("%s rolled %d:  defence points.", getName(), damage));
+        send(String.format("%s attacked with %d: points.", getName(), attack));
         if (defender.isDead()) {
             addExprincePoints(defender.getExperience_value());
             defender.send(String.format("%s died.  %s gained %d experience.", defender.getName(), getName(), defender.getExperience_value()));

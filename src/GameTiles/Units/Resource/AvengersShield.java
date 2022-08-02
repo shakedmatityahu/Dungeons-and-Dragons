@@ -30,7 +30,7 @@ public class AvengersShield extends Ability
     @Override
     public boolean canCastAbility ()
     {
-        if(coolDown>0)
+        if(remainingCoolDown>0)
             return false;
         return true;
     }
@@ -49,17 +49,22 @@ public class AvengersShield extends Ability
     @Override
     public void abilityCast(Player p, List<Enemy> enemyList)
     {
-        int randomNumber= p.randomNumber(enemyList.size());
-        Enemy enemy=enemyList.get(randomNumber);
-        remainingCoolDown=coolDown;
-        p.castAbility(enemy, (int) ABILITY_COST * p.getHealth().getHealthPool());
+        if (!enemyList.isEmpty()) {
+            int randomNumber = p.randomNumber(enemyList.size());
+            Enemy enemy = enemyList.get(randomNumber);
+            remainingCoolDown=coolDown;
+            int damage = (int)(p.getHealth().getHealthPool()*ABILITY_COST);
+            p.castAbility(enemy, damage);
+        }
+        else
+            remainingCoolDown=coolDown;
 
     }
     private int getCoolDown(){
         return coolDown;
     }
     public String describe(){
-        return "CoolDown:"+remainingCoolDown+ "/"+ getCoolDown();
+        return "CoolDown:"+remainingCoolDown+ "/"+ coolDown;
 
     }
 

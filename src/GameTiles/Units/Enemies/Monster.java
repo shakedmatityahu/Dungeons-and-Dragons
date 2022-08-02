@@ -5,7 +5,6 @@ import Dungeons_and_Dragons.Position;
 import GameTiles.Tile;
 import GameTiles.Units.Players.Player;
 
-import java.util.List;
 import java.util.Random;
 
 public class Monster extends Enemy {
@@ -23,51 +22,58 @@ public class Monster extends Enemy {
 
     @Override
     public void move(Player player, GameBoard board) {
-        if (isInRange(player, vision_range)) {
-            int dx;
-            int dy;
-            dx = Math.abs(player.getPosition().getX() - this.getPosition().getX());
-            dy = Math.abs(player.getPosition().getY() - this.getPosition().getY());
-            if (dx > dy)
+        if (isInRange(player, vision_range))
+        {
+            int dx = getPosition().getX() - player.getPosition().getX();
+            int dy = getPosition().getY() - player.getPosition().getY();
+            if (Math.abs(dx) > Math.abs(dy))
+            {
                 if (dx > 0) {
-                    step(board, 1);
+                    step(board, 0);
                 } else {
-                    step(board, 2);
+                    step(board, 1);
                 }
-            else if (dy > 0) {
-                step(board, 3);
-            } else {
-                step(board, 4);
             }
-        } else {
+            else
+                if (dy > 0)
+                {
+                step(board, 2);
+                }
+                else
+                {
+                    step(board, 3);
+                }
+        }
+        else
+        {
             step(board, new Random().nextInt(4));
         }
 
     }
 
     private void step(GameBoard board, int step) {
-        Position position = new Position(getPosition());
+        Position tmp = new Position(this.getPosition());
         Tile tile;
         switch (step) {
             case 0:// up
-                position.setX(position.getX() - 1);
-                tile = board.get(position.getX(), position.getY());
-                this.Up(tile);
+                tmp.setX(tmp.getX() - 1);
+                tile = board.get(tmp.getX(), tmp.getY());
+                this.onTick(tile);
                 break;
             case 1:// down
-                position.setX(position.getX() + 1);
-                tile = board.get(position.getX(), position.getY());
-                this.Down(tile);
+                tmp.setX(tmp.getX() + 1);
+                tile = board.get(tmp.getX(), tmp.getY());
+                this.onTick(tile);
                 break;
             case 2://left
-                position.setY(position.getY() - 1);
-                tile = board.get(position.getX(), position.getY());
-                this.Left(tile);
+                tmp.setY(tmp.getY() - 1);
+                tile = board.get(tmp.getX(), tmp.getY());
+                this.onTick(tile);
                 break;
             case 3:// right
-                position.setY(position.getY() + 1);
-                tile = board.get(position.getX(), position.getY());
-                this.Right(tile);
+                tmp.setY(tmp.getY() + 1);
+                tile = board.get(tmp.getX(), tmp.getY());
+                this.onTick(tile);
                 break;
             case 4:
                 break;

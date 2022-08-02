@@ -7,6 +7,7 @@ import GameTiles.Units.Unit;
 import UI.UserInterface;
 
 import javax.sound.midi.Soundbank;
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,6 +27,7 @@ public class GameController {
     Player player;
     private static final List<Character> ENEMY_LIST = List.of('s', 'k', 'q', 'z', 'b', 'g', 'w', 'M', 'C', 'K','B','Q','D');
     private static final List<Character> PLANE_TILES = List.of('.', '#');
+    private static final List<Character> LEGAL_MOVE = List.of('w','s','a','d','e','q','K');
     private final int UP =0;
     private final int DOWN =1;
     private final int LEFT = 2;
@@ -124,15 +126,22 @@ public class GameController {
     private Player getPlayer() {
         Map<Integer,Player > player = Player.playerFactory();
         choosePlayer(player);
-        int playerInt=userInterface.readInt();
-        if (legalInt(playerInt)) {
-            if (player.get(playerInt) != null) {
-                userInterface.print("You hav selected");
-                userInterface.print(player.get(playerInt).describe());
-                return player.get(playerInt);
+        try {
+            int playerInt = userInterface.readInt();
+            if (legalInt(playerInt)) {
+                if (player.get(playerInt) != null) {
+                    userInterface.print("You hav selected");
+                    userInterface.print(player.get(playerInt).describe());
+                    return player.get(playerInt);
+                }
             }
         }
+        catch (Exception e)
+        {
+                return getPlayer();
+        }
         return getPlayer();
+
     }
 
     private boolean legalInt(int playerInt) {
@@ -153,36 +162,39 @@ public class GameController {
     private void playerMove(Player p, GameBoard board, List<Enemy> enemyList) {
         try {
             char command = userInterface.readChar();
-            switch (command) {
-                case 'w': // up
-                    Move(board, player, UP);
-                    break;
-                case 's': // down
-                    Move(board, player, DOWN);
-                    break;
-                case 'a': //left
-                    Move(board, player, LEFT);
-                    break;
-                case 'd': // right
-                    Move(board, player, RIGHT);
-                    break;
-                case 'e': // cast
-                    try {
-                        player.OnAbilityCast(enemyList);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
-                case 'q':
-                    break;
-                case 'K': // Burn them all   ;-)
-                    BurnThemAll(enemyList, board);
-                    break;
-                default:
-                    System.out.println("");
-                    playerMove(p, board, enemyList);
-                    break;
+            if (LEGAL_MOVE. contains(command)) {
+                switch (command) {
+                    case 'w': // up
+                        Move(board, player, UP);
+                        break;
+                    case 's': // down
+                        Move(board, player, DOWN);
+                        break;
+                    case 'a': //left
+                        Move(board, player, LEFT);
+                        break;
+                    case 'd': // right
+                        Move(board, player, RIGHT);
+                        break;
+                    case 'e': // cast
+                        try {
+                            player.OnAbilityCast(enemyList);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 'q':
+                        break;
+                    case 'K': // Burn them all   ;-)
+                        BurnThemAll(enemyList, board);
+                        break;
+                }
             }
+
+                else {
+                System.out.println("");
+                playerMove(p, board, enemyList);
+                }
         }
         catch(Exception e){
             System.out.println("");

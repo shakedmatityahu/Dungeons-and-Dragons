@@ -33,14 +33,15 @@ public class Warrior extends Player {
             if (this.isInRange((Tile) enemy, WARRIOR_ABILITY_RANGE))
                 listEnemyInRange.add(enemy);
         }
-        specialAbility.abilityCast(this,listEnemyInRange);
-        health.setHealthAmount(Math.min(this.health.getHealthPool() + 10 * this.defense,this.health.getHealthPool()));
+
+            specialAbility.abilityCast(this, listEnemyInRange);
+            health.setHealthAmount(Math.min(this.health.getHealthPool() + 10 * this.defense, this.health.getHealthPool()));
+
     }
 
     @Override
     public void onTick(Tile tile) {
         super.onTick(tile);
-        specialAbility.gameTick(level);
     }
 
     @Override

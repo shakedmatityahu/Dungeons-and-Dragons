@@ -1,16 +1,8 @@
 package GameTiles;
-import Dungeons_and_Dragons.GameBoard;
 import GameTiles.DesignPatterns.Visited;
 import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.Position;
-import GameTiles.Units.Enemies.Enemy;
-import GameTiles.Units.Players.Player;
-import GameTiles.Units.Unit;
-import jdk.jshell.spi.ExecutionControl;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public abstract class Tile implements Comparable<Tile> ,Visited {
@@ -71,11 +63,14 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
     }
 
     public double Distance(Tile t) {
-        return Math.sqrt(Math.pow((this.getPosition().getX() - t.getPosition().getX()), 2) + Math.pow((this.getPosition().getY() - t.getPosition().getY()), 2));
+        double dx = Math.pow(position.getX()-t.getPosition().getX(),2);
+        double dy = Math.pow(position.getY()-t.getPosition().getY(),2);
+        return Math.sqrt(dx+dy);
     }
 
     public boolean isInRange(Tile t, int range) {
-        return range > this.Distance(t);
+        boolean test = (range > this.Distance(t))? true : false;
+        return test;
     }
 
     public int randomNumber (int lastNumberPossible)
