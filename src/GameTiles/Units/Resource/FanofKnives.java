@@ -18,8 +18,16 @@ public class FanofKnives extends Ability {
     }
 
 
+
+
     public boolean canCastAbility(int energy, int cost) {
         return energy < cost;
+    }
+
+    @Override
+    public Ability clone() {
+        Ability copy =new FanofKnives(this.getName(),this.getRange(),this.cost);
+        return copy;
     }
 
     @Override

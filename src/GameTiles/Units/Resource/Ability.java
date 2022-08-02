@@ -16,6 +16,8 @@ public abstract class Ability{
 
     }
 
+    public abstract Ability clone();
+
     public String getName() {
         return name;
     }

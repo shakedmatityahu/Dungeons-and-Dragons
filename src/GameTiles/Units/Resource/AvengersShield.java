@@ -22,6 +22,12 @@ public class AvengersShield extends Ability
 
 
     @Override
+    public Ability clone() {
+        Ability copy= new AvengersShield(getName(),getRange(),coolDown);
+        return copy;
+    }
+
+    @Override
     public boolean canCastAbility ()
     {
         if(coolDown>0)

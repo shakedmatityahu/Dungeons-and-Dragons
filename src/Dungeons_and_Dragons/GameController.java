@@ -126,30 +126,41 @@ public class GameController {
     }
 
     private void playerMove(Player p, GameBoard board, List<Enemy> enemyList) {
-        char command=userInterface.readChar();
-        switch (command) {
-            case 'w': // up
-                Move(board,player,UP);
-                break;
-            case 's': // down
-                Move(board,player,DOWN);
-                break;
-            case 'a': //left
-                Move(board,player,LEFT);
-                break;
-            case 'd': // right
-                Move(board,player,RIGHT);
-                break;
-            case 'e': // cast
-                try {
-                    player.OnAbilityCast(enemyList);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case 'K': // Burn them all   ;-)
-                BurnThemAll(enemyList, board);
-                break;
+        try {
+            char command = userInterface.readChar();
+            switch (command) {
+                case 'w': // up
+                    Move(board, player, UP);
+                    break;
+                case 's': // down
+                    Move(board, player, DOWN);
+                    break;
+                case 'a': //left
+                    Move(board, player, LEFT);
+                    break;
+                case 'd': // right
+                    Move(board, player, RIGHT);
+                    break;
+                case 'e': // cast
+                    try {
+                        player.OnAbilityCast(enemyList);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 'K': // Burn them all   ;-)
+                    BurnThemAll(enemyList, board);
+                    break;
+                default:
+                    System.out.println("");
+                    playerMove(p, board, enemyList);
+                    break;
+            }
+        }
+        catch(Exception e){
+            System.out.println("");
+            playerMove(p, board, enemyList);
+
         }
     }
 
@@ -231,6 +242,7 @@ public class GameController {
         int rowNum = rows.size();
         int colNum = rows.get(0).length();
         List<Tile> AllTiles = new ArrayList<>();
+        Player dummy = Player.playerFactory().get(-1).clone();
         for(int i=0; i < rowNum; i++)
         {
             String tileRow = rows.get(i);
@@ -241,10 +253,18 @@ public class GameController {
 
                 if(ENEMY_LIST.contains(c))
                 {
-                    //Might cause runTime error
+
                     Enemy tmp = Enemy.enemyFactory(c,position);
-                    AllTiles.add(tmp);
-                    enemyList.add(tmp);
+                    if (tmp != null)
+                    {
+                        AllTiles.add(tmp);
+                        enemyList.add(tmp);
+                    }
+                    else
+                    {
+                        System.out.println(c+ " Is not a legal char");
+                        AllTiles.add(Tile.tileFactory(c, position));
+                    }
                 }
                 else if (PLANE_TILES.contains(c))
                 {
@@ -252,46 +272,51 @@ public class GameController {
                 }
                 else if(c == '@')
                 {
-                    Player dummy = Player.playerFactory().get(1);
                     dummy.initialize(position);
-                    AllTiles.add(dummy);
                 }
             }
 
 
         }
 
-        return new GameBoard(AllTiles,rowNum,colNum);
+        return new GameBoard(AllTiles,rowNum,colNum,dummy);
     }
 
     public void Move(GameBoard board, Unit unit, int move){
         Position position = new Position(unit.getPosition());
         Tile tile;
-        switch (move){
+        try {
+        switch (move) {
             case 0:// up
-                position.setX(position.getX() + 1);
-                tile = board.finedTile(position);
+                position.setX(position.getX() - 1);
+                tile = board.get(position.getX(), position.getY());
                 unit.Up(tile);
                 break;
             case 1:// down
-                position.setX(position.getX() - 1);
-                tile = board.finedTile(position);
+                position.setX(position.getX() + 1);
+                tile = board.get(position.getX(), position.getY());
                 unit.Down(tile);
                 break;
             case 2://left
                 position.setY(position.getY() - 1);
-                tile = board.finedTile(position);
+                tile = board.get(position.getX(), position.getY());
                 unit.Left(tile);
                 break;
             case 3:// right
                 position.setY(position.getY() + 1);
-                tile = board.finedTile(position);
+                tile = board.get(position.getX(), position.getY());
                 unit.Right(tile);
                 break;
             case 4:
                 break;
-
-
+            default:
+                throw new RuntimeException("something is fishy not a legal direction");
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("something is fishy");
+            System.out.println(e.getMessage());
         }
     }
 

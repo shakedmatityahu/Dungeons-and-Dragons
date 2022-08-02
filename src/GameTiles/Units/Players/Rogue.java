@@ -30,6 +30,14 @@ public class Rogue extends Player {
     }
 
     @Override
+    public Player clone() {
+        int copyHealth = this.health.getHealthPool();
+        Player copy = new Rogue(this.name,copyHealth,this.attack,this.defense,0);
+        copy.setAbility(this.specialAbility.clone());
+        return copy;
+    }
+
+    @Override
     public void levelUp() {
         super.levelUp();
         attack += (ROGUE_ATTACK_MULTIPLAYER * level);

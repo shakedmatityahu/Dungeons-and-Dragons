@@ -28,10 +28,20 @@ public class Mage extends Player {
         this.specialAbility= new Blizzard(MAGE_ABILITY_NAME,Range,manaPool,spellPower,hitsCount,manaCost);
     }
 
+
+
     @Override
     public void onTick(Tile tile) {
         super.onTick(tile);
         specialAbility.gameTick(level);
+    }
+
+    @Override
+    public Player clone() {
+        int copyHealth = this.health.getHealthPool();
+        Player copy = new Mage(this.name,copyHealth,this.attack,this.defense,0,0,0,0,0);
+        copy.setAbility(this.specialAbility.clone());
+        return copy;
     }
 
     @Override

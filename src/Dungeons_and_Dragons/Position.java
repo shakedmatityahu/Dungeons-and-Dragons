@@ -31,14 +31,14 @@ public class Position implements Comparable<Position>{
     @Override
     public int compareTo(Position position)
     {
-        if(y<position.getY())
-            return -1;
-        if(y>= position.getY())
-            return  1;
-        if(x< position.getY())
-            return -1;
-        if(x>= position.getY())
+        if (x > position.x)
             return 1;
+        if (x < position.x)
+            return -1;
+        if (y > position.y)
+            return 1;
+        if (y < position.y)
+            return -1;
         return 0;
     }
 

@@ -34,6 +34,12 @@ public abstract class Player extends Unit {
         isAlive=true;
     }
 
+    public void setAbility(Ability ability){
+        this.specialAbility = ability;
+    }
+
+    public abstract Player clone();
+
     public static Map<Integer, Player> playerFactory(){
         Map<Integer, Player> PlayerMap = new HashMap<Integer, Player>();
         PlayerMap.put(1, new Warrior("Jon Snow",300,30,4,3));
@@ -42,6 +48,7 @@ public abstract class Player extends Unit {
         PlayerMap.put(4, new Mage("Thoros of Myr",250,25,4,150,20,20,3,4));
         PlayerMap.put(5, new Rogue("Arya Stark",150,40,2,20));
         PlayerMap.put(6, new Rogue("Bronn",250,35,3,50));
+        PlayerMap.put(-1, new Rogue("Dummy",1,1,1,1));
 
         return PlayerMap;
     }

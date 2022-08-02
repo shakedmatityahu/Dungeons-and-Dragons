@@ -19,67 +19,44 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
 
     public static boolean RealRandom = true;
 
+    //creators
     public Tile(char tile){
         this.tile = tile;
         position = new Position();
     }
+    public static Tile tileFactory(char c,Position p){
 
-
-    /// will not be used... made problems while building
-    public Tile() {
-        tile = '.';
-        position = new Position();
-
+        if (c == '#')
+            return new Wall(p);
+        else
+            return new Empty(p);
     }
-
-
     public void initialize(Position position){
         this.position = position;
     }
 
-    public static Tile tileFactory(char c,Position p){
-
-        if (c == '.')
-            return new Empty(p);
-        else
-            return new Wall(p);
+    public char getTile(){return this.tile;}
+    public Position getPosition() {
+        return position;
     }
 
     public boolean InRange(Tile tile,int range ){
         return (position.isInRange(tile.getPosition(),range));
     }
 
-    public char getTile(){return this.tile;}
-
-    public Position getPosition() {
-        return position;
-    }
-
-    private void setPosition(Position p){
-        this.position = new Position(p);
-    }
 
 
-    public abstract  void accept (Visitor v);
+    public abstract void accept(Visitor v);
 
     public void swap(Tile t){
-        Position tmp = new Position(position);
-        this.setPosition(t.position);
-        t.setPosition(tmp);
+        Position tmp = new Position(this.position);
+        this.initialize(t.position);
+        t.initialize(tmp);
     }
 
     @Override
     public int compareTo(Tile tile) {
-        try {
-            return getPosition().compareTo(tile.getPosition());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        finally {
-            return 0;
-        }
+        return this.position.compareTo(tile.position);
     }
 
 

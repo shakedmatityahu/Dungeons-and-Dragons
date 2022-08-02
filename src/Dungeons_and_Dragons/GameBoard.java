@@ -16,12 +16,16 @@ public class GameBoard {
     private PrintBoardCallBack printBoardCallBack;
     private int column;
     private int row;
+    private Player player;
 
     public void setPrintBoardCallBack(PrintBoardCallBack boardCallBack) {
         this.printBoardCallBack = boardCallBack;
     }
-    public GameBoard(List<Tile> tiles, int col, int rowNum){
+    public GameBoard(List<Tile> tiles, int col, int rowNum,Player initPlayer){
         this.tiles =tiles;
+        column = col;
+        rowNum = row;
+        player = initPlayer;
     }
 
     public static void reomve(Enemy enemy) {
@@ -29,7 +33,7 @@ public class GameBoard {
 
     public Tile get(int x, int y) throws ExecutionControl.NotImplementedException {
         for(Tile t : tiles){
-            if (t.getPosition().equals(Position.at(x, y))){
+            if (t.getPosition().compareTo(new Position(x, y)) == 0){
                 return t;
             }
         }
@@ -37,29 +41,15 @@ public class GameBoard {
     }
 
 
-    public void setPlayer(Tile player){
-        Tile old =findPlayerPosition();
+    public void setPlayer(Tile newPlayer){
+        Tile old =this.player;
         if(old != null){
-            old =player;
-            //sortTiles();
+            newPlayer.initialize(player.getPosition());
+            tiles.remove(player);
+            tiles.add(newPlayer);
+            sortTiles();
         }
 
-    }
-
-    public Tile finedTile(Position pose) {
-        for (Tile tmp : tiles) {
-            if (pose.equals(tmp.getPosition()))
-                return tmp;
-            }
-        return null;
-    }
-
-    private Tile findPlayerPosition(){
-        for (Tile tile : tiles){
-             if(tile.getTile() =='@')
-                 return tile;
-        }
-        return null;
     }
 
     public void remove(Enemy e) {

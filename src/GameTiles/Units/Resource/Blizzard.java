@@ -27,6 +27,13 @@ public class Blizzard extends Ability
         this.hitsCount=hitsCount;
         this.manaCost=manaCost;
     }
+
+    @Override
+    public Ability clone() {
+        Ability copy= new Blizzard(this.getName(),this.getRange(),manaPool,spellPower,hitsCount,manaCost);
+        return copy;
+    }
+
     public boolean canCastAbility ()
     {
         return(currentMana< manaCost);
