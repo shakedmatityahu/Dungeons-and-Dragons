@@ -75,7 +75,7 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
     }
 
     public boolean isInRange(Tile t, int range) {
-        return range >= this.Distance(t);
+        return range > this.Distance(t);
     }
 
     public int randomNumber (int lastNumberPossible)

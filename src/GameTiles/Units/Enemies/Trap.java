@@ -1,9 +1,13 @@
 package GameTiles.Units.Enemies;
 
+import Dungeons_and_Dragons.GameBoard;
 import Dungeons_and_Dragons.Position;
 import GameTiles.Empty;
 import GameTiles.Tile;
+import GameTiles.Units.Players.Player;
 import GameTiles.Units.Unit;
+
+import java.util.List;
 
 public class Trap extends Enemy {
 
@@ -40,6 +44,11 @@ public class Trap extends Enemy {
         {
             interact(tile);
         }
+    }
+
+    @Override
+    public void move(Player player, GameBoard board) {
+        onTick(player);
     }
 
     @Override

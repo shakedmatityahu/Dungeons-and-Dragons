@@ -2,8 +2,11 @@ package GameTiles.Units.Enemies;
 
 import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.*;
+import GameTiles.Tile;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.*;
+
+import java.util.List;
 
 
 public abstract class Enemy extends Unit {
@@ -19,6 +22,7 @@ public abstract class Enemy extends Unit {
         this.experience_value = experience;
         this.initialize(position);
     }
+    public abstract void move(Player player, GameBoard board);
 
     public int getExperience_value() {
         return experience_value;
@@ -89,6 +93,9 @@ public abstract class Enemy extends Unit {
 
     }
 
+    public void Burn() {
+        health.setHealthAmount(-1);
+    }
 }
 
 

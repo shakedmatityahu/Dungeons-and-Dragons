@@ -22,7 +22,7 @@ public abstract class Player extends Unit {
     protected boolean isAlive;
     protected Ability specialAbility;
 
-    protected static final int PLAYER_EXP_MULTIPLAYER =10;
+    protected static final int PLAYER_EXP_MULTIPLAYER =50;
     protected static final int PLAYER_HEALTH_MULTIPLAYER =10;
     protected static final int PLAYER_ATTACK_MULTIPLAYER =4;
     protected static final int PLAYER_DEFENSE_MULTIPLAYER =4;

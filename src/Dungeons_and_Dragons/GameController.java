@@ -76,32 +76,19 @@ public class GameController {
             cuurentLevel.setPlayer(player1);
             List<Enemy> cuurentEnemyList = enemyList.get(i);
             while (!(cuurentEnemyList.isEmpty())) {
-                List<Enemy> deadList = new ArrayList<Enemy>();
 
                 //print board
                 System.out.println(cuurentLevel);
 
                 //print data about player
                 player.send(player.describe());
-
                 playerMove(player1, cuurentLevel, cuurentEnemyList);
-                for (Enemy enemy: cuurentEnemyList)
-                {
-                 if (enemy.isDead()){
-                     cuurentLevel.removeEnemy(enemy);
-                     deadList.add(enemy);
-                 }
-                }
-                if (!(deadList.isEmpty()))
-                {
-                    for (Enemy deadEnemy : deadList) {
-                        cuurentEnemyList.remove(deadEnemy);
-                    }
-                    //deadList = null;
-                }
 
-                /*for (Enemy enemy : cuurentEnemyList) {
-                    EnemyMove(player1,cuurentLevel,enemy);
+                //clean enemies
+                cleanEnemies(cuurentEnemyList,cuurentLevel);
+
+                for (Enemy enemy : cuurentEnemyList) {
+                    enemy.move(player1,cuurentLevel);
                     if ((player1.isDead())) {
                         player1.setTile('X');
                         player1.send(String.format("%s was killed by  %s", player1.getName(), enemy.getName()));
@@ -109,24 +96,47 @@ public class GameController {
                         System.out.println("YOU LOST");
                         return;
                     }
-                }*/
+                }
             }
 
         }
         System.out.println(you_won);
     }
 
+    private void cleanEnemies(List<Enemy> cuurentEnemyList, GameBoard cuurentLevel){
+
+        List<Enemy> deadList = new ArrayList<Enemy>();
+        for (Enemy enemy: cuurentEnemyList)
+        {
+            if (enemy.isDead()){
+                cuurentLevel.removeEnemy(enemy);
+                deadList.add(enemy);
+            }
+        }
+        if (!(deadList.isEmpty()))
+        {
+            for (Enemy deadEnemy : deadList) {
+                cuurentEnemyList.remove(deadEnemy);
+            }
+        }
+    }
+
     private Player getPlayer() {
         Map<Integer,Player > player = Player.playerFactory();
         choosePlayer(player);
         int playerInt=userInterface.readInt();
-        if(player.get(playerInt) != null){
-            userInterface.print("You hav selected");
-            userInterface.print(player.get(playerInt).describe());
-            return player.get(playerInt);
+        if (legalInt(playerInt)) {
+            if (player.get(playerInt) != null) {
+                userInterface.print("You hav selected");
+                userInterface.print(player.get(playerInt).describe());
+                return player.get(playerInt);
+            }
         }
-        System.out.println("Ygritte is unavailable at the moment would you like to choose another player?");
         return getPlayer();
+    }
+
+    private boolean legalInt(int playerInt) {
+        return (0< playerInt) && (playerInt<7);
     }
 
     private void choosePlayer(Map<Integer, Player> player) {
@@ -183,34 +193,7 @@ public class GameController {
 
     private void BurnThemAll(List<Enemy> enemyList, GameBoard board) {
         for (Enemy enemy : enemyList) {
-            board.removeEnemy(enemy);
-            enemyList.remove(enemy);
-        }
-    }
-
-    private void EnemyMove(Player player, GameBoard board, Enemy enemy) {
-        Position position = new Position(player.getPosition());
-        Tile tile;
-        if (enemy.Distance(player) < enemy.getRange()) {
-            int dx;
-            int dy;
-            dx = Math.abs(player.getPosition().getX() - enemy.getPosition().getX());
-            dy = Math.abs(player.getPosition().getY() - enemy.getPosition().getY());
-            if (dx > dy)
-                if (dx > 0) {
-                    Move(board,enemy,LEFT);
-                } else {
-                    Move(board,enemy,RIGHT);
-                }
-            else if (dy > 0) {
-                Move(board,enemy,UP);
-            } else {
-                Move(board,enemy,DOWN);
-            }
-        }
-        else
-        {
-            Move(board,enemy,new Random().nextInt(STAY));
+            enemy.Burn();
         }
     }
 
@@ -293,8 +276,6 @@ public class GameController {
                     dummy.initialize(position);
                 }
             }
-
-
         }
 
         return new GameBoard(AllTiles,rowNum,colNum,dummy);
@@ -303,7 +284,6 @@ public class GameController {
     public void Move(GameBoard board, Unit unit, int move){
         Position position = new Position(unit.getPosition());
         Tile tile;
-        try {
         switch (move) {
             case 0:// up
                 position.setX(position.getX() - 1);
@@ -325,17 +305,10 @@ public class GameController {
                 tile = board.get(position.getX(), position.getY());
                 unit.Right(tile);
                 break;
-            case 4:
-                break;
             default:
-                throw new RuntimeException("something is fishy not a legal direction");
+                break;
             }
-        }
-        catch (Exception e)
-        {
-            System.out.println("something is fishy");
-            System.out.println(e.getMessage());
-        }
+
     }
 
 
