@@ -84,13 +84,14 @@ public abstract class Player extends Unit {
 
     }
 
-    public void battle(Enemy defender, int attack)
+    public void castAbility(Enemy defender, int attack)
     {
-            int defense= defendeRoll(defender);
-            if(attack -defense > 0)
-            {
-                defender.ReceiveDamage(attack - defense);
-            }
+            int defense= randomNumber(defender.getDefense());
+            int damage=Math.max((attack-defense),0);
+            defender.ReceiveDamage(damage);
+            this.send(getName()+" cast "+ specialAbility.getName()+ ".");
+            send(String.format("%s rolled %d: %d defence points.", defender.getName(), defense));
+            send(String.format("%s rolled %d: %d defence points.", getName(), damage));
             if (defender.isDead())
             {
                playerWonBattle(defender);

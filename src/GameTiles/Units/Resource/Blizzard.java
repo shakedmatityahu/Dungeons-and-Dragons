@@ -61,7 +61,7 @@ public class Blizzard extends Ability
             random=p.randomNumber(enemyList.size());
             Enemy enemy=enemyList.get(random);
             while(hitsCount < this.hitsCount) {
-                p.battle(enemy, spellPower);
+                p.castAbility(enemy, spellPower);
                 if(enemy.isDead())
                     break;
                 hitsCount++;

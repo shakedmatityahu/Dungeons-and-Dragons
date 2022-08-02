@@ -52,7 +52,7 @@ public class Mage extends Player {
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
          if(!canCast())
-            throw new Exception("Casting special ability will result with Mage death YOU MERDAERER!!!");
+            send("Casting special ability will result with Mage death YOU MERDAERER!!!");
          else {
             List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
             for (Enemy enemy : enemyList) {

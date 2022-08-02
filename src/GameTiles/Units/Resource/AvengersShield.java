@@ -52,7 +52,7 @@ public class AvengersShield extends Ability
         int randomNumber= p.randomNumber(enemyList.size());
         Enemy enemy=enemyList.get(randomNumber);
         remainingCoolDown=coolDown;
-        p.battle(enemy, (int) ABILITY_COST * p.getHealth().getHealthPool());
+        p.castAbility(enemy, (int) ABILITY_COST * p.getHealth().getHealthPool());
 
     }
     private int getCoolDown(){

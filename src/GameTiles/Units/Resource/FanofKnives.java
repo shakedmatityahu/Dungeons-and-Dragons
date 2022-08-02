@@ -50,7 +50,7 @@ public class FanofKnives extends Ability {
         if (!enemyList.isEmpty())
             currentEnergy -= cost;
         for (Enemy enemy : enemyList)
-            p.battle(enemy, p.getAttack());
+            p.castAbility(enemy, p.getAttack());
     }
 
     @Override
