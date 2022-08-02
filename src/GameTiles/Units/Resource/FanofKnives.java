@@ -21,7 +21,7 @@ public class FanofKnives extends Ability {
 
 
     public boolean canCastAbility(int energy, int cost) {
-        return energy < cost;
+        return this.currentEnergy > cost;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class FanofKnives extends Ability {
 
     @Override
     public boolean canCastAbility() {
-        return currentEnergy < cost;
+        return currentEnergy > cost;
     }
 
     @Override

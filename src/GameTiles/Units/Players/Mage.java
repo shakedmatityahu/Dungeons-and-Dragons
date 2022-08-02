@@ -34,6 +34,7 @@ public class Mage extends Player {
     public void onTick(Tile tile) {
         super.onTick(tile);
         specialAbility.gameTick(level);
+
     }
 
     @Override
@@ -48,18 +49,25 @@ public class Mage extends Player {
     public void levelUp() {
         super.levelUp();
        this.specialAbility.levelUp(level);
+
+
     }
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
          if(!canCast())
-            send("Casting special ability will result with Mage death YOU MERDAERER!!!");
+            throw  new Exception("Casting special ability will result with Mage death YOU MERDAERER!!!");
          else {
             List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
             for (Enemy enemy : enemyList) {
                 if (this.isInRange((Tile) enemy, MAGE_ABILITY_RANGE))
                     listEnemyInRange.add(enemy);
             }
+            if(listEnemyInRange.isEmpty())
+            {
+                throw new RuntimeException("In your range of sight there arent monsters ");
+            }
             specialAbility.abilityCast(this,listEnemyInRange);
+
 
 
 

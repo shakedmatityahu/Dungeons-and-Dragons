@@ -76,29 +76,42 @@ public class GameController {
             cuurentLevel.setPlayer(player1);
             List<Enemy> cuurentEnemyList = enemyList.get(i);
             while (!(cuurentEnemyList.isEmpty())) {
+                List<Enemy> deadList = new ArrayList<Enemy>();
 
                 //print board
                 System.out.println(cuurentLevel);
+
+                //print data about player
+                player.send(player.describe());
 
                 playerMove(player1, cuurentLevel, cuurentEnemyList);
                 for (Enemy enemy: cuurentEnemyList)
                 {
                  if (enemy.isDead()){
-                     cuurentLevel.Replace(enemy,Tile.tileFactory('.',enemy.getPosition()));
-                     cuurentEnemyList.remove(enemy);
-                     //enemy.setEnemyDeathCallBack();
+                     cuurentLevel.removeEnemy(enemy);
+                     deadList.add(enemy);
                  }
                 }
-                if ((player1.isDead())) {
-                    player1.setTile('X');
-                    System.out.println(cuurentLevel);
-                    System.out.println("YOU LOST");
-                    return;
+                if (!(deadList.isEmpty()))
+                {
+                    for (Enemy deadEnemy : deadList) {
+                        cuurentEnemyList.remove(deadEnemy);
+                    }
+                    //deadList = null;
                 }
+
                 /*for (Enemy enemy : cuurentEnemyList) {
                     EnemyMove(player1,cuurentLevel,enemy);
+                    if ((player1.isDead())) {
+                        player1.setTile('X');
+                        player1.send(String.format("%s was killed by  %s", player1.getName(), enemy.getName()));
+                        System.out.println(cuurentLevel);
+                        System.out.println("YOU LOST");
+                        return;
+                    }
                 }*/
             }
+
         }
         System.out.println(you_won);
     }
@@ -147,7 +160,7 @@ public class GameController {
                     try {
                         player.OnAbilityCast(enemyList);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        System.out.println(e.getMessage());
                     }
                     break;
                 case 'q':
@@ -170,7 +183,7 @@ public class GameController {
 
     private void BurnThemAll(List<Enemy> enemyList, GameBoard board) {
         for (Enemy enemy : enemyList) {
-            board.Replace(enemy,Tile.tileFactory('.',enemy.getPosition()));
+            board.removeEnemy(enemy);
             enemyList.remove(enemy);
         }
     }
@@ -262,7 +275,6 @@ public class GameController {
                     if (tmp != null)
                     {
                         tmp.setMessageCallBack((msg)-> System.out.println(msg) );
-                        tmp.send(tmp.describe());
                         AllTiles.add(tmp);
                         enemyList.add(tmp);
                     }

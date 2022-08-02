@@ -49,7 +49,15 @@ public class GameBoard {
             tiles.add(newPlayer);
             sortTiles();
         }
+    }
 
+    public void removeEnemy(Tile enemy) {
+        if (enemy != null) {
+            Tile newEmpty = new Empty(enemy.getPosition());
+            tiles.remove(enemy);
+            tiles.add(newEmpty);
+            sortTiles();
+        }
     }
 
     public void remove(Enemy e) {
@@ -80,23 +88,9 @@ public class GameBoard {
         return output;
     }
 
-    public void printBoard()
-    {
-        printBoardCallBack.print();
-    }
 
-    public void addTile(Tile tileFactory) {
-        tiles.add(tileFactory);
-        sortTiles();
-    }
-
-    public void remove(Tile tile) {
-        tiles.remove(tile);
-        sortTiles();
-    }
-
-    public void Replace(Tile oldTile ,Tile newTile){
-        addTile(newTile);
-        remove(oldTile);
+    public void swap(Position deadPos) {
+        Tile old_enemy = get(deadPos.getX(),deadPos.getY());
+         old_enemy= new Empty(deadPos);
     }
 }

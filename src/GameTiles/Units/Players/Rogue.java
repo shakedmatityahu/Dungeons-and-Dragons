@@ -48,13 +48,17 @@ public class Rogue extends Player {
 
     public void OnAbilityCast(List<Enemy> enemyList) {
         if (!canCast()){
-            send("Casting special ability will result with Rogue death YOU MERDAERER!!!");
+            throw new RuntimeException ("Casting special ability will result with Rogue death YOU MERDAERER!!!");
         } else
         {
             List<Enemy> listEnemiesInRange=new ArrayList<>();
             for (Enemy enemy : enemyList)
                 if ((isInRange((Tile) enemy, ROGUE_ABILITY_RANGE)))
                     listEnemiesInRange.add(enemy);
+            if(listEnemiesInRange.isEmpty())
+            {
+                throw new RuntimeException("In your range of sight there arent monsters ");
+            }
             this.specialAbility.abilityCast(this,listEnemiesInRange);
 
         }

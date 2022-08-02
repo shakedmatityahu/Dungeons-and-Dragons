@@ -31,8 +31,8 @@ public class AvengersShield extends Ability
     public boolean canCastAbility ()
     {
         if(coolDown>0)
-            return true;
-        return false;
+            return false;
+        return true;
     }
 
     @Override

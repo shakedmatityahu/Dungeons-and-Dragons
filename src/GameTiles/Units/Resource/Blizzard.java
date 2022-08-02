@@ -36,7 +36,7 @@ public class Blizzard extends Ability
 
     public boolean canCastAbility ()
     {
-        return(currentMana< manaCost);
+        return(currentMana > manaCost);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Blizzard extends Ability
 
     @Override
     public void gameTick(int level) {
-        this.currentMana=Math.min(manaPool,currentMana+1*level);
+        this.currentMana=Math.min(manaPool,(currentMana+1)*level);
     }
 
     @Override
@@ -57,14 +57,14 @@ public class Blizzard extends Ability
         int random=0;
         while(!enemyList.isEmpty()&& canCastAbility())
         {
-            hitsCount=0;
+            int hits=0;
             random=p.randomNumber(enemyList.size());
             Enemy enemy=enemyList.get(random);
-            while(hitsCount < this.hitsCount) {
+            while(hitsCount>hits) {
                 p.castAbility(enemy, spellPower);
                 if(enemy.isDead())
                     break;
-                hitsCount++;
+                hits++;
             }
             this.currentMana -= this.manaCost;
         }
@@ -81,7 +81,7 @@ public class Blizzard extends Ability
         return
     }*/
     public String describe(){
-        return "Mana: "+manaCost+ "/"+ manaPool +"         "+ "SpellPower: "+spellPower;
+        return "Mana: "+currentMana+ "/"+ manaPool +"         "+ "SpellPower: "+spellPower;
     }
 
 }

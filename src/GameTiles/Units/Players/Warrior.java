@@ -27,7 +27,7 @@ public class Warrior extends Player {
 
     public void OnAbilityCast(List<Enemy> enemyList) throws Exception {
         if(!canCast())
-            send("Casting special ability will result with Warrior death YOU MERDAERER!!!");
+            throw new RuntimeException ("Casting special ability will result with Warrior death YOU MERDAERER!!!");
         List<Enemy> listEnemyInRange = new ArrayList<Enemy>();
         for (Enemy enemy : enemyList) {
             if (this.isInRange((Tile) enemy, WARRIOR_ABILITY_RANGE))

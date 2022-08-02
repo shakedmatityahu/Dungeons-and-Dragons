@@ -1,12 +1,6 @@
 package GameTiles.Units.Enemies;
 
 import Dungeons_and_Dragons.Position;
-import GameTiles.DesignPatterns.Visitor;
-import GameTiles.Tile;
-import GameTiles.Units.Unit;
-import GameTiles.Wall;
-
-import GameTiles.Units.Players.Player;
 
 public class Monster extends Enemy {
     protected int vision_range;
@@ -25,7 +19,7 @@ public class Monster extends Enemy {
     }
 
     public String describe (){
-        String des= super.describe()+String.format("\t\tVisionRange: %d\t\tExperienceValue: %d",vision_range,getExprince());
+        String des= super.describe()+String.format("\t\tVisionRange: %d\t\tExperienceValue: %d",vision_range, getExperience_value());
         return des;
     }
 

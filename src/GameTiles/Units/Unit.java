@@ -3,6 +3,7 @@ import Dungeons_and_Dragons.*;
 import GameTiles.DesignPatterns.Visitor;
 import GameTiles.Empty;
 import GameTiles.Tile;
+import GameTiles.Units.Players.Player;
 import GameTiles.Units.Resource.Health;
 import GameTiles.Wall;
 import UI.MessageCallback;
@@ -87,10 +88,19 @@ public abstract class Unit extends Tile implements Visitor {
         int damage = Math.max(0,attack -defense);
         defender.ReceiveDamage(damage);
         messageCallback.send(String.format("%s Dealt %d damage to %s.", getName(), damage, defender.getName()));
+
     }
 
+    private void onDeath(Unit unit) {}
+
+
+
     public boolean isDead() {
-        return health.getHealthAmount() <= 0;
+        if(health.getHealthAmount() <= 0)
+        {
+            return true;
+        }
+        return false;
     }
     
     public void onTick(Tile tile) {
@@ -136,10 +146,6 @@ public abstract class Unit extends Tile implements Visitor {
     public void send (String output)
     {
         messageCallback.send(output);
-    }
-    public void print()
-    {
-        send(describe());
     }
 
     public void setMessageCallBack(MessageCallback messageCallback) { this.messageCallback=messageCallback;}

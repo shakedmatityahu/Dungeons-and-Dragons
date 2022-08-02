@@ -2,21 +2,13 @@ package GameTiles.Units.Enemies;
 
 import GameTiles.DesignPatterns.Visitor;
 import Dungeons_and_Dragons.*;
-import GameTiles.Tile;
 import GameTiles.Units.Players.Player;
 import GameTiles.Units.*;
-import UI.EnemyDeathCallBack;
-import UI.MessageCallback;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 
 public abstract class Enemy extends Unit {
 
 
-
-    private EnemyDeathCallBack enemyDeathCallBack;
     protected static final char visible_char = '.';
 
 
@@ -28,16 +20,7 @@ public abstract class Enemy extends Unit {
         this.initialize(position);
     }
 
-    public void death()
-    {
-        setHealth(0,0);
-        enemyDeathCallBack.call(getName()+ " died.");
-    }
-    public void setEnemyDeathCallBack(EnemyDeathCallBack edc){
-        enemyDeathCallBack = edc;
-    }
-
-    public int getExprince() {
+    public int getExperience_value() {
         return experience_value;
     }
 
@@ -50,7 +33,7 @@ public abstract class Enemy extends Unit {
     public void visit(Enemy e) {    }
 
     public void visit(Player p) {
-        this.battle(p);
+        super.battle(p);
     }
 
     public int getRange(){

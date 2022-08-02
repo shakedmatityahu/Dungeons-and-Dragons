@@ -4,8 +4,6 @@ import Dungeons_and_Dragons.Position;
 import GameTiles.Empty;
 import GameTiles.Tile;
 import GameTiles.Units.Unit;
-import GameTiles.Wall;
-import GameTiles.Units.Players.Player;
 
 public class Trap extends Enemy {
 
@@ -54,7 +52,7 @@ public class Trap extends Enemy {
 
     public String describe (){
         String des=super.describe();
-        des+=String.format("\t\tExperienceValue: %d\t\tVisibilityTime: %d\t\tInvisibilityTime: %d",getExprince(),getVisibilityTime(),getInVisibilityTime());
+        des+=String.format("\t\tExperienceValue: %d\t\tVisibilityTime: %d\t\tInvisibilityTime: %d", getExperience_value(),getVisibilityTime(),getInVisibilityTime());
         return des;
     }
 

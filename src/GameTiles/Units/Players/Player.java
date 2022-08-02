@@ -67,59 +67,47 @@ public abstract class Player extends Unit {
          attack =  (PLAYER_ATTACK_MULTIPLAYER*level);
          defense = (PLAYER_DEFENSE_MULTIPLAYER*level);
         send("You just leveled Up");
+
     }
 
     public abstract void OnAbilityCast(List<Enemy> list)throws Exception;
 
     protected void battle(Enemy defender){
         super.battle(defender);
-        if (defender.isDead())
-        {
-           playerWonBattle(defender);
-        }
-        if (experience >= PLAYER_EXP_MULTIPLAYER*level){
-            send("You just leveled Up");
-            levelUp();
-        }
-
-    }
-
-    public void castAbility(Enemy defender, int attack)
-    {
-            int defense= randomNumber(defender.getDefense());
-            int damage=Math.max((attack-defense),0);
-            defender.ReceiveDamage(damage);
-            this.send(getName()+" cast "+ specialAbility.getName()+ ".");
-            send(String.format("%s rolled %d: %d defence points.", defender.getName(), defense));
-            send(String.format("%s rolled %d: %d defence points.", getName(), damage));
-            if (defender.isDead())
-            {
-               playerWonBattle(defender);
-            }
-            if (experience >= PLAYER_EXP_MULTIPLAYER*level){
+        if(defender.isDead()){
+            defender.send(String.format("%s died.  %s gained %d experience.", defender.getName(), getName(), defender.getExperience_value()));
+            swap(defender);
+            addExprincePoints(defender.getExperience_value());
+            if (experience >= PLAYER_EXP_MULTIPLAYER*level)
                 levelUp();
-            }
+        }
 
     }
+
+    public void castAbility(Enemy defender, int attack) {
+        int defense = randomNumber(defender.getDefense());
+        int damage = Math.max((attack - defense), 0);
+        defender.ReceiveDamage(damage);
+        send(getName() + " cast " + specialAbility.getName() + ".");
+        send(String.format("%s rolled %d:  defence points.", defender.getName(), defense));
+        send(String.format("%s rolled %d:  defence points.", getName(), damage));
+        if (defender.isDead()) {
+            addExprincePoints(defender.getExperience_value());
+            defender.send(String.format("%s died.  %s gained %d experience.", defender.getName(), getName(), defender.getExperience_value()));
+            if (experience >= PLAYER_EXP_MULTIPLAYER * level)
+                levelUp();
+        }
+    }
+
+
     private void addExprincePoints(int experience) {
-        this.experience=this.experience+experience;
-        send("You gained "+ experience+ " new experience points");
+        this.experience += experience;
 
-    }
-
-    public void death ()
-    {
-        this.isAlive=false;
-        send("GAME-OVER you died");
     }
 
     @Override
     public void onTick(Tile tile) {
         super.onTick(tile);
-        if(isDead())
-        {
-            death();
-        }
         specialAbility.gameTick(level);
     }
 
@@ -144,12 +132,6 @@ public abstract class Player extends Unit {
         this.battle(e);
     }
 
-    private void playerWonBattle(Enemy defender)
-    {
-        addExprincePoints(defender.getExprince());
-        swap(defender);
-        send(defender.getName() +" died."+ getName()+" gained "+defender.getName()+ " experience points");
-    }
     private String getExperince()
     {
         String s=experience+"/"+level*50;
