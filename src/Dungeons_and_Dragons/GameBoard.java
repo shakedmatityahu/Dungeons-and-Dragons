@@ -31,13 +31,13 @@ public class GameBoard {
     public static void reomve(Enemy enemy) {
     }
 
-    public Tile get(int x, int y) throws ExecutionControl.NotImplementedException {
+    public Tile get(int x, int y) {
         for(Tile t : tiles){
             if (t.getPosition().compareTo(new Position(x, y)) == 0){
                 return t;
             }
         }
-        throw new RuntimeException("No tile");
+        return null;
     }
 
 
