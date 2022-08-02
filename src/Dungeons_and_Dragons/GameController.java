@@ -76,6 +76,7 @@ public class GameController {
             GameBoard cuurentLevel = gameBoards.get(i);
             cuurentLevel.setPlayer(player);
             List<Enemy> cuurentEnemyList = enemyList.get(i);
+            player.initialize(gameBoards.get(i).findPlayerPosition().getPosition());
             while (!(cuurentEnemyList.isEmpty())) {
 
                 //print board
@@ -241,35 +242,44 @@ public class GameController {
         int rowNum = rows.size();
         int colNum = rows.get(0).length();
         Tile [][] boardArray=new Tile[rowNum][colNum];
+        List<Tile> listTile=new ArrayList<>();
         Player dummy = new Warrior("Jon Snow",300,30,4,3);
         for(int i=0; i < rowNum; i++)
         {
             String tileRow = rows.get(i);
             for (int j=0; j < colNum; j++)
             {
-                Position position = new Position(j,i);
+                Position position = new Position(i,j);
                 char c = tileRow.charAt(j);
                 if(ENEMY_LIST.contains(c))
                 {
 
                     //Might cause runTime error
                     Enemy tmp = Enemy.enemyFactory(c,position);
-                    boardArray[i][j]=tmp;
-                    enemyList.add(tmp);
+                    if(tmp!=null){
+                        boardArray[i][j]=tmp;
+                        enemyList.add(tmp);
+                        listTile.add(tmp);
+                    }
+
                 }
                 else if (PLANE_TILES.contains(c))
                 {
                     boardArray[i][j]=Tile.tileFactory(c, position);
+                    listTile.add(boardArray[i][j]);
                 }
                 else if(c == '@')
                 {
                     dummy.initialize(position);
+                    boardArray[i][j]=dummy;
+                    listTile.add(boardArray[i][j]);
                 }
+
             }
 
 
         }
-        return new GameBoard(boardArray,rowNum,colNum,player,dummy);
+        return new GameBoard(boardArray,rowNum,colNum,player,dummy,listTile);
     }
 
     public void Move(GameBoard board, Unit unit, int move){
@@ -277,24 +287,29 @@ public class GameController {
         Tile tile;
         switch (move){
             case 0:// up
-                position.setX(position.getX() + 1);
-                tile = board.finedTile(position);
-                unit.Move(tile);
-                break;
-            case 1:// down
                 position.setX(position.getX() - 1);
                 tile = board.finedTile(position);
                 unit.Move(tile);
+                board.sortTiles();
+                board.sortArray();
+                break;
+            case 1:// down
+                position.setX(position.getX() + 1);
+                tile = board.finedTile(position);
+                unit.Move(tile);
+                board.sortArray();
                 break;
             case 2://left
                 position.setY(position.getY() - 1);
                 tile = board.finedTile(position);
                 unit.Move(tile);
+                board.sortArray();
                 break;
             case 3:// right
                 position.setY(position.getY() + 1);
                 tile = board.finedTile(position);
-                unit.Move(tile);
+                player.Move(tile);
+                board.sortArray();
                 break;
             case 4:
                 break;

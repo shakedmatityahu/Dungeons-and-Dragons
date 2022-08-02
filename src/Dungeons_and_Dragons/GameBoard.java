@@ -9,11 +9,12 @@ import jdk.jshell.spi.ExecutionControl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameBoard {
-    public static Tile[][] board;
+    private  Tile[][] board;
     private List<Tile> tiles;
     private PrintBoardCallBack printBoardCallBack;
     private int column;
@@ -23,14 +24,15 @@ public class GameBoard {
     public void setPrintBoardCallBack(PrintBoardCallBack boardCallBack) {
         this.printBoardCallBack = boardCallBack;
     }
-    public GameBoard(Tile[][] array, int rowNum, int col,Player player,Player fakePlayer){
+    public GameBoard(Tile[][] array, int rowNum, int col,Player player,Player fakePlayer,List<Tile> tiles){
         this.board=new Tile[rowNum][col];
         this.board=array;
         this.player=player;
         this.player.initialize(fakePlayer.getPosition());
-        board[fakePlayer.getPosition().getY()][fakePlayer.getPosition().getX()]=player;
+        board[fakePlayer.getPosition().getX()][fakePlayer.getPosition().getY()]=player;
         column = col;
         row =rowNum;
+        this.tiles=tiles;
 
     }
 
@@ -57,7 +59,7 @@ public class GameBoard {
         return null;
     }
 
-    private Tile findPlayerPosition(){
+    public Tile findPlayerPosition(){
         for (int i=0;i<row;i++){
             for(int j=0;j<column;j++) {
                 if (board[i][j].getTile() == '@')
@@ -74,16 +76,42 @@ public class GameBoard {
     }
 
     public void sortTiles(){
-        tiles = tiles.stream().sorted().collect(Collectors.toList());
+        //tiles = tiles.stream().sorted().collect(Collectors.toList());
+        Comparator<Tile> comp = new Comparator<Tile>() {
+            @Override
+            public int compare(Tile o1, Tile o2)
+            {
+                if(o1.getPosition()==null && o2.getPosition()==null)
+                    System.out.println("null");
+                int o1Y = o1.getPosition().getY();
+                int o2Y = o2.getPosition().getY();
+                if(o1Y < o2Y)
+                    return -1;
+                else if (o1Y > o2Y)
+                    return 1;
+                else{
+                    int o1X = o1.getPosition().getX();
+                    int o2X = o2.getPosition().getX();
+                    if(o1X < o2X)
+                        return -1;
+                    else if(o1X > o2X)
+                        return 1;
+                    else
+                        return 0;
+                }
+            }
+        };
+
+        tiles = tiles.stream().sorted(comp).collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
         String output = "";
         int counter = 0;
-        for(int i=0;i<row;i++)
+        for(int i=0;i<board.length;i++)
         {
-            for(int j=0;j<column;j++) {
+            for(int j=0;j<board[0].length;j++) {
                 output += board[i][j].getTile();
             }
                 output += "\n" ;
@@ -114,4 +142,18 @@ public class GameBoard {
     }
 
 
+    public void sortArray() {
+        try{
+            //sortTiles();
+            for(Tile tile:tiles)
+            {
+                if(tile.getTile()=='@')
+                    System.out.println("found x: " +tile.getPosition().getX()+" y:"+tile.getPosition().getY());
+                board[tile.getPosition().getX()][tile.getPosition().getY()]=tile;
+            }
+        }
+        catch (Exception e) {
+            System.out.println();
+        }
+    }
 }

@@ -35,7 +35,7 @@ public abstract class Tile implements Comparable<Tile> ,Visited {
 
 
     public void initialize(Position position){
-        this.position = position;
+        this.position = new Position(position);
     }
 
     public static Tile tileFactory(char c,Position p){
