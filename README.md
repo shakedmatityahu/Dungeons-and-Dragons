@@ -2,7 +2,6 @@
 
 Welcome to the Dungeons and Dragons Text-based Game! This program allows you to play a simplified version of the popular tabletop role-playing game, Dungeons and Dragons, right in your terminal. Embark on an epic adventure, battle fearsome monsters, and make crucial decisions that shape your character's destiny.
 
-![Dungeons and Dragons](https://raw.githubusercontent.com/shakedmatityahu/Dungeons-and-Dragons/main/images/dnd_screenshot.png)
 
 ## Table of Contents
 
@@ -21,9 +20,9 @@ Welcome to the Dungeons and Dragons Text-based Game! This program allows you to 
 
 ### Prerequisites
 
-To run the Dungeons and Dragons Text-based Game, you'll need the following:
-
-- Python 3.x installed on your system.
+- Java Development Kit (JDK) 8 or higher.
+- An IDE or text editor (e.g., IntelliJ IDEA, Eclipse, VS Code).
+- A terminal or command prompt.
 
 ### Installation
 
