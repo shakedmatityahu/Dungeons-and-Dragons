@@ -2,7 +2,6 @@
 
 Welcome to the Dungeons and Dragons Text-based Game! This program allows you to play a simplified version of the popular tabletop role-playing game, Dungeons and Dragons, right in your terminal. Embark on an epic adventure, battle fearsome monsters, and make crucial decisions that shape your character's destiny.
 
-
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -13,6 +12,7 @@ Welcome to the Dungeons and Dragons Text-based Game! This program allows you to 
   - [Commands](#commands)
   - [Exploration](#exploration)
   - [Combat](#combat)
+  - [Game Flow](#game-flow)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -38,34 +38,53 @@ Welcome to the Dungeons and Dragons Text-based Game! This program allows you to 
    cd Dungeons-and-Dragons
    ```
 
-3. Run the game:
+3. Compile the project:
 
    ```bash
-   python main.py
+   javac -d bin src/**/*.java
    ```
+
+4. Run the game:
+
+   ```bash
+   java -cp bin Dungeons_and_Dragons.GameController <path-to-levels>
+   ```
+
+   Replace `<path-to-levels>` with the directory path containing your level files.
 
 ## How to Play
 
 ### Starting the Game
 
-1. After running the program, you'll be prompted to create a character by providing a name and choosing a class (Warrior, Mage, or Archer).
-
-2. Once your character is created, you'll embark on an adventure in the fantasy world.
+1. Start the game by running the `GameController` with the path to your level files.
+2. Select your character from the available options.
 
 ### Commands
 
-- Use the command line to interact with the game.
-- Input your commands using text and press Enter to execute them.
+- Use the following commands to navigate through the levels:
+  - `w`: Move up
+  - `s`: Move down
+  - `a`: Move left
+  - `d`: Move right
+  - `e`: Cast ability
+  - `K`: Special command (Burn them all)
 
 ### Exploration
 
-- You'll navigate through the game by moving between locations using commands like "go north," "go south," "go east," and "go west."
+- Navigate through the game by moving between locations using the commands.
 - Explore different areas to find items, quests, and encounter NPCs.
 
 ### Combat
 
-- Combat will occur when you encounter monsters or enemies.
-- You'll be given options to attack, defend, use items, or try to escape during combat encounters.
+- Combat occurs when you encounter monsters or enemies.
+- During combat encounters, you have options to attack, defend, use items, or try to escape.
+
+### Game Flow
+
+- The game initializes by loading level files and setting up the game boards and enemy lists.
+- The player selects a character from the available options.
+- Each level is played in turns, where the player makes a move, followed by enemy movements.
+- The game continues until all levels are cleared or the player dies.
 
 ## Contributing
 
