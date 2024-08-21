@@ -96,10 +96,6 @@ Contributions to this project are welcome! If you find any bugs or have ideas fo
 4. Push your changes to your fork.
 5. Open a pull request, describing the changes you've made.
 
-## License
-
-This project is licensed under the [MIT License](https://github.com/shakedmatityahu/Dungeons-and-Dragons/blob/main/LICENSE).
-
 ---
 
 Enjoy your journey in the Dungeons and Dragons Text-based Game! May your adventures be full of excitement and triumph. If you have any questions or need assistance, feel free to reach out in the Issues section of the repository. Have fun!
