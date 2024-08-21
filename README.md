@@ -86,16 +86,6 @@ Welcome to the Dungeons and Dragons Text-based Game! This program allows you to 
 - Each level is played in turns, where the player makes a move, followed by enemy movements.
 - The game continues until all levels are cleared or the player dies.
 
-## Contributing
-
-Contributions to this project are welcome! If you find any bugs or have ideas for improvements, feel free to open an issue or submit a pull request.
-
-1. Fork the repository.
-2. Create a new branch for your contribution.
-3. Make your changes and commit them.
-4. Push your changes to your fork.
-5. Open a pull request, describing the changes you've made.
-
 ---
 
 Enjoy your journey in the Dungeons and Dragons Text-based Game! May your adventures be full of excitement and triumph. If you have any questions or need assistance, feel free to reach out in the Issues section of the repository. Have fun!
